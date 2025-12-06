@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthèse du Mémoire - Ajustement des Pensions</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .author-info {
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .chapter {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .chapter-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            color: var(--dark-color);
+            margin: 1.5rem 0 1rem 0;
+            padding-left: 0.5rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .subsection-title {
+            color: var(--dark-color);
+            margin: 1.2rem 0 0.8rem 0;
+            font-size: 1.1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .formula {
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid var(--secondary-color);
+            text-align: center;
+        }
+        
+        .math {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        .math-sup {
+            vertical-align: super;
+            font-size: 0.8em;
+        }
+        
+        .math-sub {
+            vertical-align: sub;
+            font-size: 0.8em;
+        }
+        
+        .math-large {
+            font-size: 1.2em;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+        
+        .conclusion {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            color: var(--dark-color);
+            border-top: 1px solid #ddd;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .chapter {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Ajustement des Pensions de Sécurité Sociale à l'Espérance de Vie</h1>
+            <p class="subtitle">Analyse des mécanismes d'ajustement automatique pour la viabilité des systèmes de retraite</p>
+            <div class="author-info">
+                <p>Mémoire présenté par <strong>SIMO TCHEMO Steve Géraldin</strong></p>
+                <p>Promoteur : Pierre Devolder - Année académique 2023-2024</p>
+                <p>Master 120 en Sciences actuarielles - UCLouvain</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#chapitre1">Chapitre 1</a></li>
+                <li><a href="#chapitre2">Chapitre 2</a></li>
+                <li><a href="#chapitre3">Chapitre 3</a></li>
+                <li><a href="#chapitre4">Chapitre 4</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </nav>
+
+        <section id="introduction" class="chapter">
+            <h2 class="chapter-title">Introduction</h2>
+            <p>Le mémoire s'attaque à un enjeu majeur du XXIe siècle : la viabilité des systèmes de retraite face au vieillissement démographique et à la baisse de la natalité. L'allongement de l'espérance de vie et la diminution du nombre de cotisants menacent l'équilibre financier et l'équité intergénérationnelle des régimes de pension.</p>
+            
+            <p>L'objectif principal est d'analyser les <span class="highlight">mécanismes d'ajustement automatique (MAA)</span> comme solution pour adapter les paramètres des pensions (âge de retraite, cotisations, prestations) aux évolutions démographiques et économiques.</p>
+            
+            <div class="conclusion">
+                <p><strong>Contexte :</strong> L'espérance de vie mondiale est passée de 48 ans dans les années 1950 à 72,6 ans en 2019, tandis que les taux de natalité ont diminué de 5,0 à 2,5 enfants par femme. En Europe, le ratio de personnes âgées de 65 ans et plus par rapport à la population active pourrait atteindre 50% d'ici 2070.</p>
+            </div>
+        </section>
+
+        <section id="chapitre1" class="chapter">
+            <h2 class="chapter-title">Chapitre 1 : Fondements Théoriques et Contexte</h2>
+            
+            <h3 class="section-title">1.1 Systèmes de pension : principes et financement</h3>
+            
+            <h4 class="subsection-title">Trois piliers des retraites :</h4>
+            <ul>
+                <li><strong>1er pilier :</strong> Régimes publics de base (Bismarck vs Beveridge)</li>
+                <li><strong>2ème pilier :</strong> Régimes professionnels complémentaires</li>
+                <li><strong>3ème pilier :</strong> Épargne-retraite individuelle</li>
+            </ul>
+            
+            <h4 class="subsection-title">Types de régimes :</h4>
+            <ul>
+                <li><strong>Prestations Définies (DB) :</strong> Prestations garanties, risque porté par l'employeur</li>
+                <li><strong>Cotisations Définies (DC) :</strong> Cotisations fixes, prestations variables</li>
+            </ul>
+            
+            <h4 class="subsection-title">Méthodes de financement :</h4>
+            <ul>
+                <li><strong>Répartition :</strong> Cotisations des actifs financent les retraités</li>
+                <li><strong>Capitalisation :</strong> Épargne individuelle investie</li>
+            </ul>
+            
+            <div class="formula">
+                <span class="math">V(0)(1+i)<span class="math-sup">t</span> + ∑<span class="math-sub">s=0</span><span class="math-sup">t-1</span> [π(s)S(s) - B(s)](1+i)<span class="math-sup">t-s</span> = ∑<span class="math-sub">s=t</span><span class="math-sup">∞</span> B(s)(1+i)<span class="math-sup">-(s-t)</span> - ∑<span class="math-sub">s=t</span><span class="math-sup">∞</span> π(s)S(s)(1+i)<span class="math-sup">-(s-t)</span></span>
+            </div>
+            
+            <h3 class="section-title">1.2 Dynamique démographique</h3>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Indicateur</th>
+                            <th>Valeur/Tendance</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Taux de natalité</td>
+                            <td>1,53 naissance/femme (UE, 2021)</td>
+                            <td>Diminution des futurs cotisants</td>
+                        </tr>
+                        <tr>
+                            <td>Espérance de vie</td>
+                            <td>+40 ans depuis 1880 (Belgique)</td>
+                            <td>Allongement de la durée des retraites</td>
+                        </tr>
+                        <tr>
+                            <td>Ratio de dépendance</td>
+                            <td>33,4% (2023) → 59,7% (2075, UE)</td>
+                            <td>Pression financière accrue</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="chapitre2" class="chapter">
+            <h2 class="chapter-title">Chapitre 2 : Mécanismes d'Ajustement Automatique (MAA)</h2>
+            
+            <h3 class="section-title">2.1 Présentation des MAA</h3>
+            
+            <p><strong>Définition :</strong> Mesures légales déclenchées automatiquement pour maintenir la solvabilité des régimes.</p>
+            
+            <p><strong>Objectifs :</strong> Équité intergénérationnelle, stabilité financière, réduction des réformes discrétionnaires.</p>
+            
+            <h4 class="subsection-title">Types :</h4>
+            <ul>
+                <li><strong>Démographiques</strong> (ex. : ajustement de l'âge de retraite)</li>
+                <li><strong>Financiers</strong> (ex. : indexation sur l'inflation)</li>
+            </ul>
+            
+            <h3 class="section-title">2.2 Exemples de modèles</h3>
+            
+            <h4 class="subsection-title">Modèle suédois :</h4>
+            <p>Comptes notionnels, diviseur actuariel <span class="math">D<span class="math-sub">n</span></span> :</p>
+            <div class="formula">
+                <span class="math">D<span class="math-sub">n</span> = (1/12) × ∑<span class="math-sub">k=n</span><span class="math-sup">∞</span> ∑<span class="math-sub">x=0</span><span class="math-sup">11</span> (l<span class="math-sub">k</span>/l<span class="math-sub">n</span>) × (1.016)<span class="math-sup">-(k-n + x/12)</span></span>
+            </div>
+            
+            <h4 class="subsection-title">Modèle néerlandais :</h4>
+            <p>Ajustement de l'âge de retraite :</p>
+            <div class="formula">
+                <span class="math">x<span class="math-sub">r</span>(t) = 65 + (e<span class="math-sub">65</span><span class="math-sup">P</span>(t) - 18.26)</span>
+            </div>
+            
+            <h3 class="section-title">2.3 Modélisation de l'équité intergénérationnelle</h3>
+            
+            <div class="formula">
+                <span class="math">C<span class="math-sub">t</span> · V<span class="math-sub">t</span> = D<span class="math-sub">t</span> · P<span class="math-sub">x<span class="math-sub">r</span>(t)</span> · a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span></span>
+            </div>
+            
+            <p>Avec :</p>
+            <ul>
+                <li><span class="math">C<span class="math-sub">t</span></span> : taux de cotisation</li>
+                <li><span class="math">V<span class="math-sub">t</span></span> : salaire moyen réévalué</li>
+                <li><span class="math">D<span class="math-sub">t</span></span> : ratio de dépendance</li>
+                <li><span class="math">P<span class="math-sub">x<span class="math-sub">r</span>(t)</span></span> : pension moyenne</li>
+                <li><span class="math">a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span></span> : facteur de rente viagère</li>
+            </ul>
+            
+            <h4 class="subsection-title">Mécanismes dérivés :</h4>
+            
+            <p><strong>Ajustement du taux de cotisation :</strong></p>
+            <div class="formula">
+                <span class="math">c<span class="math-sub">t</span> = c<span class="math-sub">0</span> · (D<span class="math-sub">t</span>/D<span class="math-sub">0</span>) · (a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>)</span>
+            </div>
+            
+            <p><strong>Ajustement de l'âge de retraite avec TR constant :</strong></p>
+            <div class="formula">
+                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) / (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) = (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>) · e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) / (x<span class="math-sub">r</span>(0) - x<span class="math-sub">e</span>)</span>
+            </div>
+            
+            <p><strong>Ajustement avec amélioration des pensions :</strong></p>
+            <div class="formula">
+                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) = e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+            </div>
+            
+            <p><strong>Facteur de durabilité (ex. : Portugal, Finlande) :</strong></p>
+            <div class="formula">
+                <span class="math">SF<span class="math-sub">x<span class="math-sub">r</span>(t)</span> = SF<span class="math-sub">x<span class="math-sub">r</span>(0)</span> · (a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+            </div>
+        </section>
+
+        <section id="chapitre3" class="chapter">
+            <h2 class="chapter-title">Chapitre 3 : Modèles Quantitatifs de Longévité</h2>
+            
+            <h3 class="section-title">3.1 Modèles stochastiques de mortalité</h3>
+            
+            <h4 class="subsection-title">Estimateur de Hoem :</h4>
+            <div class="formula">
+                <span class="math">q̂<span class="math-sub">x,t</span> = (∑<span class="math-sub">i=1</span><span class="math-sup">N<span class="math-sub">x,t</span></span> d<span class="math-sub">xi,t</span>) / (∑<span class="math-sub">i=1</span><span class="math-sup">N<span class="math-sub">x,t</span></span> E<span class="math-sub">xi,t</span>)</span>
+            </div>
+            
+            <h4 class="subsection-title">Modèle de Lee-Carter :</h4>
+            <div class="formula">
+                <span class="math">ln(μ<span class="math-sub">x,t</span>) = a<span class="math-sub">x</span> + b<span class="math-sub">x</span>k<span class="math-sub">t</span> + ε<span class="math-sub">x,t</span></span>
+            </div>
+            
+            <h4 class="subsection-title">Modèle Log-Poisson :</h4>
+            <div class="formula">
+                <span class="math">D<span class="math-sub">xt</span> ~ 𝓟(E<span class="math-sub">xt</span>μ<span class="math-sub">xt</span>), μ<span class="math-sub">xt</span> = exp(α<span class="math-sub">x</span> + β<span class="math-sub">x</span>k<span class="math-sub">t</span>)</span>
+            </div>
+            
+            <h3 class="section-title">3.2 Application aux données belges</h3>
+            
+            <p><strong>Données :</strong> Human Mortality Database (1981-2023), table unisexe</p>
+            
+            <p><strong>Sélection du modèle :</strong> Log-Poisson supérieur (MAPE = 0,06358 vs 0,08445 pour Lee-Carter)</p>
+            
+            <p><strong>Projection des <span class="math">k<span class="math-sub">t</span></span> via ARIMA(0,2,1) :</strong></p>
+            <div class="formula">
+                <span class="math">κ<span class="math-sub">t+1</span> = κ<span class="math-sub">t</span> + d + ϵ<span class="math-sub">t</span>, ϵ<span class="math-sub">t</span> ~ N(0, σ<span class="math-sup">2</span>)</span>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <caption>Espérance de vie projetée</caption>
+                    <thead>
+                        <tr>
+                            <th>Année</th>
+                            <th>Espérance à 65 ans</th>
+                            <th>Espérance à 70 ans</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023</td>
+                            <td>19,34 ans</td>
+                            <td>14,36 ans</td>
+                        </tr>
+                        <tr>
+                            <td>2024</td>
+                            <td>19,45 ans</td>
+                            <td>14,45 ans</td>
+                        </tr>
+                        <tr>
+                            <td>2025</td>
+                            <td>19,60 ans</td>
+                            <td>14,56 ans</td>
+                        </tr>
+                        <tr>
+                            <td>2026</td>
+                            <td>19,73 ans</td>
+                            <td>14,65 ans</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="chapitre4" class="chapter">
+            <h2 class="chapter-title">Chapitre 4 : Application des MAA et Analyse Comparative</h2>
+            
+            <h3 class="section-title">4.1 Modélisation d'un régime à prestations définies</h3>
+            
+            <h4 class="subsection-title">Architecture du modèle et hypothèses fondamentales</h4>
+            
+            <p><strong>Cadre général :</strong></p>
+            <ul>
+                <li>Régime par répartition pure sans financement externe</li>
+                <li>Période d'étude : 2023-2123 (100 ans)</li>
+                <li>Population fermée sans migration</li>
+                <li>Données démographiques belges (Human Mortality Database)</li>
+            </ul>
+            
+            <p><strong>Paramètres clés du régime :</strong></p>
+            <ul>
+                <li>Âge d'entrée : <span class="math">x<span class="math-sub">e</span> = 25</span> ans</li>
+                <li>Âge de retraite initial : <span class="math">x<span class="math-sub">r</span>(0) = 65</span> ans</li>
+                <li>Taux de remplacement cible : TR = 52%</li>
+                <li>Taux d'actualisation : <span class="math">y<span class="math-sub">t</span> = 2%</span></li>
+                <li>Taux d'accumulation linéaire : <span class="math">θ<span class="math-sub">t</span> = 1,3%</span></li>
+                <li>Taux de revalorisation des salaires : <span class="math">v<span class="math-sub">t</span> = 2%</span></li>
+            </ul>
+            
+            <div class="formula">
+                <span class="math">P<span class="math-sub">x<span class="math-sub">r</span>(t)</span> = θ<span class="math-sub">t</span> (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) · RE<span class="math-sub">x<span class="math-sub">r</span>(t)</span> · SF<span class="math-sub">x<span class="math-sub">r</span>(t)</span> · b<span class="math-sub">x<span class="math-sub">r</span>(t)</span></span>
+            </div>
+            
+            <h4 class="subsection-title">Modélisation détaillée de la population</h4>
+            
+            <p><strong>Projection démographique :</strong></p>
+            <ul>
+                <li>Utilisation du modèle Log-Poisson pour les taux de mortalité <span class="math">q(x,t)</span></li>
+                <li>Population initiale <span class="math">L(x,2023)</span> issue des tables de mortalité périodiques unisexes</li>
+                <li>Pas de naissances : <span class="math">L(0,t) = 100 000</span> constant</li>
+                <li>Projection jusqu'en 2123 avec vieillissement de la cohorte initiale</li>
+            </ul>
+            
+            <p><strong>Structure populationnelle :</strong></p>
+            <ul>
+                <li>Actifs : <span class="math">A<span class="math-sub">t</span> = ∑<span class="math-sub">x=25</span><span class="math-sup">64</span> L(x,t)</span></li>
+                <li>Retraités : <span class="math">R<span class="math-sub">t</span> = ∑<span class="math-sub">x=65</span><span class="math-sup">105</span> L(x,t)</span></li>
+                <li>Quotient de vieillesse : <span class="math">QV<span class="math-sub">t</span> = R<span class="math-sub">t</span> / A<span class="math-sub">t</span></span></li>
+            </ul>
+            
+            <div class="table-container">
+                <table>
+                    <caption>Évolution du quotient de vieillesse</caption>
+                    <thead>
+                        <tr>
+                            <th>Année</th>
+                            <th>2023</th>
+                            <th>2033</th>
+                            <th>2043</th>
+                            <th>2053</th>
+                            <th>2063</th>
+                            <th>2073</th>
+                            <th>2083</th>
+                            <th>2093</th>
+                            <th>2103</th>
+                            <th>2113</th>
+                            <th>2123</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>QV (%)</td>
+                            <td>49,39</td>
+                            <td>50,55</td>
+                            <td>52,84</td>
+                            <td>55,45</td>
+                            <td>57,59</td>
+                            <td>60,72</td>
+                            <td>62,73</td>
+                            <td>65,36</td>
+                            <td>67,99</td>
+                            <td>70,62</td>
+                            <td>71,74</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="section-title">4.2 Application des mécanismes d'ajustements automatiques</h3>
+            
+            <h4 class="subsection-title">4.2.1 Ajustement du taux de cotisation</h4>
+            
+            <p><strong>Fondement théorique :</strong></p>
+            <div class="formula">
+                <span class="math">c<span class="math-sub">t</span> = c<span class="math-sub">0</span> · (D<span class="math-sub">t</span>/D<span class="math-sub">0</span>) · (a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>)</span>
+            </div>
+            
+            <p><strong>Application pratique :</strong></p>
+            <ul>
+                <li>Taux initial <span class="math">c<span class="math-sub">0</span> = 24,47%</span></li>
+                <li>Ajustement annuel basé sur l'évolution de <span class="math">D<span class="math-sub">t</span></span> et <span class="math">a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span></span></li>
+            </ul>
+            
+            <p><strong>Résultats :</strong></p>
+            <ul>
+                <li>Taux d'équilibre : 24,47% → 37,31% en 2123 (+52,43%)</li>
+                <li>Avec MAA : 24,47% → 39,20% en 2123 (+60,15%)</li>
+                <li>Sans MAA : maintien à 24,47% → déficit cumulé catastrophique</li>
+            </ul>
+            
+            <p><strong>Impact sur les déficits :</strong></p>
+            <ul>
+                <li>Sans MAA : déficit cumulé > 1,4 trillion d'euros en 2123</li>
+                <li>Avec MAA : déficit limité à environ 2 milliards d'euros</li>
+                <li>Excédents initiaux (2023-2025) grâce à l'ajustement progressif</li>
+            </ul>
+            
+            <h4 class="subsection-title">4.2.2 Ajustement de l'âge de la retraite avec amélioration des pensions</h4>
+            
+            <p><strong>Équation fondamentale :</strong></p>
+            <div class="formula">
+                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) = e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+            </div>
+            
+            <p><strong>Méthode de résolution :</strong></p>
+            <ul>
+                <li>Interpolation linéaire sur les tables de mortalité prospectives</li>
+                <li>Résolution de : <span class="math">∑<span class="math-sub">x=x<span class="math-sub">r</span></span><span class="math-sup">ω</span> p<span class="math-sub">x</span> = e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span></li>
+            </ul>
+            
+            <div class="table-container">
+                <table>
+                    <caption>Évolution de l'âge de retraite</caption>
+                    <thead>
+                        <tr>
+                            <th>Année</th>
+                            <th>2023</th>
+                            <th>2030</th>
+                            <th>2040</th>
+                            <th>2050</th>
+                            <th>2060</th>
+                            <th>2070</th>
+                            <th>2080</th>
+                            <th>2090</th>
+                            <th>2100</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Âge</td>
+                            <td>65,0</td>
+                            <td>66,3</td>
+                            <td>68,6</td>
+                            <td>70,8</td>
+                            <td>72,8</td>
+                            <td>74,6</td>
+                            <td>76,1</td>
+                            <td>77,5</td>
+                            <td>78,7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p><strong>Impact démographique :</strong></p>
+            <ul>
+                <li>Population active : 3,876M → 5,489M (+41,6%)</li>
+                <li>Population retraitée : 1,824M → 1,237M (-32,2%)</li>
+                <li>Quotient de vieillesse : 47,07% → 22,49%</li>
+            </ul>
+            
+            <p><strong>Calcul des nouvelles pensions :</strong></p>
+            <div class="formula">
+                <span class="math">P<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">ajusté</span> = (c<span class="math-sub">0</span> · V<span class="math-sub">t</span>) / QV<span class="math-sub">t</span></span>
+            </div>
+            
+            <p><strong>Performance financière :</strong></p>
+            <ul>
+                <li>Ratio de solvabilité maintenu à 1 jusqu'en 2033</li>
+                <li>Déficit cumulé limité à 2,61 billions vs 119 trillions sans MAA</li>
+            </ul>
+            
+            <h4 class="subsection-title">4.2.3 Ajustement de l'âge avec taux de remplacement constant</h4>
+            
+            <p><strong>Équation d'équilibre :</strong></p>
+            <div class="formula">
+                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) / (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) = (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>) · e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) / (x<span class="math-sub">r</span>(0) - x<span class="math-sub">e</span>)</span>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <caption>Nouvel âge de retraite</caption>
+                    <thead>
+                        <tr>
+                            <th>Année</th>
+                            <th>2023</th>
+                            <th>2030</th>
+                            <th>2040</th>
+                            <th>2050</th>
+                            <th>2060</th>
+                            <th>2070</th>
+                            <th>2080</th>
+                            <th>2090</th>
+                            <th>2100</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Âge</td>
+                            <td>65,0</td>
+                            <td>66,7</td>
+                            <td>68,9</td>
+                            <td>70,9</td>
+                            <td>72,9</td>
+                            <td>74,7</td>
+                            <td>76,4</td>
+                            <td>78,0</td>
+                            <td>79,5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p><strong>Ajustement du taux d'accumulation :</strong></p>
+            <div class="formula">
+                <span class="math">θ<span class="math-sub">t</span> = θ<span class="math-sub">0</span> · (x<span class="math-sub">r</span>(0) - x<span class="math-sub">e</span>) / (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) = 1,3% · 40 / (x<span class="math-sub">r</span>(t) - 25)</span>
+            </div>
+            
+            <p><strong>Impact :</strong></p>
+            <ul>
+                <li>QV : 47,07% → 20,49%</li>
+                <li>Taux d'accumulation : 1,3% → 0,912%</li>
+            </ul>
+            
+            <h4 class="subsection-title">4.2.5 Facteur de durabilité</h4>
+            
+            <p><strong>Formule générale :</strong></p>
+            <div class="formula">
+                <span class="math">SF<span class="math-sub">x<span class="math-sub">r</span>(t)</span> = SF<span class="math-sub">x<span class="math-sub">r</span>(0)</span> · (a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+            </div>
+            
+            <p><strong>Application :</strong></p>
+            <ul>
+                <li>Réduction progressive des pensions d'entrée</li>
+                <li>Compensation de l'augmentation de l'espérance de vie</li>
+                <li>Maintien de l'équité intergénérationnelle</li>
+            </ul>
+            
+            <p><strong>Performance :</strong></p>
+            <ul>
+                <li>Croissance plus stable des pensions</li>
+                <li>Déficit cumulé limité à 1,17 milliard vs croissance exponentielle sans MAA</li>
+            </ul>
+            
+            <h3 class="section-title">4.3 Étude de sensibilité approfondie</h3>
+            
+            <h4 class="subsection-title">4.3.1 Scénarios de stress démographique</h4>
+            
+            <p><strong>Cas 1 : Diminution de la natalité</strong></p>
+            <ul>
+                <li>Hypothèse : baisse de 1% par an à partir de 2024, stabilisation après 2034</li>
+                <li>Impact sur la population active : 3,876M → 3,556M (-8,3%)</li>
+                <li>QV final : 69,9% vs 71,7% dans le scénario de base</li>
+                <li>Déficit cumulé avec MAA : 13,4 milliards vs 14,6 milliards (base)</li>
+            </ul>
+            
+            <p><strong>Cas 2 : Âge de retraite à 60 ans</strong></p>
+            <ul>
+                <li>Conséquences :
+                    <ul>
+                        <li>Période de cotisation réduite</li>
+                        <li>Taux d'accumulation augmenté</li>
+                        <li>QV : 62% → 88%</li>
+                        <li>Déficit initial aggravé</li>
+                    </ul>
+                </li>
+                <li>Avec MAA : excédent à partir de 2024</li>
+            </ul>
+            
+            <p><strong>Cas 3 : Âge de retraite à 68 ans</strong></p>
+            <ul>
+                <li>Impacts :
+                    <ul>
+                        <li>Période de cotisation allongée</li>
+                        <li>Taux d'accumulation réduit à 1,21%</li>
+                        <li>QV : 34,8% → 54,2%</li>
+                        <li>Taux de cotisation initial plus faible (18,1%)</li>
+                    </ul>
+                </li>
+                <li>Performance améliorée avec ajustements</li>
+            </ul>
+            
+            <h4 class="subsection-title">4.3.2 Scénarios de stress économique</h4>
+            
+            <p><strong>Variation du taux de revalorisation des pensions (<span class="math">π<span class="math-sub">t</span></span>)</strong></p>
+            
+            <p><strong>Ajustement du taux de cotisation :</strong></p>
+            <ul>
+                <li>Si <span class="math">π<span class="math-sub">t</span> > y<span class="math-sub">t</span></span> : nécessité d'augmenter les cotisations</li>
+                <li>Si <span class="math">π<span class="math-sub">t</span> = y<span class="math-sub">t</span></span> : simplification actuarielle</li>
+                <li>Si <span class="math">π<span class="math-sub">t</span> < y<span class="math-sub">t</span></span> : réduction possible des cotisations</li>
+            </ul>
+            
+            <p><strong>Résultats pour différents taux :</strong></p>
+            <ul>
+                <li><span class="math">π<span class="math-sub">t</span> = 1%</span> : déficit modéré</li>
+                <li><span class="math">π<span class="math-sub">t</span> = 4%</span> : amélioration significative, excédents</li>
+            </ul>
+            
+            <h3 class="section-title">4.4 Règle de Musgrave : alternative aux MAA</h3>
+            
+            <h4 class="subsection-title">4.4.1 Principes fondamentaux</h4>
+            
+            <p><strong>Ratio de Musgrave :</strong></p>
+            <div class="formula">
+                <span class="math">M<span class="math-sub">t</span> = P<span class="math-sub">t</span> / [S<span class="math-sub">t</span>(1 - c<span class="math-sub">t</span>)]</span>
+            </div>
+            
+            <p><strong>Équilibre initial :</strong> <span class="math">c<span class="math-sub">1</span> = D<span class="math-sub">1</span> δ<span class="math-sub">1</span></span></p>
+            
+            <h4 class="subsection-title">4.4.2 Formules de récurrence</h4>
+            
+            <p><strong>Taux de remplacement :</strong></p>
+            <div class="formula">
+                <span class="math">δ<span class="math-sub">n</span> = δ<span class="math-sub">n-1</span> · 1 / [1 + δ<span class="math-sub">n-1</span>(D<span class="math-sub">n</span> - D<span class="math-sub">n-1</span>)]</span>
+            </div>
+            
+            <p><strong>Taux de cotisation :</strong></p>
+            <div class="formula">
+                <span class="math">c<span class="math-sub">n</span> = c<span class="math-sub">n-1</span> · D<span class="math-sub">n</span> / [1 + c<span class="math-sub">n-1</span>(D<span class="math-sub">n</span> - D<span class="math-sub">n-1</span>)]</span>
+            </div>
+            
+            <h4 class="subsection-title">4.4.3 Application et performance</h4>
+            
+            <p><strong>Évolution 2023-2123 :</strong></p>
+            <ul>
+                <li>Taux de cotisation : 24,47% → 42,80%</li>
+                <li>Taux de remplacement : compensation à la baisse</li>
+                <li>Déficit cumulé : progression positive et stable</li>
+                <li>Ratio de solvabilité : 1,132 (meilleure performance)</li>
+            </ul>
+            
+            <h3 class="section-title">4.5 Analyse comparative synthétique</h3>
+            
+            <div class="table-container">
+                <table>
+                    <caption>Tableau récapitulatif des performances</caption>
+                    <thead>
+                        <tr>
+                            <th>Mécanisme</th>
+                            <th>VAP Cotisations</th>
+                            <th>VAP Prestations</th>
+                            <th>Ratio Solvabilité</th>
+                            <th>Déficit Cumulé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Situation de base</td>
+                            <td>1,191E+13</td>
+                            <td>1,471E+13</td>
+                            <td>0,810</td>
+                            <td>Catastrophique</td>
+                        </tr>
+                        <tr>
+                            <td>Ajustement taux cotisation</td>
+                            <td>1,529E+13</td>
+                            <td>1,471E+13</td>
+                            <td>1,039</td>
+                            <td>Contrôlé</td>
+                        </tr>
+                        <tr>
+                            <td>Âge retraite + amélioration</td>
+                            <td>1,490E+13</td>
+                            <td>1,490E+13</td>
+                            <td>1,000</td>
+                            <td>2,61 billions</td>
+                        </tr>
+                        <tr>
+                            <td>Âge retraite + TR constant</td>
+                            <td>1,502E+13</td>
+                            <td>1,502E+13</td>
+                            <td>1,000</td>
+                            <td>Modéré</td>
+                        </tr>
+                        <tr>
+                            <td>Facteur de durabilité</td>
+                            <td>1,132E+13</td>
+                            <td>1,093E+13</td>
+                            <td>1,035</td>
+                            <td>1,17 milliard</td>
+                        </tr>
+                        <tr>
+                            <td>Règle de Musgrave</td>
+                            <td>1,570E+13</td>
+                            <td>1,387E+13</td>
+                            <td>1,132</td>
+                            <td>Excédentaire</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="conclusion">
+                <p><strong>Conclusions du chapitre :</strong></p>
+                <ol>
+                    <li><strong>Tous les MAA améliorent significativement</strong> la solvabilité par rapport au scénario de base</li>
+                    <li><strong>L'ajustement de l'âge de retraite</strong> offre le meilleur équilibre entre équité et solvabilité</li>
+                    <li><strong>La règle de Musgrave</strong> présente la meilleure performance financière</li>
+                    <li><strong>La transparence et l'acceptabilité sociale</strong> restent des défis majeurs pour tous les mécanismes</li>
+                    <li><strong>La combinaison de plusieurs MAA</strong> pourrait offrir la solution optimale</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="conclusion" class="chapter">
+            <h2 class="chapter-title">Conclusion Générale</h2>
+            
+            <p>Ce mémoire démontre de manière exhaustive l'efficacité des différents mécanismes d'ajustement et fournit aux décideurs publics des outils quantitatifs robustes pour la réforme des systèmes de retraite.</p>
+            
+            <div class="conclusion">
+                <p><strong>Points clés à retenir :</strong></p>
+                <ul>
+                    <li>Les <strong>MAA sont indispensables</strong> pour assurer la pérennité des régimes de retraite face au vieillissement démographique</li>
+                    <li>Les modèles quantitatifs (Lee-Carter, Log-Poisson) permettent une projection fiable de l'espérance de vie</li>
+                    <li>L'ajustement de l'âge de retraite et l'introduction de facteurs de durabilité sont des leviers efficaces</li>
+                    <li>La <strong>règle de Musgrave</strong> offre une alternative équilibrée, partageant le risque entre actifs et retraités</li>
+                    <li>Les MAA doivent être <strong>transparents, équitables et socialement acceptables</strong></li>
+                </ul>
+            </div>
+            
+            <p>Les MAA et la règle de Musgrave représentent des innovations cruciales pour la gestion des systèmes de pension face aux fluctuations démographiques et économiques. Ils permettent de préserver la justice intergénérationnelle et d'assurer une répartition équitable des ressources, tout en maintenant la stabilité et la durabilité des systèmes de retraite à long terme.</p>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>Mémoire de fin d'études - Master 120 en Sciences actuarielles</p>
+                <p>UCLouvain - École de statistique, biostatistique et sciences actuarielles</p>
+                <p>&copy; 2024 - SIMO TCHEMO Steve Géraldin</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

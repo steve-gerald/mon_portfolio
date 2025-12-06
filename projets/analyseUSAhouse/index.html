@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse du Marché Immobilier Américain 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #8B9A8B;
+            --secondary-color: #B8A082;
+            --accent-color: #A67C52;
+            --highlight-color: #D4B896;
+            --text-dark: #2C2C2C;
+            --text-light: #6B6B6B;
+            --background: #FAF8F5;
+            --grid: #E8E3D8;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--grid);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .executive-summary {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: var(--highlight-color);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .summary-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .summary-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .summary-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin: 30px 0;
+        }
+
+        .chart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .insight-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .insight-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .insight-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .insight-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--grid);
+            color: var(--text-light);
+        }
+
+        .insight-card li:last-child {
+            border-bottom: none;
+        }
+
+        .insight-card li strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .methodology {
+            background: var(--highlight-color);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        .methodology h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            margin: 10px;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .download-btn i {
+            margin-right: 10px;
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .highlight {
+            background: var(--highlight-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Analyse du Marché Immobilier Américain</h1>
+            <p class="subtitle">Étude comparative des prix, tendances et abordabilité dans 50 grandes villes (2024)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Résumé Exécutif -->
+        <section class="section">
+            <div class="executive-summary">
+                <h2 class="section-title">Résumé Exécutif</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; text-align: center; color: var(--text-light);">
+                    Cette analyse approfondie du marché immobilier américain révèle des disparités significatives entre les grandes villes,
+                    avec des marchés en déclin dans le Texas et la Floride, tandis que le Midwest et le Nord-Est connaissent une croissance robuste.
+                </p>
+                
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Prix Médian National</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--accent-color);">$367,965</p>
+                        <p>Stable avec une croissance de +0.2% en 2024</p>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Ville la Plus Chère</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--accent-color);">San Jose, CA</p>
+                        <p>$1,582,065 (-1.6% de croissance)</p>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <i class="fas fa-chart-line-down"></i>
+                        <h3>Ville la Moins Chère</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--accent-color);">Pittsburgh, PA</p>
+                        <p>$232,771 (+1.8% de croissance)</p>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Ratio Prix/Revenu Moyen</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--accent-color);">6.0x</p>
+                        <p>Indicateur d'abordabilité générale</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analyse des Prix Immobiliers -->
+        <section class="section">
+            <h2 class="section-title">Statistiques des Prix Immobiliers</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4><i class="fas fa-crown"></i> Villes les Plus Chères</h4>
+                    <ul>
+                        <li><strong>San Jose, CA:</strong> $1,582,065 (-1.6%)</li>
+                        <li><strong>San Francisco, CA:</strong> $1,127,650 (-3.8%)</li>
+                        <li><strong>Los Angeles, CA:</strong> $959,206 (-0.8%)</li>
+                        <li><strong>San Diego, CA:</strong> $925,599 (-2.6%)</li>
+                        <li><strong>Seattle, WA:</strong> $751,156 (-0.8%)</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-card">
+                    <h4><i class="fas fa-dollar-sign"></i> Villes les Plus Abordables</h4>
+                    <ul>
+                        <li><strong>Pittsburgh, PA:</strong> $232,771 (+1.8%)</li>
+                        <li><strong>Oklahoma City, OK:</strong> $242,586 (+1.0%)</li>
+                        <li><strong>Memphis, TN:</strong> $244,072 (-0.7%)</li>
+                        <li><strong>Cleveland, OH:</strong> $248,038 (+4.7%)</li>
+                        <li><strong>New Orleans, LA:</strong> $256,244 (-1.0%)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 class="chart-title">Top 15 des Villes avec les Prix les Plus Élevés</h3>
+                <div class="image-container">
+                    <img src="top_15_expensive_cities.png" alt="Top 15 villes avec les prix immobiliers les plus élevés">
+                </div>
+                <p style="margin-top: 20px; color: var(--text-light); text-align: center;">
+                    <strong>Observation clé:</strong> Les villes de la côte Ouest dominent le classement des prix élevés, 
+                    avec une concentration particulière en Californie. Cependant, la plupart de ces marchés coûteux 
+                    connaissent une croissance négative ou stagnante, suggérant un possible ajustement du marché.
+                </p>
+            </div>
+        </section>
+
+        <!-- Analyse des Tendances de Croissance -->
+        <section class="section">
+            <h2 class="section-title">Tendances de Croissance des Prix</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4><i class="fas fa-arrow-up"></i> Croissance la Plus Forte</h4>
+                    <ul>
+                        <li><strong>Cleveland, OH:</strong> +4.7% ($248,038)</li>
+                        <li><strong>Hartford, CT:</strong> +4.5% ($393,092)</li>
+                        <li><strong>Louisville, KY:</strong> +3.9% ($271,943)</li>
+                        <li><strong>Detroit, MI:</strong> +3.8% ($268,642)</li>
+                        <li><strong>New York, NY:</strong> +3.7% ($713,066)</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-card">
+                    <h4><i class="fas fa-arrow-down"></i> Déclin le Plus Marqué</h4>
+                    <ul>
+                        <li><strong>Tampa, FL:</strong> -6.2% ($361,115)</li>
+                        <li><strong>Austin, TX:</strong> -6.0% ($437,456)</li>
+                        <li><strong>Miami, FL:</strong> -4.6% ($472,814)</li>
+                        <li><strong>Orlando, FL:</strong> -4.3% ($389,304)</li>
+                        <li><strong>Dallas, TX:</strong> -3.9% ($369,096)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 class="chart-title">Analyse des Tendances de Croissance par Ville</h3>
+                <div class="image-container">
+                    <img src="growth_analysis.png" alt="Analyse des tendances de croissance">
+                </div>
+                <p style="margin-top: 20px; color: var(--text-light); text-align: center;">
+                    <strong>Analyse:</strong> Un schéma géographique clair émerge - les marchés du Midwest (Cleveland, Detroit, Chicago) 
+                    et du Nord-Est (Hartford, New York) montrent une croissance positive, tandis que le Texas et la Floride, 
+                    anciens moteurs de croissance, connaissent maintenant des corrections significatives.
+                </p>
+            </div>
+        </section>
+
+        <!-- Analyse de l'Abordabilité -->
+        <section class="section">
+            <h2 class="section-title">Abordabilité Immobilière</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Villes les Moins Abordables</h4>
+                    <ul>
+                        <li><strong>Los Angeles, CA:</strong> 13.3x le revenu médian</li>
+                        <li><strong>San Jose, CA:</strong> 12.2x le revenu médian</li>
+                        <li><strong>San Diego, CA:</strong> 11.2x le revenu médian</li>
+                        <li><strong>San Francisco, CA:</strong> 9.5x le revenu médian</li>
+                        <li><strong>New York, NY:</strong> 9.1x le revenu médian</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-card">
+                    <h4><i class="fas fa-check-circle"></i> Villes les Plus Abordables</h4>
+                    <ul>
+                        <li><strong>Pittsburgh, PA:</strong> 3.7x le revenu médian</li>
+                        <li><strong>Oklahoma City, OK:</strong> 3.7x le revenu médian</li>
+                        <li><strong>Birmingham, AL:</strong> 4.0x le revenu médian</li>
+                        <li><strong>Cleveland, OH:</strong> 4.0x le revenu médian</li>
+                        <li><strong>Buffalo, NY:</strong> 4.2x le revenu médian</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 class="chart-title">Analyse de l'Abordabilité par Ville</h3>
+                <div class="image-container">
+                    <img src="affordability_analysis.png" alt="Analyse de l'abordabilité">
+                </div>
+                <p style="margin-top: 20px; color: var(--text-light); text-align: center;">
+                    <strong>Interprétation:</strong> La ligne de référence à 5x le revenu médian représente généralement 
+                    le seuil d'abordabilité. Seules 8 villes sur 49 dépassent ce seuil, concentrées principalement 
+                    sur les côtes Est et Ouest, créant un fossé d'abordabilité géographique marqué.
+                </p>
+            </div>
+        </section>
+
+        <!-- Visualisation Interactive -->
+        <section class="section">
+            <h2 class="section-title">Analyse Interactive Complète</h2>
+            <div class="chart-container">
+                <iframe src="interactive_analysis.html" width="100%" height="800" frameborder="0" 
+                        style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);"></iframe>
+            </div>
+        </section>
+
+        <!-- Recommandations et Perspectives -->
+        <section class="section">
+            <h2 class="section-title">Recommandations et Perspectives</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4><i class="fas fa-bullseye"></i> Pour les Investisseurs</h4>
+                    <ul>
+                        <li><strong>Opportunités de valeur:</strong> Marchés du Midwest (Cleveland, Detroit) avec croissance positive et prix abordables</li>
+                        <li><strong>Éviter:</strong> Marchés en déclin du Texas et de la Floride à court terme</li>
+                        <li><strong>Surveiller:</strong> Villes du Nord-Est avec croissance stable et demande durable</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-card">
+                    <h4><i class="fas fa-home"></i> Pour les Acheteurs Résidentiels</h4>
+                    <ul>
+                        <li><strong>Abordabilité maximale:</strong> Pittsburgh, Oklahoma City, Birmingham</li>
+                        <li><strong>Équilibre prix/croissance:</strong> Villes du Midwest avec stabilité économique</li>
+                        <li><strong>Attention:</strong> Côtes Ouest et Est - ratios prix/revenu excessifs</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-card">
+                    <h4><i class="fas fa-chart-line"></i> Tendances Futures</h4>
+                    <ul>
+                        <li><strong>Normalisation:</strong> Correction attendue dans les marchés surévalués</li>
+                        <li><strong>Migration:</strong> Flux vers les marchés abordables du Midwest</li>
+                        <li><strong>Stabilité:</strong> Marchés établis du Nord-Est résistants aux cycles</li>
+                    </ul>
+                </div>
+                
+                <div class="insight-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Risques et Limites</h4>
+                    <ul>
+                        <li><strong>Données limitées:</strong> Analyse basée sur 50 grandes villes seulement</li>
+                        <li><strong>Facteurs externes:</strong> Taux d'intérêt, inflation non intégrés</li>
+                        <li><strong>Dynamiques locales:</strong> Variations intra-urbaines non capturées</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Méthodologie -->
+        <section class="section">
+            <div class="methodology">
+                <h3><i class="fas fa-microscope"></i> Méthodologie et Sources de Données</h3>
+                <p><strong>Sources principales:</strong></p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><a href="https://investors.zillowgroup.com/" target="_blank" style="color: var(--accent-color);">Zillow Home Value Index (ZHVI)</a> - Prix médians par métropole</li>
+                    <li><a href="https://www.redfin.com/us-housing-market" target="_blank" style="color: var(--accent-color);">Redfin Housing Market Data</a> - Tendances de croissance</li>
+                    <li>Données de revenus médians - Estimations basées sur les données census américaines</li>
+                </ul>
+                
+                <p><strong>Méthodes d'analyse:</strong></p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Analyse descriptive des prix médians (ZHVI 2024)</li>
+                    <li>Calcul du taux de croissance annuel (YoY 2024)</li>
+                    <li>Ratio d'abordabilité: Prix médian / Revenu médian</li>
+                    <li>Classification par percentiles pour identification des extrêmes</li>
+                </ul>
+                
+                <p><strong>Période d'analyse:</strong> Données 2024 avec comparaisons annuelles</p>
+                <p><strong>Échantillon:</strong> 50 plus grandes métropoles américaines</p>
+            </div>
+        </section>
+
+        <!-- Section Téléchargement -->
+        <section class="section">
+            <div class="download-section">
+                <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px;">
+                    <i class="fas fa-download"></i> Télécharger les Données
+                </h3>
+                <p style="margin-bottom: 30px; color: var(--text-light);">
+                    Accédez aux données brutes et aux résultats d'analyse pour vos propres recherches
+                </p>
+                <a href="real_estate_data.csv" class="download-btn" download>
+                    <i class="fas fa-file-csv"></i> Données Immobilières (CSV)
+                </a>
+                <a href="analysis_results.json" class="download-btn" download>
+                    <i class="fas fa-file-code"></i> Résultats d'Analyse (JSON)
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Analyse du Marché Immobilier Américain</p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                Données sources: Zillow, Redfin | Analyse réalisée avec méthodologies statistiques et peut contenir des erreurs 
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation de défilement doux
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observer tous les éléments avec animation
+            document.querySelectorAll('.summary-card, .insight-card, .chart-container').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

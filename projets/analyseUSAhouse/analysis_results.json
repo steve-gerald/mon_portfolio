@@ -1,0 +1,319 @@
+{
+  "top_expensive_cities": [
+    {
+      "Metro Area": "San Jose CA",
+      "ZHVI_2024": 1582065,
+      "YoY_Change_2024": -1.6
+    },
+    {
+      "Metro Area": "San Francisco CA",
+      "ZHVI_2024": 1127650,
+      "YoY_Change_2024": -3.8
+    },
+    {
+      "Metro Area": "Los Angeles CA",
+      "ZHVI_2024": 959206,
+      "YoY_Change_2024": -0.8
+    },
+    {
+      "Metro Area": "San Diego CA",
+      "ZHVI_2024": 925599,
+      "YoY_Change_2024": -2.6
+    },
+    {
+      "Metro Area": "Seattle WA",
+      "ZHVI_2024": 751156,
+      "YoY_Change_2024": -0.8
+    },
+    {
+      "Metro Area": "Boston MA",
+      "ZHVI_2024": 731359,
+      "YoY_Change_2024": 1.3
+    },
+    {
+      "Metro Area": "New York NY",
+      "ZHVI_2024": 713066,
+      "YoY_Change_2024": 3.7
+    },
+    {
+      "Metro Area": "Riverside CA",
+      "ZHVI_2024": 585417,
+      "YoY_Change_2024": -2.1
+    },
+    {
+      "Metro Area": "Washington DC",
+      "ZHVI_2024": 584722,
+      "YoY_Change_2024": 1.2
+    },
+    {
+      "Metro Area": "Sacramento CA",
+      "ZHVI_2024": 582942,
+      "YoY_Change_2024": -2.2
+    }
+  ],
+  "top_affordable_cities": [
+    {
+      "Metro Area": "Pittsburgh PA",
+      "ZHVI_2024": 232771,
+      "YoY_Change_2024": 1.8
+    },
+    {
+      "Metro Area": "Oklahoma City OK",
+      "ZHVI_2024": 242586,
+      "YoY_Change_2024": 1.0
+    },
+    {
+      "Metro Area": "Memphis TN",
+      "ZHVI_2024": 244072,
+      "YoY_Change_2024": -0.7
+    },
+    {
+      "Metro Area": "Cleveland OH",
+      "ZHVI_2024": 248038,
+      "YoY_Change_2024": 4.7
+    },
+    {
+      "Metro Area": "New Orleans LA",
+      "ZHVI_2024": 256244,
+      "YoY_Change_2024": -1.0
+    },
+    {
+      "Metro Area": "Birmingham AL",
+      "ZHVI_2024": 257127,
+      "YoY_Change_2024": 0.1
+    },
+    {
+      "Metro Area": "Detroit MI",
+      "ZHVI_2024": 268642,
+      "YoY_Change_2024": 3.8
+    },
+    {
+      "Metro Area": "St. Louis MO",
+      "ZHVI_2024": 271010,
+      "YoY_Change_2024": 2.3
+    },
+    {
+      "Metro Area": "Louisville KY",
+      "ZHVI_2024": 271943,
+      "YoY_Change_2024": 3.9
+    },
+    {
+      "Metro Area": "San Antonio TX",
+      "ZHVI_2024": 283286,
+      "YoY_Change_2024": -3.1
+    }
+  ],
+  "top_growth_cities": [
+    {
+      "Metro Area": "Cleveland OH",
+      "ZHVI_2024": 248038,
+      "YoY_Change_2024": 4.7
+    },
+    {
+      "Metro Area": "Hartford CT",
+      "ZHVI_2024": 393092,
+      "YoY_Change_2024": 4.5
+    },
+    {
+      "Metro Area": "Louisville KY",
+      "ZHVI_2024": 271943,
+      "YoY_Change_2024": 3.9
+    },
+    {
+      "Metro Area": "Detroit MI",
+      "ZHVI_2024": 268642,
+      "YoY_Change_2024": 3.8
+    },
+    {
+      "Metro Area": "New York NY",
+      "ZHVI_2024": 713066,
+      "YoY_Change_2024": 3.7
+    },
+    {
+      "Metro Area": "Buffalo NY",
+      "ZHVI_2024": 283377,
+      "YoY_Change_2024": 3.7
+    },
+    {
+      "Metro Area": "Philadelphia PA",
+      "ZHVI_2024": 386721,
+      "YoY_Change_2024": 3.6
+    },
+    {
+      "Metro Area": "Chicago IL",
+      "ZHVI_2024": 346252,
+      "YoY_Change_2024": 3.5
+    },
+    {
+      "Metro Area": "Milwaukee WI",
+      "ZHVI_2024": 376538,
+      "YoY_Change_2024": 3.2
+    },
+    {
+      "Metro Area": "Providence RI",
+      "ZHVI_2024": 511889,
+      "YoY_Change_2024": 2.9
+    }
+  ],
+  "top_decline_cities": [
+    {
+      "Metro Area": "Tampa FL",
+      "ZHVI_2024": 361115,
+      "YoY_Change_2024": -6.2
+    },
+    {
+      "Metro Area": "Austin TX",
+      "ZHVI_2024": 437456,
+      "YoY_Change_2024": -6.0
+    },
+    {
+      "Metro Area": "Miami FL",
+      "ZHVI_2024": 472814,
+      "YoY_Change_2024": -4.6
+    },
+    {
+      "Metro Area": "Orlando FL",
+      "ZHVI_2024": 389304,
+      "YoY_Change_2024": -4.3
+    },
+    {
+      "Metro Area": "Dallas TX",
+      "ZHVI_2024": 369096,
+      "YoY_Change_2024": -3.9
+    },
+    {
+      "Metro Area": "San Francisco CA",
+      "ZHVI_2024": 1127650,
+      "YoY_Change_2024": -3.8
+    },
+    {
+      "Metro Area": "Phoenix AZ",
+      "ZHVI_2024": 448513,
+      "YoY_Change_2024": -3.5
+    },
+    {
+      "Metro Area": "Jacksonville FL",
+      "ZHVI_2024": 352549,
+      "YoY_Change_2024": -3.4
+    },
+    {
+      "Metro Area": "Atlanta GA",
+      "ZHVI_2024": 384607,
+      "YoY_Change_2024": -3.1
+    },
+    {
+      "Metro Area": "San Antonio TX",
+      "ZHVI_2024": 283286,
+      "YoY_Change_2024": -3.1
+    }
+  ],
+  "least_affordable_cities": [
+    {
+      "Metro Area": "Los Angeles CA",
+      "Price_to_Income_Ratio": 13.322305555555555,
+      "ZHVI_2024": 959206
+    },
+    {
+      "Metro Area": "San Jose CA",
+      "Price_to_Income_Ratio": 12.16973076923077,
+      "ZHVI_2024": 1582065
+    },
+    {
+      "Metro Area": "San Diego CA",
+      "Price_to_Income_Ratio": 11.15179518072289,
+      "ZHVI_2024": 925599
+    },
+    {
+      "Metro Area": "San Francisco CA",
+      "Price_to_Income_Ratio": 9.476050420168066,
+      "ZHVI_2024": 1127650
+    },
+    {
+      "Metro Area": "New York NY",
+      "Price_to_Income_Ratio": 9.141871794871795,
+      "ZHVI_2024": 713066
+    },
+    {
+      "Metro Area": "Boston MA",
+      "Price_to_Income_Ratio": 8.217516853932585,
+      "ZHVI_2024": 731359
+    },
+    {
+      "Metro Area": "Miami FL",
+      "Price_to_Income_Ratio": 8.15196551724138,
+      "ZHVI_2024": 472814
+    },
+    {
+      "Metro Area": "Seattle WA",
+      "Price_to_Income_Ratio": 7.991021276595744,
+      "ZHVI_2024": 751156
+    },
+    {
+      "Metro Area": "Sacramento CA",
+      "Price_to_Income_Ratio": 7.67028947368421,
+      "ZHVI_2024": 582942
+    },
+    {
+      "Metro Area": "Portland OR",
+      "Price_to_Income_Ratio": 7.383613333333333,
+      "ZHVI_2024": 553771
+    }
+  ],
+  "most_affordable_cities": [
+    {
+      "Metro Area": "Pittsburgh PA",
+      "Price_to_Income_Ratio": 3.694777777777778,
+      "ZHVI_2024": 232771
+    },
+    {
+      "Metro Area": "Oklahoma City OK",
+      "Price_to_Income_Ratio": 3.732092307692308,
+      "ZHVI_2024": 242586
+    },
+    {
+      "Metro Area": "Birmingham AL",
+      "Price_to_Income_Ratio": 3.9558,
+      "ZHVI_2024": 257127
+    },
+    {
+      "Metro Area": "Cleveland OH",
+      "Price_to_Income_Ratio": 4.000612903225806,
+      "ZHVI_2024": 248038
+    },
+    {
+      "Metro Area": "Buffalo NY",
+      "Price_to_Income_Ratio": 4.167308823529412,
+      "ZHVI_2024": 283377
+    },
+    {
+      "Metro Area": "St. Louis MO",
+      "Price_to_Income_Ratio": 4.169384615384615,
+      "ZHVI_2024": 271010
+    },
+    {
+      "Metro Area": "New Orleans LA",
+      "Price_to_Income_Ratio": 4.20072131147541,
+      "ZHVI_2024": 256244
+    },
+    {
+      "Metro Area": "Memphis TN",
+      "Price_to_Income_Ratio": 4.208137931034483,
+      "ZHVI_2024": 244072
+    },
+    {
+      "Metro Area": "Louisville KY",
+      "Price_to_Income_Ratio": 4.249109375,
+      "ZHVI_2024": 271943
+    },
+    {
+      "Metro Area": "Indianapolis IN",
+      "Price_to_Income_Ratio": 4.426742424242424,
+      "ZHVI_2024": 292165
+    }
+  ],
+  "national_median": 367965.0,
+  "national_growth": 0.2,
+  "average_price": 463159.06,
+  "average_growth": 0.009399999999999966,
+  "average_ratio": 6.0244752484086606
+}

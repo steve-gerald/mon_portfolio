@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse des Risques Financiers - Étude d'AAPL</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --background-color: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Image Container */
+        .image-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Analysis Grid */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .analysis-item {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .analysis-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: var(--light-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Key Findings */
+        .key-findings {
+            background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .key-findings h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .key-findings ul {
+            list-style: none;
+        }
+
+        .key-findings li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .key-findings li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>Analyse des Risques Financiers</h1>
+                <p>Analyse Complète de la Performance et des Risques d'AAPL (2000-2020)</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Vue d'Ensemble</a></li>
+                <li><a href="#methodologie">Méthodologie</a></li>
+                <li><a href="#analyse">Analyse</a></li>
+                <li><a href="#resultats">Résultats</a></li>
+                <li><a href="#telechargement">Téléchargement</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <section id="overview" class="section">
+                <h2 class="section-title">Vue d'Ensemble </h2>
+                
+                <div class="card">
+                    <h3>Contexte du Projet</h3>
+                    <p>Cette analyse examine les données de prix boursiers d'Apple Inc. (AAPL) du 3 janvier 2000 au 6 mars 2020, couvrant plus de 5 000 jours de négociation. L'étude suit un cadre d'évaluation des risques complet conçu pour évaluer la volatilité du marché, les distributions de rendement et les métriques de risque essentielles pour la prise de décision en matière d'investissement.</p>
+                    
+                    <p>La période d'analyse capture des événements de marché significatifs incluant la bulle des dot-com, la crise financière de 2008 et le redressement ultérieur, fournissant un ensemble de données robuste pour comprendre le profil de risque d'Apple dans différentes conditions de marché.</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="aapl_dashboard.png" alt="Tableau de bord des statistiques clés d'AAPL"/>
+                    <p class="image-caption">Figure 1: Vue d'ensemble complète des métriques de performance et des indicateurs de risque d'AAPL</p>
+                </div>
+            </section>
+
+            <section id="methodologie" class="section">
+                <h2 class="section-title">Méthodologie et Traitement des Données</h2>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <h4><i class="fas fa-database"></i> Source de Données</h4>
+                        <p>L'analyse utilise des données de prix boursiers quotidiens du NYSE, du 3 janvier 2000 au 6 mars 2020, totalisant 5 076 jours de négociation. L'intégrité des données a été vérifiée par des méthodes de validation statistique et de détection des valeurs aberrantes.</p>
+                    </div>
+                    
+                    <div class="analysis-item">
+                        <h4><i class="fas fa-calculator"></i> Calcul des Rendements</h4>
+                        <p>Les rendements logarithmiques ont été calculés en utilisant la formule:</p>
+                        <div class="formula-box">
+                            <div class="formula-title">Formule des Rendements Logarithmiques</div>
+                            $$r(t) = \ln\left(\frac{P(t)}{P(t-1)}\right)$$
+                            <p>où $P(t)$ représente le prix de clôture au temps $t$.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-item">
+                        <h4><i class="fas fa-chart-line"></i> Tests Statistiques</h4>
+                        <p>Le test de Jarque-Bera a été employé pour évaluer la normalité des rendements. Les fonctions d'autocorrélation ont été calculées pour les rendements et les rendements au carré afin d'identifier les modèles et l'agglomération de volatilité.</p>
+                        <div class="formula-box">
+                            <div class="formula-title">Test de Jarque-Bera</div>
+                            $$JB = n\left(\frac{S^2}{6} + \frac{(K-3)^2}{24}\right)$$
+                            <p>où $S$ est l'asymétrie, $K$ la kurtosis, et $n$ le nombre d'observations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-item">
+                        <h4><i class="fas fa-shield-alt"></i> Métriques de Risque</h4>
+                        <p>Les calculs de la Value-at-Risk (VaR) ont été effectués aux niveaux de confiance de 1% et 5%. Les mesures de volatilité mobile ont été calculées en utilisant des fenêtres de 30 jours pour capturer les caractéristiques de risque variables dans le temps.</p>
+                        <div class="formula-box">
+                            <div class="formula-title">Value-at-Risk (VaR)</div>
+                            $$VaR_{\alpha} = F^{-1}(\alpha)$$
+                            <p>où $F^{-1}$ est la fonction quantile inverse de la distribution des rendements.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="analyse" class="section">
+                <h2 class="section-title">Analyse Complète</h2>
+                
+                <div class="card">
+                    <h3>Évolution du Prix des Actions</h3>
+                    <div class="image-container">
+                        <img src="aapl_price_evolution.png" alt="Évolution du prix des actions AAPL"/>
+                        <p class="image-caption">Figure 2: Trajectoire du prix des actions d'AAPL de 2000-2020, montrant une croissance spectaculaire de 3,47$ à plus de 300$ (ajusté pour les divisions)</p>
+                    </div>
+                    <p>L'action d'Apple a démontré une croissance exceptionnelle à long terme, augmentant d'environ 8 600% sur la période d'analyse. L'évolution du prix révèle des phases distinctes : volatilité initiale au début des années 2000, croissance régulière dans les années 2000, appréciation accélérée pendant l'ère de l'iPhone (à partir de 2007), et performance remarquable dans les années 2010 alimentée par l'expansion des services et le développement de l'écosystème.</p>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">Calcul du Rendement Total</div>
+                        $$\text{Rendement Total} = \frac{P_{final} - P_{initial}}{P_{initial}} \times 100\%$$
+                        <p>Pour AAPL: $\frac{300 - 3.47}{3.47} \times 100\% \approx 8,600\%$</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Caractéristiques de la Distribution des Rendements</h3>
+                    <div class="image-container">
+                        <img src="aapl_returns_distribution.png" alt="Distribution des rendements AAPL"/>
+                        <p class="image-caption">Figure 3: Analyse de la distribution révélant des écarts significatifs par rapport à la normalité et des événements extrêmes dans les queues de distribution</p>
+                    </div>
+                    
+                    <div class="analysis-grid">
+                        <div class="analysis-item">
+                            <h4>Propriétés Statistiques</h4>
+                            <ul>
+                                <li><strong>Rendement Journalier Moyen:</strong> 0.087%</li>
+                                <li><strong>Écart-Type:</strong> 2.64%</li>
+                                <li><strong>Rendement Annualisé:</strong> 21.96%</li>
+                                <li><strong>Volatilité Annualisée:</strong> 41.93%</li>
+                            </ul>
+                            <div class="formula-box">
+                                <div class="formula-title">Conversion Annualisée</div>
+                                $$\mu_{annuel} = \mu_{journalier} \times 252$$
+                                $$\sigma_{annuel} = \sigma_{journalier} \times \sqrt{252}$$
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-item">
+                            <h4>Forme de la Distribution</h4>
+                            <ul>
+                                <li><strong>Asymétrie:</strong> -4.33 (asymétrie négative)</li>
+                                <li><strong>Kurtosis:</strong> 119.41 (queues lourdes)</li>
+                                <li><strong>Test de Jarque-Bera:</strong> 3,025,197 (p &lt; 0.001)</li>
+                                <li><strong>Normalité:</strong> Rejetée</li>
+                            </ul>
+                            <div class="formula-box">
+                                <div class="formula-title">Mesures de Forme</div>
+                                $$\text{Asymétrie} = \frac{E[(X-\mu)^3]}{\sigma^3}$$
+                                $$\text{Kurtosis} = \frac{E[(X-\mu)^4]}{\sigma^4}$$
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Interprétation:</strong> L'asymétrie négative de -4.33 indique que les rendements extrêmes négatifs sont plus fréquents que prévu par une distribution normale. La kurtosis extrêmement élevée de 119.41 (contre 3 pour une distribution normale) signale la présence de queues de distribution lourdes, indiquant un risque plus élevé d'événements extrêmes.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Agglomération de Volatilité et Autocorrélation</h3>
+                    <div class="image-container">
+                        <img src="aapl_autocorrelation.png" alt="Analyse d'autocorrélation AAPL"/>
+                        <p class="image-caption">Figure 4: Fonctions d'autocorrélation pour les rendements et les rendements au carré, indiquant des effets d'agglomération de volatilité</p>
+                    </div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">Fonction d'Autocorrélation</div>
+                        $$\rho(k) = \frac{\text{Cov}(r_t, r_{t-k})}{\sigma^2}$$
+                        <p>où $\rho(k)$ est l'autocorrélation au lag $k$.</p>
+                    </div>
+                    
+                    <p>L'analyse d'autocorrélation révèle une corrélation sérielle minimale dans les rendements, soutenant l'efficacité du marché. Cependant, les rendements au carré présentent une autocorrélation persistante, indiquant un clustering de volatilité - caractéristique emblématique des séries temporelles financières. Ce modèle suggère que les périodes de forte volatilité tendent à être suivies de périodes de forte volatilité, et les périodes calmes par des périodes calmes, validant le besoin de modèles de risque dynamiques comme GARCH.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Évaluation des Risques et Value-at-Risk</h3>
+                    <div class="image-container">
+                        <img src="aapl_risk_metrics.png" alt="Métriques de risque AAPL"/>
+                        <p class="image-caption">Figure 5: Rendements quotidiens avec seuils VaR et analyse de volatilité mobile</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">-6.61%</div>
+                            <div class="stat-label">VaR Journalier (1%)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">-3.67%</div>
+                            <div class="stat-label">VaR Journalier (5%)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">0.52</div>
+                            <div class="stat-label">Ratio de Sharpe</div>
+                        </div>
+                    </div>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">Ratio de Sharpe</div>
+                        $$S = \frac{\mu_p - r_f}{\sigma_p}$$
+                        <p>où $\mu_p$ est le rendement du portefeuille, $r_f$ le taux sans risque, et $\sigma_p$ l'écart-type du portefeuille.</p>
+                    </div>
+                    
+                    <p>L'analyse des risques démontre la volatilité significative d'Apple, avec un VaR journalier à 1% indiquant des pertes potentielles dépassant 6,6% lors des pires journées de négociation. Le graphique de volatilité mobile révèle des périodes de risque élevé, particulièrement pendant les événements de stress du marché. Le ratio de Sharpe de 0.52 suggère des rendements ajustés au risque raisonnables, bien que cela reflète l'environnement de volatilité élevée typique des actions technologiques.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Analyse Statistique Avancée</h3>
+                    
+                    <h4>Test de Normalité de Jarque-Bera</h4>
+                    <p>Le test de Jarque-Bera est une méthode statistique pour vérifier si les rendements suivent une distribution normale. Le résultat extrêmement élevé (3,025,197) avec un p-value &lt; 0.001 fournit une preuve statistique irréfutable que les rendements d'AAPL ne suivent pas une distribution normale.</p>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">Détail du Test de Jarque-Bera</div>
+                        $$JB = n \times \left(\frac{S^2}{6} + \frac{(K-3)^2}{24}\right)$$
+                        <p>Pour AAPL:</p>
+                        <ul>
+                            <li>$n = 5075$ (nombre d'observations)</li>
+                            <li>$S = -4.33$ (asymétrie)</li>
+                            <li>$K = 119.41$ (kurtosis)</li>
+                            <li>$JB = 3,025,197$ (statistique du test)</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Analyse de la Volatilité</h4>
+                    <p>La volatilité a été analysée en utilisant des fenêtres mobiles de 30 jours pour capturer la nature dynamique du risque. La volatilité annualisée de 41.93% est substantiellement plus élevée que la moyenne du marché (environ 15-20%), reflétant la nature spéculative et le potentiel de croissance élevé d'Apple.</p>
+                    
+                    <div class="formula-box">
+                        <div class="formula-title">Volatilité Mobile</div>
+                        $$\sigma_{30j}(t) = \sqrt{\frac{1}{29} \sum_{i=0}^{29} (r_{t-i} - \bar{r}_{30})^2}$$
+                        $$\sigma_{annualisée} = \sigma_{30j} \times \sqrt{252}$$
+                    </div>
+                </div>
+            </section>
+
+            <section id="resultats" class="section">
+                <h2 class="section-title">Résultats Clés et Implications</h2>
+                
+                <div class="key-findings">
+                    <h3>Insights Critiques</h3>
+                    <ul>
+                        <li><strong>Performance Exceptionnelle à Long Terme:</strong> AAPL a délivré des rendements exceptionnels de 21.96% par an, surpassant significativement les benchmarks du marché</li>
+                        <li><strong>Distribution Non-Normale des Rendements:</strong> Les rendements présentent une asymétrie négative significative (-4.33) et une kurtosis extrême (119.41), indiquant des gains fréquents de petite taille et des pertes occasionnelles importantes</li>
+                        <li><strong>Clustering de Volatilité Confirmé:</strong> Les rendements au carré montrent une autocorrélation persistante, validant la présence de clustering de volatilité et l'adéquation des modèles de type GARCH</li>
+                        <li><strong>Profil de Risque-Récompense Élevé:</strong> Avec une volatilité annualisée de 41.93%, AAPL représente un investissement à haut risque nécessitant une gestion sophistiquée des risques</li>
+                        <li><strong>Preuve d'Efficacité du Marché:</strong> L'autocorrélation minimale dans les rendements soutient l'efficacité du marché sous forme faible pour l'action AAPL</li>
+                        <li><strong>Présence de Risque de Queue:</strong> Les queues lourdes de la distribution indiquent une probabilité plus élevée d'événements extrêmes que prévu par la distribution normale</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Implications pour les Investisseurs</h3>
+                    <p>L'action d'Apple représente une étude de cas convaincante dans l'analyse moderne des risques boursiers. Tout en délivrant des rendements exceptionnels, le profil de risque de l'action exige une considération attentive de la taille des positions, de la diversification et des stratégies de couverture dynamiques. Le clustering de volatilité confirmé suggère que les modèles de risque incorporant une volatilité variable dans le temps (tels que GARCH) seraient plus appropriés que les mesures de risque statiques.</p>
+                    
+                    <p>Pour les gestionnaires de portefeuille, l'analyse souligne l'importance de comprendre les caractéristiques de distribution des rendements au-delà des simples métriques moyenne-variance. La présence d'une asymétrie et d'une kurtosis significatives nécessite l'utilisation de mesures de risque plus sophistiquées telles que la Conditional VaR (CVaR) et les scénarios de stress testing.</p>
+                    
+                    <h4>Recommandations de Gestion des Risques</h4>
+                    <ul>
+                        <li><strong>Modélisation GARCH:</strong> Utiliser des modèles GARCH pour capturer la volatilité variable dans le temps</li>
+                        <li><strong>Mesures de Risque Avancées:</strong> Implémenter CVaR et des mesures de risque de queue</li>
+                        <li><strong>Stress Testing:</strong> Effectuer des tests de résistance réguliers pour évaluer la performance dans des scénarios extrêmes</li>
+                        <li><strong>Diversification:</strong> Maintenir une diversification appropriée compte tenu du profil de risque élevé</li>
+                        <li><strong>Surveillance Dynamique:</strong> Surveiller continuellement la volatilité et ajuster les positions en conséquence</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Limites et Perspectives Futures</h3>
+                    <p><strong>Limites de l'Étude:</strong></p>
+                    <ul>
+                        <li>L'analyse se concentre uniquement sur AAPL et pourrait bénéficier d'une comparaison sectorielle</li>
+                        <li>Les modèles GARCH et RiskMetrics mentionnés dans le document de projet nécessitent une analyse plus approfondie</li>
+                        <li>L'impact des événements macroéconomiques n'a pas été explicitement modélisé</li>
+                    </ul>
+                    
+                    <p><strong>Recherches Futures:</strong></p>
+                    <ul>
+                        <li>Implémentation et comparaison de modèles GARCH, EGARCH et GJR</li>
+                        <li>Analyse de la corrélation avec d'autres actions technologiques</li>
+                        <li>Étude de l'impact des annonces de résultats et des événements corporatifs</li>
+                        <li>Développement de stratégies de couverture basées sur les résultats de l'analyse</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="telechargement" class="section">
+                <div class="download-section">
+                    <h3>Données et Ressources</h3>
+                    <p>Accédez à l'ensemble complet de données et fichiers d'analyse pour des recherches et validations ultérieures.</p>
+                    <a href="aapl_analysis_data.csv" class="download-btn" download="">
+                        <i class="fas fa-download"></i> Télécharger les Données d'Analyse (CSV)
+                    </a>
+                    <a href="stocks.csv" class="download-btn" download="">
+                        <i class="fas fa-download"></i> Télécharger les Données Brutes (CSV)
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Rapport d'Analyse des Risques Financiers. Généré en utilisant des méthodes statistiques avancées et des techniques de visualisation de données.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId && document.querySelector(targetId)) {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse des Résultats NVIDIA : Mythe vs Réalité</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --nv-green: #7FB069;
+            --nv-dark-green: #5A8A4A;
+            --nv-light-green: #A8D08D;
+            --nv-gray: #8E8E93;
+            --nv-dark-gray: #48484A;
+            --nv-light-gray: #F2F2F7;
+            --nv-white: #FFFFFF;
+            --nv-black: #1C1C1E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--nv-dark-gray);
+            background-color: var(--nv-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--nv-white) 0%, var(--nv-light-gray) 100%);
+            padding: 60px 0;
+            border-bottom: 1px solid var(--nv-light-gray);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--nv-dark-gray);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: var(--nv-gray);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .meta {
+            text-align: center;
+            color: var(--nv-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Executive Summary */
+        .executive-summary {
+            background: var(--nv-light-gray);
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+
+        .summary-card {
+            background: var(--nv-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--nv-green);
+        }
+
+        .summary-card h2 {
+            color: var(--nv-dark-gray);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .finding-item {
+            background: var(--nv-white);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--nv-light-gray);
+        }
+
+        .finding-item .metric {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--nv-green);
+            display: block;
+        }
+
+        .finding-item .label {
+            font-size: 0.9rem;
+            color: var(--nv-gray);
+            margin-top: 5px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin: 60px 0;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--nv-dark-gray);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--nv-green);
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--nv-dark-gray);
+            margin: 30px 0 15px 0;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--nv-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--nv-dark-gray);
+            margin-bottom: 20px;
+        }
+
+        .chart-description {
+            font-size: 0.95rem;
+            color: var(--nv-gray);
+            margin-top: 15px;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        /* Insight Boxes */
+        .insight-box {
+            background: var(--nv-light-gray);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--nv-green);
+        }
+
+        .insight-box .icon {
+            color: var(--nv-green);
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .insight-box h4 {
+            color: var(--nv-dark-gray);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--nv-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .data-table th {
+            background: var(--nv-green);
+            color: var(--nv-white);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--nv-light-gray);
+        }
+
+        .data-table tr:hover {
+            background: var(--nv-light-gray);
+        }
+
+        /* Download Section */
+        .download-section {
+            background: var(--nv-light-gray);
+            padding: 40px 0;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: var(--nv-green);
+            color: var(--nv-white);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            margin: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--nv-dark-green);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--nv-dark-gray);
+            color: var(--nv-white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .key-findings {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Highlight Classes */
+        .positive {
+            color: var(--nv-green);
+            font-weight: 600;
+        }
+
+        .negative {
+            color: #D32F2F;
+            font-weight: 600;
+        }
+
+        .neutral {
+            color: var(--nv-gray);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: var(--nv-light-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Analyse des Résultats NVIDIA</h1>
+            <p class="subtitle">Mythe vs Réalité : La Hausse de NVIDIA Est-Elle Due aux Résultats ?</p>
+            <div class="meta">
+                <i class="fas fa-calendar"></i> Période d'Analyse : Novembre 2023 - Novembre 2025 |
+                <i class="fas fa-chart-line"></i> 8 Événements de Résultats Analysés |
+                <i class="fas fa-database"></i> Données Yahoo Finance
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary -->
+    <section class="executive-summary">
+        <div class="container">
+            <div class="summary-card">
+                <h2><i class="fas fa-bullseye"></i> Résumé Exécutif</h2>
+                <p><strong>Question Principale :</strong> La majeure partie de la hausse de NVIDIA s'est-elle produite autour des annonces de résultats ?</p>
+                
+                <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.6;">
+                    <strong class="highlight">NON</strong> - Notre analyse complète de la hausse de 314% de NVIDIA sur deux ans révèle que 
+                    <strong>les annonces de résultats n'ont PAS été le principal moteur</strong> de la performance remarquable du titre. 
+                    Contrairement à la croyance populaire, les gains de NVIDIA proviennent du boom soutenu de l'IA et des fondamentaux de l'entreprise, pas des événements trimestriels.
+                </p>
+
+                <div class="key-findings">
+                    <div class="finding-item">
+                        <span class="metric negative">-0,50%</span>
+                        <div class="label">Retour Moyen Jour de Résultats</div>
+                    </div>
+                    <div class="finding-item">
+                        <span class="metric negative">-13,8%</span>
+                        <div class="label">Retour Stratégie de Trading</div>
+                    </div>
+                    <div class="finding-item">
+                        <span class="metric positive">314%</span>
+                        <div class="label">Retour Acheter & Conserver</div>
+                    </div>
+                    <div class="finding-item">
+                        <span class="metric neutral">37,5%</span>
+                        <div class="label">Taux de Succès Résultats</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Stock Performance Analysis -->
+        <section class="section">
+            <h2><i class="fas fa-chart-line"></i> Analyse de Performance du Titre</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">Prix de l'Action NVIDIA avec Annonces de Résultats</div>
+                <img src="nvidia_stock_earnings.png" alt="Graphique Prix Action NVIDIA">
+                <div class="chart-description">
+                    <strong>Observation :</strong> Le prix de l'action NVIDIA montre une trajectoire haussière spectaculaire de 44,87$ à 189,40$ sur deux ans, 
+                    représentant un retour de 314%. Les lignes verticales en pointillé marquent les dates d'annonce des résultats, avec les retours du jour des résultats annotés.
+                    <br><br>
+                    <strong>Interprétation :</strong> Bien que les annonces de résultats soient marquées tout au long de la période, la tendance haussière soutenue 
+                    suggère que les forces du marché plus larges et les fondamentaux de l'entreprise, plutôt que les surprises trimestrielles, entraînent la performance.
+                    <br><br>
+                    <strong>Implication :</strong> Les preuves visuelles contredisent le récit selon lequel les événements de résultats sont le principal catalyseur 
+                    de la hausse du titre NVIDIA. Le modèle de croissance cohérent indique une création de valeur à long terme plutôt que des pics basés sur des événements.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <i class="fas fa-lightbulb icon"></i>
+                <h4>Principales Métriques de Performance</h4>
+                <p>NVIDIA a délivré des retours exceptionnels de <strong class="positive">314,2%</strong> sur la période de deux ans, 
+                surpassant significativement le marché plus large. Cependant, cette performance est venue avec une volatilité élevée de <strong>50,7%</strong> annualisée, 
+                reflétant les risques inhérents aux titres technologiques à forte croissance. La capitalisation boursière actuelle de <strong>4,6 billions de dollars</strong> 
+                fait de NVIDIA l'une des entreprises les plus valorisées au monde.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Métrique</th>
+                        <th>Valeur</th>
+                        <th>Contexte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Prix Actuel</td>
+                        <td class="positive">189,40 $</td>
+                        <td>Plus haut 2 ans : 212,19 $</td>
+                    </tr>
+                    <tr>
+                        <td>Retour Total</td>
+                        <td class="positive">314,2%</td>
+                        <td>vs S&P 500 ~25%</td>
+                    </tr>
+                    <tr>
+                        <td>Volatilité Annualisée</td>
+                        <td class="neutral">50,7%</td>
+                        <td>Élevée pour une grande capitalisation</td>
+                    </tr>
+                    <tr>
+                        <td>Capitalisation Boursière</td>
+                        <td class="positive">4,6 T$</td>
+                        <td>Parmi les plus grandes au monde</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Earnings Impact Analysis -->
+        <section class="section">
+            <h2><i class="fas fa-calendar-alt"></i> Analyse d'Impact des Résultats</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">Analyse Complète d'Impact des Résultats</div>
+                <img src="earnings_impact_analysis.png" alt="Analyse d'Impact des Résultats">
+                <div class="chart-description">
+                    <strong>Observation :</strong> L'analyse en quatre panneaux révèle une faible corrélation entre les retours pré-résultats et les retours du jour des résultats, 
+                    une distribution des retours du jour des résultats centrée autour de zéro, une performance mixte de la fenêtre de 10 jours, et un faible taux de succès de 37,5%.
+                    <br><br>
+                    <strong>Interprétation :</strong> L'absence de réactions positives cohérentes aux résultats suggère que le marché incorpore efficacement 
+                    les fondamentaux solides de NVIDIA bien avant les annonces de résultats. Le retour moyen négatif du jour des résultats (-0,50%) indique un comportement potentiel 
+                    "acheter la rumeur, vendre la nouvelle".
+                    <br><br>
+                    <strong>Implication :</strong> Les investisseurs ne peuvent pas prévoir ou profiter de manière fiable des annonces de résultats, car le marché 
+                    a déjà établi le prix des perspectives de croissance de NVIDIA. Le taux de succès de 37,5% n'est pas meilleur que le hasard.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <i class="fas fa-exclamation-triangle icon"></i>
+                <h4>Tests de Significativité Statistique</h4>
+                <p>Notre analyse statistique rigoureuse montre que les retours du jour des résultats (p-value : 0,484) et les retours de la fenêtre de 10 jours 
+                (p-value : 0,662) ne sont <strong>pas statistiquement significatifs</strong> au niveau de 5%. Cela signifie que nous ne pouvons pas rejeter 
+                l'hypothèse nulle que les retours des résultats moyennent zéro, confirmant que les annonces de résultats ne fournissent pas de retours positifs fiables.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Événement de Résultats</th>
+                        <th>Retour Pré-5j</th>
+                        <th>Jour des Résultats</th>
+                        <th>Retour Post-5j</th>
+                        <th>Fenêtre Totale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nov 2023</td>
+                        <td class="positive">+0,6%</td>
+                        <td class="negative">-0,9%</td>
+                        <td class="negative">-3,6%</td>
+                        <td class="negative">-3,1%</td>
+                    </tr>
+                    <tr>
+                        <td>Fév 2024</td>
+                        <td class="negative">-6,5%</td>
+                        <td class="negative">-2,9%</td>
+                        <td class="positive">+15,1%</td>
+                        <td class="positive">+7,7%</td>
+                    </tr>
+                    <tr>
+                        <td>Mai 2024</td>
+                        <td class="positive">+0,3%</td>
+                        <td class="negative">-0,5%</td>
+                        <td class="positive">+16,4%</td>
+                        <td class="positive">+16,8%</td>
+                    </tr>
+                    <tr>
+                        <td>Août 2024</td>
+                        <td class="negative">-2,2%</td>
+                        <td class="negative">-2,1%</td>
+                        <td class="negative">-14,6%</td>
+                        <td class="negative">-16,6%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Trading Strategy Simulation -->
+        <section class="section">
+            <h2><i class="fas fa-chess"></i> Simulation de Stratégie de Trading</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">Performance de la Stratégie de Trading vs Acheter & Conserver</div>
+                <img src="trading_strategy_performance.png" alt="Performance Stratégie de Trading">
+                <div class="chart-description">
+                    <strong>Observation :</strong> La stratégie de trading montre des résultats mitigés sur 8 trades, avec un retour moyen de -0,79% 
+                    par trade et une volatilité élevée. Le graphique de comparaison illustre dramatiquement le retour moyen de -0,79% de la stratégie 
+                    par rapport au retour total de 314% de l'achat et conservation.
+                    <br><br>
+                    <strong>Interprétation :</strong> Le retour total négatif de -13,8% de la stratégie contre 314% pour l'achat et conservation représente 
+                    une sous-performance massive de 327,8 points de pourcentage. La volatilité élevée (15,7% par trade) combinée au faible taux de succès (37,5%) 
+                    rend cette stratégie à la fois risquée et non rentable.
+                    <br><br>
+                    <strong>Implication :</strong> Tenter de chronométrer NVIDIA autour des résultats est une stratégie perdante. L'efficacité du marché 
+                    pour établir le prix des informations rend presque impossible de tirer profit de manière cohérente des approches de trading basées sur les résultats.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <i class="fas fa-chart-bar icon"></i>
+                <h4>Analyse de l'Échec de la Stratégie</h4>
+                <p>La stratégie de trading basée sur les résultats a échoué pour plusieurs raisons : <strong>(1)</strong> Efficacité du marché - l'information 
+                est déjà établie au prix, <strong>(2)</strong> Volatilité élevée autour des résultats crée des fluctuations imprévisibles, <strong>(3)</strong> 
+                Comportement "acheter la rumeur, vendre la nouvelle" conduit à des retours négatifs le jour des résultats, et <strong>(4)</strong> Les coûts de transaction 
+                et les spreads bid-ask érodent davantage les retours. Le ratio de Sharpe de la stratégie de -0,305 confirme une mauvaise performance ajustée au risque.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date du Trade</th>
+                        <th>Prix d'Achat</th>
+                        <th>Prix de Vente</th>
+                        <th>Retour</th>
+                        <th>Jours Détenus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nov 2023</td>
+                        <td>48,31 $</td>
+                        <td>46,74 $</td>
+                        <td class="negative">-3,25%</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Fév 2024</td>
+                        <td>72,10 $</td>
+                        <td>82,24 $</td>
+                        <td class="positive">+14,07%</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Mai 2024</td>
+                        <td>90,36 $</td>
+                        <td>114,95 $</td>
+                        <td class="positive">+27,21%</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Août 2024</td>
+                        <td>129,95 $</td>
+                        <td>106,43 $</td>
+                        <td class="negative">-18,10%</td>
+                        <td>14</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Valuation Comparison -->
+        <section class="section">
+            <h2><i class="fas fa-balance-scale"></i> Comparaison de Valorisation</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">Analyse du Ratio P/E et Comparaison de Marché</div>
+                <img src="pe_ratio_analysis.png" alt="Analyse Ratio P/E">
+                <div class="chart-description">
+                    <strong>Observation :</strong> Le ratio P/E actuel de NVIDIA de 53,97 se situe au 98e percentile de sa gamme de 2 ans, 
+                    significativement plus élevé que la moyenne S&P 500 (22,5) et la moyenne du secteur technologique (28,0). Le graphique historique montre 
+                    l'expansion du P/E d'environ 13 à près de 54.
+                    <br><br>
+                    <strong>Interprétation :</strong> La prime de 140% par rapport au S&P 500 et de 93% par rapport au secteur technologique indique 
+                    des attentes de valorisation extrêmement élevées. L'expansion du P/E de 13x à 54x suggère que le marché établit le prix d'une croissance exponentielle continue, 
+                    créant un risque de valorisation significatif.
+                    <br><br>
+                    <strong>Implication :</strong> La valorisation actuelle de NVIDIA laisse peu de place à l'erreur. Toute déception dans les 
+                    taux de croissance pourrait entraîner une compression significative du P/E et un déclin du prix de l'action. Les investisseurs paient une prime élevée 
+                    pour une croissance future qui pourrait ne pas se matérialiser.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <i class="fas fa-exclamation-circle icon"></i>
+                <h4>Évaluation du Risque de Valorisation</h4>
+                <p>Le ratio P/E de NVIDIA de 53,97 représente une <strong>valorisation au 98e percentile</strong> au cours des deux dernières années, 
+                indiquant un optimisme extrême. Bien que le leadership d'NVIDIA en IA et la croissance des revenus (165B USD TTM) justifient une certaine prime, 
+                la valorisation actuelle suppose une croissance exponentiale continue qui pourrait être insoutenable. Le P/E forward de 45,98 
+                suggère que les analystes s'attendent à ce que les bénéfices rattrapent, mais cela représente toujours une prime significative par rapport aux moyennes du marché.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Métrique de Valorisation</th>
+                        <th>NVIDIA</th>
+                        <th>S&P 500</th>
+                        <th>Secteur Tech</th>
+                        <th>Prime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ratio P/E Actuel</td>
+                        <td class="positive">53,97</td>
+                        <td>22,5</td>
+                        <td>28,0</td>
+                        <td class="negative">+140%</td>
+                    </tr>
+                    <tr>
+                        <td>Ratio P/E Forward</td>
+                        <td class="positive">45,98</td>
+                        <td>~20,0</td>
+                        <td>~25,0</td>
+                        <td class="negative">+130%</td>
+                    </tr>
+                    <tr>
+                        <td>P/E Moyen 2 Ans</td>
+                        <td class="neutral">34,36</td>
+                        <td>~22,0</td>
+                        <td>~27,0</td>
+                        <td class="negative">+56%</td>
+                    </tr>
+                    <tr>
+                        <td>Percentile P/E</td>
+                        <td class="negative">98,2%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Record Historique</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Key Insights and Conclusions -->
+        <section class="section">
+            <h2><i class="fas fa-key"></i> Principales Perspectives et Conclusions</h2>
+            
+            <div class="insight-box">
+                <i class="fas fa-myth icon"></i>
+                <h4>Mythe Démystifié : Hausse Due aux Résultats</h4>
+                <p>Le récit populaire selon lequel la hausse spectaculaire de 314% de NVIDIA était due aux annonces de résultats est 
+                <strong>démontrablement faux</strong>. Notre analyse de 8 événements de résultats sur deux ans montre :</p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>Retour moyen du jour des résultats : <strong class="negative">-0,50%</strong> (pas statistiquement significatif)</li>
+                    <li>Seulement <strong>1 sur 8</strong> des jours de résultats a produit des retours positifs</li>
+                    <li>Taux de succès de la fenêtre de résultats de 10 jours : <strong>37,5%</strong> (pire que le hasard)</li>
+                    <li>Retour de la stratégie de trading : <strong class="negative">-13,8%</strong> vs <strong class="positive">314%</strong> acheter & conserver</li>
+                </ul>
+            </div>
+
+            <div class="insight-box">
+                <i class="fas fa-chart-line icon"></i>
+                <h4>Implications d'Investissement</h4>
+                <p><strong>1. Éviter le Chronométrage des Résultats :</strong> Tenter de trader autour des résultats NVIDIA est une stratégie perdante qui 
+                sous-performe l'achat & conservation de plus de 300 points de pourcentage.</p>
+                <p><strong>2. Se Concentrer sur les Fondamentaux :</strong> Les gains de NVIDIA proviennent du boom soutenu de l'IA, de la croissance du centre de données, et 
+                du leadership technologique, pas des surprises trimestrielles.</p>
+                <p><strong>3. Risque de Valorisation :</strong> Le P/E actuel de 54x représente un optimisme extrême et laisse peu de marge d'erreur.</p>
+                <p><strong>4. Approche à Long Terme :</strong> L'achat & conservation s'est avéré largement supérieur à toute stratégie de chronométrage basée sur les résultats.</p>
+            </div>
+
+            <div class="insight-box">
+                <i class="fas fa-brain icon"></i>
+                <h4>Perspectives sur l'Efficacité du Marché</h4>
+                <p>Le cas de NVIDIA démontre les principes classiques de l'efficacité du marché :</p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>Incorporation de l'Information :</strong> Le marché établit le prix du leadership d'NVIDIA en IA bien avant les résultats</li>
+                    <li><strong>Marche Aléatoire :</strong> Les retours du jour des résultats ne montrent aucun modèle prévisible</li>
+                    <li><strong>Élimination de l'Arbitrage :</strong> Les stratégies de chronométrage simples échouent en raison de la fixation de prix efficace</li>
+                    <li><strong>Finance Comportementale :</strong> Le comportement "acheter la rumeur, vendre la nouvelle" est évident</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Limitations and Next Steps -->
+        <section class="section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Limites et Étapes Suivantes</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+                <div>
+                    <h3>Limites de l'Étude</h3>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Taille de l'Échantillon :</strong> Seulement 8 événements de résultats sur 2 ans</li>
+                        <li><strong>Coûts de Transaction :</strong> Non inclus dans les retours de la stratégie</li>
+                        <li><strong>Impact de Marché :</strong> Suppose que les trades n'affectent pas les prix</li>
+                        <li><strong>Estimation P/E :</strong> Le P/E historique calculé en utilisant l'EPS actuel</li>
+                        <li><strong>Facteurs Externes :</strong> L'environnement macro et la rotation sectorielle non capturés</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Étapes Suivantes Recommandées</h3>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Analyse Étendue :</strong> Étudier 5+ ans de données de résultats</li>
+                        <li><strong>Comparaison de Pairs :</strong> Analyser AMD, Intel et d'autres sociétés de semi-conducteurs</li>
+                        <li><strong>Analyse Intraday :</strong> Examiner les mouvements de prix minute par minute</li>
+                        <li><strong>Marché des Options :</strong> Étudier la volatilité implicite autour des résultats</li>
+                        <li><strong>Analyse Sectorielle :</strong> Comparer avec la performance du secteur AI/tech plus large</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container">
+            <h2><i class="fas fa-download"></i> Télécharger les Données Brutes</h2>
+            <p>Accédez à l'ensemble des données utilisées dans cette analyse pour vos propres recherches et vérifications.</p>
+            <div style="margin-top: 20px;">
+                <a href="nvda_processed.csv" class="download-btn" download>
+                    <i class="fas fa-file-csv"></i> Données Stock NVIDIA (CSV)
+                </a>
+                <a href="earnings_analysis_final.csv" class="download-btn" download>
+                    <i class="fas fa-file-csv"></i> Analyse des Résultats (CSV)
+                </a>
+                <a href="trading_strategy_results.csv" class="download-btn" download>
+                    <i class="fas fa-file-csv"></i> Résultats Stratégie Trading (CSV)
+                </a>
+                <a href="pe_analysis.csv" class="download-btn" download>
+                    <i class="fas fa-file-csv"></i> Analyse P/E (CSV)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Rapport d'Analyse des Résultats NVIDIA</strong></p>
+            <p>Source de Données : API Yahoo Finance | Période d'Analyse : Novembre 2023 - Novembre 2025</p>
+            <p>Méthodologie : Analyse statistique de 8 événements de résultats avec tests de significativité</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+                Cette analyse est effectué dans le cadre d'un projet autodidacte et peut contenir des erreurs.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

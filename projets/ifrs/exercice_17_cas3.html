@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cas 3 : Résolution détaillée de l'Exercice 17 - Taux décroissant</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h1, h2, h3, h4 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .code { background-color: #eee; padding: 2px 4px; border-radius: 3px; font-family: monospace; }
+        .math { display: block; margin: 10px 0; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>Cas 3  Résolution  avec taux d'actualisation variable (décroissant)</h1>
+
+<h2>Données de base de l'exercice</h2>
+
+<ul>
+    <li><strong>Nombre de contrats</strong> : 50</li>
+    <li><strong>Période de couverture</strong> : 4 ans</li>
+    <li><strong>Prime unique</strong> : 30€ par contrat, reçue immédiatement après la reconnaissance initiale</li>
+    <li><strong>Total des primes</strong> : 1 500€</li>
+    <li><strong>Sinistres et frais attendus</strong> : 800€, engagés uniformément sur la période de couverture (200€ par an)</li>
+    <li><strong>'Risk adjustment' (RA)</strong> : 80€, libérée uniformément sur la période de couverture via l'OCI</li>
+    <li><strong>Taux d'actualisation</strong> : 2,5% initial, baisse de 0,02% (0,0002) chaque année.</li>
+    <li><strong>Amortissement linéaire de la CSM</strong></li>
+</ul>
+
+<hr>
+
+<h2>ÉTAPE PRÉLIMINAIRE : Calcul des facteurs d'actualisation</h2>
+
+<p>Avec un taux d'actualisation variable, le facteur d'actualisation cumulé <span class="code">v_n</span> pour l'année <span class="code">n</span> est le produit des facteurs d'actualisation annuels :</p>
+
+<p class="math">v_n = \frac{1}{1+i_1} \times \frac{1}{1+i_2} \times \dots \times \frac{1}{1+i_n}</p>
+
+<h3>Calculs des taux et facteurs</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année (<span class="code">n</span>)</th>
+            <th>Taux annuel (<span class="code">i_n</span>)</th>
+            <th>Facteur annuel (<span class="code">1/(1+i_n)</span>)</th>
+            <th>Facteur cumulé (<span class="code">v_n</span>)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>2,50% (0,0250)</td>
+            <td>1 / 1,0250 = 0,975610</td>
+            <td><strong>0,975610</strong></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2,48% (0,0248)</td>
+            <td>1 / 1,0248 = 0,975800</td>
+            <td>0,975610 × 0,975800 = <strong>0,952037</strong></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>2,46% (0,0246)</td>
+            <td>1 / 1,0246 = 0,975991</td>
+            <td>0,952037 × 0,975991 = <strong>0,929002</strong></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>2,44% (0,0244)</td>
+            <td>1 / 1,0244 = 0,976183</td>
+            <td>0,929002 × 0,976183 = <strong>0,906509</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 1.a : Déterminez la valeur des 'fulfilment cash-flows' et de la CSM à leur reconnaissance initiale</h2>
+
+<h3>Étape 1 : Calcul de la valeur actuelle des flux futurs (PVCF)</h3>
+
+<p>Les sinistres sont de 200€ par an.</p>
+
+<p class="math">PVCF = \sum_{n=1}^{4} (\text{Sinistres année } n \times v_n)</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année</th>
+            <th>Sinistres</th>
+            <th>Facteur cumulé (<span class="code">v_n</span>)</th>
+            <th>Valeur actuelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>200€</td>
+            <td>0,975610</td>
+            <td>200 × 0,975610 = 195,1220€</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>200€</td>
+            <td>0,952037</td>
+            <td>200 × 0,952037 = 190,4074€</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>200€</td>
+            <td>0,929002</td>
+            <td>200 × 0,929002 = 185,8004€</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>200€</td>
+            <td>0,906509</td>
+            <td>200 × 0,906509 = 181,3018€</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>800€</strong></td>
+            <td></td>
+            <td><strong>PVCF = 752,6316€</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>PVCF = -752,6316€</strong> (négatif car ce sont des sorties de trésorerie)</p>
+
+<h3>Étape 2 : Calcul des Fulfilment Cash-Flows (FCF)</h3>
+
+<p class="math">FCF = PVCF + RA</p>
+
+<p>FCF = -752,6316€ + 80€ = <strong>-672,6316€</strong></p>
+
+<h3>Étape 3 : Calcul de la CSM à la reconnaissance initiale</h3>
+
+<p class="math">CSM = Primes reçues - |FCF|</p>
+
+<p>CSM = 1 500€ - 672,6316€ = **827,3684€**</p>
+
+<h3>Tableau récapitulatif - Question 1.a</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Élément</th>
+            <th>Montant (€)</th>
+            <th>Détails du calcul</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Primes reçues</strong></td>
+            <td>1 500,0000</td>
+            <td>50 × 30€</td>
+        </tr>
+        <tr>
+            <td><strong>PVCF (sinistres actualisés)</strong></td>
+            <td>-752,6316</td>
+            <td>Somme des VA des sinistres</td>
+        </tr>
+        <tr>
+            <td><strong>Risk Adjustment</strong></td>
+            <td>80,0000</td>
+            <td>Donné</td>
+        </tr>
+        <tr>
+            <td><strong>Fulfilment Cash-Flows (FCF)</strong></td>
+            <td><strong>-672,6316</strong></td>
+            <td>PVCF + RA</td>
+        </tr>
+        <tr>
+            <td><strong>CSM (reconnaissance initiale)</strong></td>
+            <td><strong>827,3684</strong></td>
+            <td>Primes - |FCF|</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 1.b : Comment évolueraient ces valeurs si la prime unique était de 25€, les sinistres de 1400€ et la RA de 120€ ?</h2>
+
+<h3>Nouvelles données</h3>
+
+<ul>
+    <li>Total des primes : <strong>1 250€</strong></li>
+    <li>Sinistres attendus : <strong>1 400€</strong> (350€ par an)</li>
+    <li>Risk adjustment : <strong>120€</strong></li>
+</ul>
+
+<h3>Étape 1 : Calcul de la PVCF</h3>
+
+<p>Les sinistres sont de 350€ par an.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année</th>
+            <th>Sinistres</th>
+            <th>Facteur cumulé (<span class="code">v_n</span>)</th>
+            <th>Valeur actuelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>350€</td>
+            <td>0,975610</td>
+            <td>350 × 0,975610 = 341,4635€</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>350€</td>
+            <td>0,952037</td>
+            <td>350 × 0,952037 = 333,2130€</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>350€</td>
+            <td>0,929002</td>
+            <td>350 × 0,929002 = 325,1507€</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>350€</td>
+            <td>0,906509</td>
+            <td>350 × 0,906509 = 317,2782€</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>1 400€</strong></td>
+            <td></td>
+            <td><strong>PVCF = 1 317,1054€</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>PVCF = -1 317,1054€</strong></p>
+
+<h3>Étape 2 : Calcul des FCF</h3>
+
+<p class="math">FCF = PVCF + RA</p>
+
+<p>FCF = -1 317,1054€ + 120€ = <strong>-1 197,1054€</strong></p>
+
+<h3>Étape 3 : Calcul de la CSM</h3>
+
+<p class="math">CSM = Primes reçues - |FCF|</p>
+
+<p>CSM = 1 250€ - 1 197,1054€ = **52,8946€**</p>
+
+<h3>Tableau comparatif - Question 1.b</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Élément</th>
+            <th>Scénario initial (Q1.a)</th>
+            <th>Scénario modifié (Q1.b)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Primes reçues</strong></td>
+            <td>1 500,0000€</td>
+            <td>1 250,0000€</td>
+        </tr>
+        <tr>
+            <td><strong>PVCF</strong></td>
+            <td>-752,6316€</td>
+            <td>-1 317,1054€</td>
+        </tr>
+        <tr>
+            <td><strong>Risk Adjustment</strong></td>
+            <td>80,0000€</td>
+            <td>120,0000€</td>
+        </tr>
+        <tr>
+            <td><strong>FCF</strong></td>
+            <td>-672,6316€</td>
+            <td>-1 197,1054€</td>
+        </tr>
+        <tr>
+            <td><strong>CSM calculée</strong></td>
+            <td>827,3684€</td>
+            <td><strong>52,8946€</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Statut du contrat</strong></td>
+            <td>Profitable</td>
+            <td>Profitable</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>Conclusion :</strong> Le contrat reste profitable avec une CSM positive de 52,8946€.</p>
+
+<hr>
+
+<h2>QUESTION 2 : Si la RA est négligeable et que tout se déroule comme attendu</h2>
+
+<h3>Nouvelles hypothèses pour la Question 2</h3>
+
+<ul>
+    <li><strong>RA = 0€</strong></li>
+    <li>Sinistres payés uniformément : 200€ par an</li>
+    <li>Taux d'actualisation variable (décroissant)</li>
+</ul>
+
+<hr>
+
+<h2>QUESTION 2.a : La valeur de la CSM à la reconnaissance initiale des contrats</h2>
+
+<h3>Calcul</h3>
+
+<p><strong>PVCF = -752,6316€</strong> (calculé en 1.a)</p>
+
+<p class="math">FCF = PVCF + RA = -752,6316€ + 0€ = -752,6316€</p>
+
+<p class="math">CSM = Primes reçues - |FCF|</p>
+
+<p>CSM = 1 500€ - 752,6316€ = **747,3684€**</p>
+
+<h3>Tableau récapitulatif - Question 2.a</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Élément</th>
+            <th>Montant (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PVCF</td>
+            <td>-752,6316</td>
+        </tr>
+        <tr>
+            <td>RA</td>
+            <td>0,0000</td>
+        </tr>
+        <tr>
+            <td>FCF</td>
+            <td>-752,6316</td>
+        </tr>
+        <tr>
+            <td><strong>CSM (reconnaissance initiale)</strong></td>
+            <td><strong>747,3684</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 2.b : Le montant de CSM libéré en fin d'année 1</h2>
+
+<h3>Calcul</h3>
+
+<p>La CSM est amortie <strong>linéairement</strong> sur 4 ans.</p>
+
+<p><strong>CSM libéré en année 1 = 747,3684€ / 4 = 186,8421€</strong></p>
+
+<h3>Tableau - Question 2.b</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Élément</th>
+            <th>Montant (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CSM initiale</td>
+            <td>747,3684</td>
+        </tr>
+        <tr>
+            <td>Période de couverture</td>
+            <td>4 ans</td>
+        </tr>
+        <tr>
+            <td><strong>CSM libéré en fin d'année 1</strong></td>
+            <td><strong>186,8421</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 2.c : Le montant des sinistres attendus en année 3</h2>
+
+<h3>Calcul</h3>
+
+<p>Les sinistres sont engagés uniformément sur la période de couverture.</p>
+
+<p><strong>Sinistres attendus en année 3 = 800€ / 4 = 200€</strong></p>
+
+<hr>
+
+<h2>QUESTION 2.d : La valeur du groupe de contrats d'assurance en fin d'années 1 à 4</h2>
+
+<h3>Méthodologie</h3>
+
+<p>Pour la PVCF restante, nous devons utiliser les facteurs d'actualisation <strong>annuels</strong> restants.</p>
+
+<h4>FIN D'ANNÉE 1</h4>
+
+<p><strong>Évolution de la CSM :</strong><br>
+- CSM début année 1 : 747,3684€<br>
+- CSM libéré : 186,8421€<br>
+- <strong>CSM fin année 1 = 560,5263€</strong></p>
+
+<p><strong>Évolution de la PVCF :</strong></p>
+
+<p>Il reste les sinistres des années 2, 3 et 4 (200€ chacun). Les facteurs d'actualisation à utiliser sont les facteurs annuels de l'année 2, 3 et 4.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année de paiement</th>
+            <th>Sinistres</th>
+            <th>Taux annuel (<span class="code">i_n</span>)</th>
+            <th>Facteur annuel (<span class="code">1/(1+i_n)</span>)</th>
+            <th>Valeur actuelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2</td>
+            <td>200€</td>
+            <td>2,48% (0,0248)</td>
+            <td>0,975800</td>
+            <td>200 × 0,975800 = 195,1600€</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>200€</td>
+            <td>2,46% (0,0246)</td>
+            <td>0,975991</td>
+            <td>200 × 0,975991 = 195,1982€</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>200€</td>
+            <td>2,44% (0,0244)</td>
+            <td>0,976183</td>
+            <td>200 × 0,976183 = 195,2366€</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>600€</strong></td>
+            <td></td>
+            <td></td>
+            <td><strong>PVCF = 585,5948€</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>PVCF fin année 1 = -585,5948€</strong></p>
+
+<p><strong>Passif total fin année 1 = 560,5263€ + 585,5948€ = 1 146,1211€</strong></p>
+
+<h4>FIN D'ANNÉE 2</h4>
+
+<p><strong>Évolution de la CSM :</strong><br>
+- CSM début année 2 : 560,5263€<br>
+- CSM libéré : 186,8421€<br>
+- <strong>CSM fin année 2 = 373,6842€</strong></p>
+
+<p><strong>Évolution de la PVCF :</strong></p>
+
+<p>Il reste les sinistres des années 3 et 4 (200€ chacun).</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année de paiement</th>
+            <th>Sinistres</th>
+            <th>Taux annuel (<span class="code">i_n</span>)</th>
+            <th>Facteur annuel (<span class="code">1/(1+i_n)</span>)</th>
+            <th>Valeur actuelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>3</td>
+            <td>200€</td>
+            <td>2,46% (0,0246)</td>
+            <td>0,975991</td>
+            <td>200 × 0,975991 = 195,1982€</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>200€</td>
+            <td>2,44% (0,0244)</td>
+            <td>0,976183</td>
+            <td>200 × 0,976183 = 195,2366€</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>400€</strong></td>
+            <td></td>
+            <td></td>
+            <td><strong>PVCF = 390,4348€</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>PVCF fin année 2 = -390,4348€</strong></p>
+
+<p><strong>Passif total fin année 2 = 373,6842€ + 390,4348€ = 764,1190€</strong></p>
+
+<h4>FIN D'ANNÉE 3</h4>
+
+<p><strong>Évolution de la CSM :</strong><br>
+- CSM début année 3 : 373,6842€<br>
+- CSM libéré : 186,8421€<br>
+- <strong>CSM fin année 3 = 186,8421€</strong></p>
+
+<p><strong>Évolution de la PVCF :</strong></p>
+
+<p>Il reste les sinistres de l'année 4 (200€).</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année de paiement</th>
+            <th>Sinistres</th>
+            <th>Taux annuel (<span class="code">i_n</span>)</th>
+            <th>Facteur annuel (<span class="code">1/(1+i_n)</span>)</th>
+            <th>Valeur actuelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>4</td>
+            <td>200€</td>
+            <td>2,44% (0,0244)</td>
+            <td>0,976183</td>
+            <td>200 × 0,976183 = 195,2366€</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>200€</strong></td>
+            <td></td>
+            <td></td>
+            <td><strong>PVCF = 195,2366€</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>PVCF fin année 3 = -195,2366€</strong></p>
+
+<p><strong>Passif total fin année 3 = 186,8421€ + 195,2366€ = 382,0787€</strong></p>
+
+<h4>FIN D'ANNÉE 4</h4>
+
+<p><strong>CSM fin année 4 = 0€</strong><br>
+<strong>PVCF fin année 4 = 0€</strong><br>
+<strong>Passif total fin année 4 = 0€</strong></p>
+
+<h3>Tableau récapitulatif - Question 2.d</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fin d'année</th>
+            <th>CSM (€)</th>
+            <th>PVCF (€)</th>
+            <th><strong>Passif total (€)</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>0</strong></td>
+            <td>747,3684</td>
+            <td>752,6316</td>
+            <td>1 500,0000</td>
+        </tr>
+        <tr>
+            <td><strong>1</strong></td>
+            <td>560,5263</td>
+            <td>585,5948</td>
+            <td><strong>1 146,1211</strong></td>
+        </tr>
+        <tr>
+            <td><strong>2</strong></td>
+            <td>373,6842</td>
+            <td>390,4348</td>
+            <td><strong>764,1190</strong></td>
+        </tr>
+        <tr>
+            <td><strong>3</strong></td>
+            <td>186,8421</td>
+            <td>195,2366</td>
+            <td><strong>382,0787</strong></td>
+        </tr>
+        <tr>
+            <td><strong>4</strong></td>
+            <td>0,0000</td>
+            <td>0,0000</td>
+            <td><strong>0,0000</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 3 : RA de 80€ libérée uniformément via l'OCI, avec ajustements en année 2</h2>
+
+<h3>Rappel des hypothèses de la Question 3</h3>
+
+<ul>
+    <li>RA initiale : 80€, libérée uniformément sur 4 ans (20€ par an)</li>
+    <li>En année 2 : sinistres réels = 140€ (au lieu de 200€ attendus)</li>
+    <li>Réestimation : sinistres années 3 et 4 = 140€ chacun (au lieu de 200€)</li>
+    <li>Taux d'actualisation variable (décroissant)</li>
+</ul>
+
+<hr>
+
+<h2>QUESTION 3.a : Le montant de CSM libéré en fin d'année 2</h2>
+
+<h3>Étape 1 : Situation à la reconnaissance initiale</h3>
+
+<p><strong>Rappel des valeurs initiales (avec RA = 80€) :</strong><br>
+- CSM : 827,3684€<br>
+- PVCF : -752,6316€<br>
+- RA : 80€<br>
+- FCF : -672,6316€</p>
+
+<h3>Étape 2 : Évolution en année 1</h3>
+
+<p><strong>CSM en année 1 :</strong><br>
+- Amortissement linéaire : 827,3684€ / 4 = 206,8421€<br>
+- <strong>CSM fin année 1 = 620,5263€</strong></p>
+
+<p><strong>PVCF en année 1 :</strong><br>
+- Sinistres payés en année 1 : 200€ (comme attendu)<br>
+- <strong>PVCF fin année 1 = -585,5948€</strong> (calculé en 2.d)</p>
+
+<p><strong>RA en année 1 :</strong><br>
+- RA libéré : 20€<br>
+- <strong>RA fin année 1 = 60€</strong></p>
+
+<h3>Étape 3 : Événements en année 2</h3>
+
+<p><strong>Sinistres réels payés en année 2 : 140€</strong> (au lieu de 200€ attendus)</p>
+
+<p><strong>Réestimation des sinistres futurs :</strong><br>
+- Année 3 : 140€ (au lieu de 200€)<br>
+- Année 4 : 140€ (au lieu de 200€)</p>
+
+<h3>Étape 4 : Calcul de la nouvelle PVCF en fin d'année 2</h3>
+
+<p>Les sinistres restants sont ceux des années 3 et 4 (140€ chacun).</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Année de paiement</th>
+            <th>Sinistres réestimés</th>
+            <th>Taux annuel (<span class="code">i_n</span>)</th>
+            <th>Facteur annuel (<span class="code">1/(1+i_n)</span>)</th>
+            <th>Valeur actuelle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>3</td>
+            <td>140€</td>
+            <td>2,46% (0,0246)</td>
+            <td>0,975991</td>
+            <td>140 × 0,975991 = 136,6387€</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>140€</td>
+            <td>2,44% (0,0244)</td>
+            <td>0,976183</td>
+            <td>140 × 0,976183 = 136,6656€</td>
+        </tr>
+        <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>PVCF = 273,3043€</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>PVCF fin année 2 (après réestimation) = -273,3043€</strong></p>
+
+<h3>Étape 5 : Calcul de l'ajustement de la CSM</h3>
+
+<p><strong>PVCF attendue en fin d'année 2 (avant réestimation) :</strong><br>
+- PVCF attendue = 390,4348€ (calculé en 2.d)</p>
+
+<p><strong>Ajustement de la PVCF = -273,3043€ - (-390,4348€) = +117,1305€</strong></p>
+
+<p><strong>Ajustement de la CSM = +117,1305€</strong></p>
+
+<h3>QUESTION 3.a : Le montant de CSM libéré en fin d'année 2</h3>
+
+<p><strong>CSM après ajustement = CSM début année 2 + Ajustement</strong><br>
+CSM après ajustement = 620,5263€ + 117,1305€ = 737,6568€</p>
+
+<p><strong>Unités de couverture restantes en début d'année 2 : 3 ans</strong></p>
+
+<p><strong>CSM libéré en année 2 = 737,6568€ / 3 = 245,8856€</strong></p>
+
+<h3>QUESTION 3.b : La valeur de la CSM en fin d'année 2</h3>
+
+<p><strong>CSM fin année 2 = CSM après ajustement - CSM libéré</strong><br>
+CSM fin année 2 = 737,6568€ - 245,8856€ = **491,7712€**</p>
+
+<h3>QUESTION 3.c : Le montant des flux futurs sortants attendus en fin d'année 2</h3>
+
+<p>Le montant des flux futurs sortants (en valeur actuelle) est :</p>
+
+<p><strong>|PVCF| = 273,3043€</strong></p>
+
+<p>Le montant non actualisé est :</p>
+
+<p><strong>Sinistres année 3 + Sinistres année 4 = 140€ + 140€ = 280€</strong></p>
+
+<h3>Tableau récapitulatif - Questions 3.a, 3.b, 3.c</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Élément</th>
+            <th>Montant (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CSM début année 2</td>
+            <td>620,5263</td>
+        </tr>
+        <tr>
+            <td>Ajustement favorable</td>
+            <td>+117,1305</td>
+        </tr>
+        <tr>
+            <td>CSM après ajustement</td>
+            <td>737,6568</td>
+        </tr>
+        <tr>
+            <td><strong>CSM libéré en fin d'année 2 (Q3.a)</strong></td>
+            <td><strong>245,8856</strong></td>
+        </tr>
+        <tr>
+            <td><strong>CSM fin année 2 (Q3.b)</strong></td>
+            <td><strong>491,7712</strong></td>
+        </tr>
+        <tr>
+            <td><strong>PVCF fin année 2 (Q3.c)</strong></td>
+            <td><strong>273,3043</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 3.d : La valeur du groupe de contrats d'assurance en fin d'années 1 à 4</h2>
+
+<h4>FIN D'ANNÉE 1</h4>
+
+<ul>
+    <li><strong>CSM fin année 1 = 620,5263€</strong></li>
+    <li><strong>PVCF fin année 1 = 585,5948€</strong></li>
+    <li><strong>RA fin année 1 = 60€</strong> (80€ - 20€)</li>
+</ul>
+
+<p><strong>Passif total fin année 1 = 620,5263€ + 585,5948€ + 60€ = 1 266,1211€</strong></p>
+
+<h4>FIN D'ANNÉE 2</h4>
+
+<ul>
+    <li><strong>CSM fin année 2 = 491,7712€</strong></li>
+    <li><strong>PVCF fin année 2 = 273,3043€</strong></li>
+    <li><strong>RA fin année 2 = 40€</strong> (60€ - 20€)</li>
+</ul>
+
+<p><strong>Passif total fin année 2 = 491,7712€ + 273,3043€ + 40€ = 805,0755€</strong></p>
+
+<h4>FIN D'ANNÉE 3</h4>
+
+<p><strong>CSM fin année 3 :</strong><br>
+- CSM début année 3 : 491,7712€<br>
+- Unités de couverture restantes : 2 ans<br>
+- CSM libéré année 3 : 491,7712€ / 2 = 245,8856€<br>
+- <strong>CSM fin année 3 = 245,8856€</strong></p>
+
+<p><strong>PVCF fin année 3 :</strong><br>
+- Sinistres payés en année 3 : 140€<br>
+- Il reste les sinistres de l'année 4 (140€).<br>
+- <strong>PVCF fin année 3 = 136,6656€</strong> (calculé en 3.c)</p>
+
+<p><strong>RA fin année 3 :</strong><br>
+- RA début année 3 : 40€<br>
+- RA libéré année 3 : 20€<br>
+- <strong>RA fin année 3 = 20€</strong></p>
+
+<p><strong>Passif total fin année 3 = 245,8856€ + 136,6656€ + 20€ = 402,5512€</strong></p>
+
+<h4>FIN D'ANNÉE 4</h4>
+
+<p><strong>Passif total fin année 4 = 0€</strong></p>
+
+<h3>Tableau récapitulatif - Question 3.d</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fin d'année</th>
+            <th>CSM (€)</th>
+            <th>PVCF (€)</th>
+            <th>RA (€)</th>
+            <th><strong>Passif total (€)</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1</strong></td>
+            <td>620,5263</td>
+            <td>585,5948</td>
+            <td>60</td>
+            <td><strong>1 266,1211</strong></td>
+        </tr>
+        <tr>
+            <td><strong>2</strong></td>
+            <td>491,7712</td>
+            <td>273,3043</td>
+            <td>40</td>
+            <td><strong>805,0755</strong></td>
+        </tr>
+        <tr>
+            <td><strong>3</strong></td>
+            <td>245,8856</td>
+            <td>136,6656</td>
+            <td>20</td>
+            <td><strong>402,5512</strong></td>
+        </tr>
+        <tr>
+            <td><strong>4</strong></td>
+            <td>0,0000</td>
+            <td>0,0000</td>
+            <td>0</td>
+            <td><strong>0,0000</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 4 : RA de 80€ libérée uniformément via l'OCI (mêmes conditions que 3)</h2>
+
+<h3>QUESTION 4.a : La valeur de la CSM en fin d'années 1 et 2</h3>
+
+<p><strong>CSM fin année 1 = 620,5263€</strong> (calculé en 3.d)</p>
+
+<p><strong>CSM fin année 2 = 491,7712€</strong> (calculé en 3.d)</p>
+
+<h3>QUESTION 4.b : Le montant de RA libéré en fin d'année 1</h3>
+
+<p><strong>RA libéré en fin d'année 1 = 80€ / 4 = 20€</strong></p>
+
+<h3>QUESTION 4.c : La valeur de la RA en fin d'année 2</h3>
+
+<p><strong>RA fin année 2 = 80€ - 20€ - 20€ = 40€</strong></p>
+
+<h3>QUESTION 4.d : La valeur du groupe de contrats d'assurance en fin d'années 1 à 4</h3>
+
+<p>Les valeurs sont identiques à celles calculées en 3.d.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fin d'année</th>
+            <th><strong>Passif total (€)</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1</strong></td>
+            <td><strong>1 266,1211</strong></td>
+        </tr>
+        <tr>
+            <td><strong>2</strong></td>
+            <td><strong>805,0755</strong></td>
+        </tr>
+        <tr>
+            <td><strong>3</strong></td>
+            <td><strong>402,5512</strong></td>
+        </tr>
+        <tr>
+            <td><strong>4</strong></td>
+            <td><strong>0,0000</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>QUESTION 5 : RA ajustée à 30€ en année 3 (au lieu de 40€)</h2>
+
+<h3>Étape 1 : Situation en début d'année 3</h3>
+
+<ul>
+    <li><strong>CSM début année 3 = 491,7712€</strong></li>
+    <li><strong>RA début année 3 = 40€</strong></li>
+</ul>
+
+<h3>Étape 2 : Réestimation de la RA en année 3</h3>
+
+<p><strong>RA attendue pour années 3 et 4 : 40€</strong></p>
+
+<p><strong>RA réestimée : 30€</strong></p>
+
+<p><strong>Ajustement de la RA = 30€ - 40€ = -10€</strong></p>
+
+<h3>QUESTION 5.a : La valeur de la CSM en fin d'année 3</h3>
+
+<p><strong>Ajustement de la CSM = -10€</strong></p>
+
+<p><strong>CSM après ajustement = 491,7712€ - 10€ = 481,7712€</strong></p>
+
+<p><strong>Unités de couverture restantes : 2 ans</strong></p>
+
+<p><strong>CSM libéré en année 3 = 481,7712€ / 2 = 240,8856€</strong></p>
+
+<p><strong>CSM fin année 3 = 481,7712€ - 240,8856€ = 240,8856€</strong></p>
+
+<h3>QUESTION 5.b : La valeur de la RA en fin d'année 3</h3>
+
+<p><strong>RA début année 3 (après réestimation) : 30€</strong></p>
+
+<p><strong>RA libéré en année 3 = 30€ / 2 = 15€</strong></p>
+
+<p><strong>RA fin année 3 = 30€ - 15€ = 15€</strong></p>
+
+<h3>QUESTION 5.c : La valeur du groupe de contrats d'assurance en fin d'année 3</h3>
+
+<p><strong>Composantes du passif en fin d'année 3 :</strong><br>
+- CSM : 240,8856€<br>
+- PVCF : 136,6656€ (calculé en 3.d)<br>
+- RA : 15€</p>
+
+<p><strong>Passif total fin année 3 = 240,8856€ + 136,6656€ + 15€ = 392,5512€</strong></p>
+
+<h3>Tableau récapitulatif - Question 5</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Composante</th>
+            <th>Montant (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>CSM fin année 3 (Q5.a)</strong></td>
+            <td><strong>240,8856</strong></td>
+        </tr>
+        <tr>
+            <td><strong>RA fin année 3 (Q5.b)</strong></td>
+            <td><strong>15,0000</strong></td>
+        </tr>
+        <tr>
+            <td>PVCF fin année 3</td>
+            <td>136,6656</td>
+        </tr>
+        <tr>
+            <td><strong>Passif total fin année 3 (Q5.c)</strong></td>
+            <td><strong>392,5512</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
