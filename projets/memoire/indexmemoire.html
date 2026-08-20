@@ -228,6 +228,8 @@
             }
         }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header>
@@ -290,7 +292,7 @@
             </ul>
             
             <div class="formula">
-                <span class="math">V(0)(1+i)<span class="math-sup">t</span> + ∑<span class="math-sub">s=0</span><span class="math-sup">t-1</span> [π(s)S(s) - B(s)](1+i)<span class="math-sup">t-s</span> = ∑<span class="math-sub">s=t</span><span class="math-sup">∞</span> B(s)(1+i)<span class="math-sup">-(s-t)</span> - ∑<span class="math-sub">s=t</span><span class="math-sup">∞</span> π(s)S(s)(1+i)<span class="math-sup">-(s-t)</span></span>
+                $$V(0)(1+i)^t + \sum_{s=0}^{t-1} [\pi(s)S(s) - B(s)](1+i)^{t-s} = \sum_{s=t}^{\infty} B(s)(1+i)^{-(s-t)} - \sum_{s=t}^{\infty} \pi(s)S(s)(1+i)^{-(s-t)}$$
             </div>
             
             <h3 class="section-title">1.2 Dynamique démographique</h3>
@@ -345,50 +347,50 @@
             <h4 class="subsection-title">Modèle suédois :</h4>
             <p>Comptes notionnels, diviseur actuariel <span class="math">D<span class="math-sub">n</span></span> :</p>
             <div class="formula">
-                <span class="math">D<span class="math-sub">n</span> = (1/12) × ∑<span class="math-sub">k=n</span><span class="math-sup">∞</span> ∑<span class="math-sub">x=0</span><span class="math-sup">11</span> (l<span class="math-sub">k</span>/l<span class="math-sub">n</span>) × (1.016)<span class="math-sup">-(k-n + x/12)</span></span>
+                \(D_n = \frac{1}{12} \sum_{k=n}^{\infty} \sum_{x=0}^{11} \frac{l_k}{l_n} (1.016)^{-(k-n + x/12)}\)
             </div>
             
             <h4 class="subsection-title">Modèle néerlandais :</h4>
             <p>Ajustement de l'âge de retraite :</p>
             <div class="formula">
-                <span class="math">x<span class="math-sub">r</span>(t) = 65 + (e<span class="math-sub">65</span><span class="math-sup">P</span>(t) - 18.26)</span>
+                \(x_r(t) = 65 + (e_{65}^P(t) - 18.26)\)
             </div>
             
             <h3 class="section-title">2.3 Modélisation de l'équité intergénérationnelle</h3>
             
             <div class="formula">
-                <span class="math">C<span class="math-sub">t</span> · V<span class="math-sub">t</span> = D<span class="math-sub">t</span> · P<span class="math-sub">x<span class="math-sub">r</span>(t)</span> · a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span></span>
+                \(C_t \cdot V_t = D_t \cdot P_{x_r(t)} \cdot a_{x_r(t)}^{\pi,y}\)
             </div>
             
             <p>Avec :</p>
             <ul>
-                <li><span class="math">C<span class="math-sub">t</span></span> : taux de cotisation</li>
-                <li><span class="math">V<span class="math-sub">t</span></span> : salaire moyen réévalué</li>
-                <li><span class="math">D<span class="math-sub">t</span></span> : ratio de dépendance</li>
-                <li><span class="math">P<span class="math-sub">x<span class="math-sub">r</span>(t)</span></span> : pension moyenne</li>
-                <li><span class="math">a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span></span> : facteur de rente viagère</li>
+                <li>\(C_t\) : taux de cotisation</li>
+                <li>\(V_t\) : salaire moyen réévalué</li>
+                <li>\(D_t\) : ratio de dépendance</li>
+                <li>\(P_{x_r(t)}\) : pension moyenne</li>
+                <li>\(a_{x_r(t)}^{\pi,y}\) : facteur de rente viagère</li>
             </ul>
             
             <h4 class="subsection-title">Mécanismes dérivés :</h4>
             
             <p><strong>Ajustement du taux de cotisation :</strong></p>
             <div class="formula">
-                <span class="math">c<span class="math-sub">t</span> = c<span class="math-sub">0</span> · (D<span class="math-sub">t</span>/D<span class="math-sub">0</span>) · (a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>)</span>
+                \(c_t = c_0 \cdot \frac{D_t}{D_0} \cdot \frac{a_{x_r(t)}^{\pi,y}}{a_{x_r(0)}^{\pi,y}}\)
             </div>
             
             <p><strong>Ajustement de l'âge de retraite avec TR constant :</strong></p>
             <div class="formula">
-                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) / (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) = (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>) · e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) / (x<span class="math-sub">r</span>(0) - x<span class="math-sub">e</span>)</span>
+                \(\frac{e_{x_r}^c(t)}{x_r(t) - x_e} = \frac{D_0}{D_t} \cdot \frac{e_{x_r}^c(0)}{x_r(0) - x_e}\)
             </div>
             
             <p><strong>Ajustement avec amélioration des pensions :</strong></p>
             <div class="formula">
-                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) = e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+                \(e_{x_r}^c(t) = e_{x_r}^c(0) \cdot \frac{D_0}{D_t}\)
             </div>
             
             <p><strong>Facteur de durabilité (ex. : Portugal, Finlande) :</strong></p>
             <div class="formula">
-                <span class="math">SF<span class="math-sub">x<span class="math-sub">r</span>(t)</span> = SF<span class="math-sub">x<span class="math-sub">r</span>(0)</span> · (a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+                \(SF_{x_r(t)} = SF_{x_r(0)} \cdot \frac{a_{x_r(0)}^{\pi,y}}{a_{x_r(t)}^{\pi,y}} \cdot \frac{D_0}{D_t}\)
             </div>
         </section>
 
@@ -399,17 +401,17 @@
             
             <h4 class="subsection-title">Estimateur de Hoem :</h4>
             <div class="formula">
-                <span class="math">q̂<span class="math-sub">x,t</span> = (∑<span class="math-sub">i=1</span><span class="math-sup">N<span class="math-sub">x,t</span></span> d<span class="math-sub">xi,t</span>) / (∑<span class="math-sub">i=1</span><span class="math-sup">N<span class="math-sub">x,t</span></span> E<span class="math-sub">xi,t</span>)</span>
+                \(\hat{q}_{x,t} = \frac{\sum_{i=1}^{N_{x,t}} d_{xi,t}}{\sum_{i=1}^{N_{x,t}} E_{xi,t}}\)
             </div>
             
             <h4 class="subsection-title">Modèle de Lee-Carter :</h4>
             <div class="formula">
-                <span class="math">ln(μ<span class="math-sub">x,t</span>) = a<span class="math-sub">x</span> + b<span class="math-sub">x</span>k<span class="math-sub">t</span> + ε<span class="math-sub">x,t</span></span>
+                \(\ln(\mu_{x,t}) = a_x + b_x k_t + \varepsilon_{x,t}\)
             </div>
             
             <h4 class="subsection-title">Modèle Log-Poisson :</h4>
             <div class="formula">
-                <span class="math">D<span class="math-sub">xt</span> ~ 𝓟(E<span class="math-sub">xt</span>μ<span class="math-sub">xt</span>), μ<span class="math-sub">xt</span> = exp(α<span class="math-sub">x</span> + β<span class="math-sub">x</span>k<span class="math-sub">t</span>)</span>
+                \(D_{xt} \sim \mathcal{P}(E_{xt}\mu_{xt}), \quad \mu_{xt} = \exp(\alpha_x + \beta_x k_t)\)
             </div>
             
             <h3 class="section-title">3.2 Application aux données belges</h3>
@@ -418,9 +420,9 @@
             
             <p><strong>Sélection du modèle :</strong> Log-Poisson supérieur (MAPE = 0,06358 vs 0,08445 pour Lee-Carter)</p>
             
-            <p><strong>Projection des <span class="math">k<span class="math-sub">t</span></span> via ARIMA(0,2,1) :</strong></p>
+            <p><strong>Projection des \(k_t\) via ARIMA(0,2,1) :</strong></p>
             <div class="formula">
-                <span class="math">κ<span class="math-sub">t+1</span> = κ<span class="math-sub">t</span> + d + ϵ<span class="math-sub">t</span>, ϵ<span class="math-sub">t</span> ~ N(0, σ<span class="math-sup">2</span>)</span>
+                \(\kappa_{t+1} = \kappa_t + d + \epsilon_t, \quad \epsilon_t \sim \mathcal{N}(0, \sigma^2)\)
             </div>
             
             <div class="table-container">
@@ -476,33 +478,33 @@
             
             <p><strong>Paramètres clés du régime :</strong></p>
             <ul>
-                <li>Âge d'entrée : <span class="math">x<span class="math-sub">e</span> = 25</span> ans</li>
-                <li>Âge de retraite initial : <span class="math">x<span class="math-sub">r</span>(0) = 65</span> ans</li>
+                <li>Âge d'entrée : \(x_e = 25\) ans</li>
+                <li>Âge de retraite initial : \(x_r(0) = 65\) ans</li>
                 <li>Taux de remplacement cible : TR = 52%</li>
-                <li>Taux d'actualisation : <span class="math">y<span class="math-sub">t</span> = 2%</span></li>
-                <li>Taux d'accumulation linéaire : <span class="math">θ<span class="math-sub">t</span> = 1,3%</span></li>
-                <li>Taux de revalorisation des salaires : <span class="math">v<span class="math-sub">t</span> = 2%</span></li>
+                <li>Taux d'actualisation : \(y_t = 2\%\)</li>
+                <li>Taux d'accumulation linéaire : \(\theta_t = 1,3\%\)</li>
+                <li>Taux de revalorisation des salaires : \(v_t = 2\%\)</li>
             </ul>
             
             <div class="formula">
-                <span class="math">P<span class="math-sub">x<span class="math-sub">r</span>(t)</span> = θ<span class="math-sub">t</span> (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) · RE<span class="math-sub">x<span class="math-sub">r</span>(t)</span> · SF<span class="math-sub">x<span class="math-sub">r</span>(t)</span> · b<span class="math-sub">x<span class="math-sub">r</span>(t)</span></span>
+                \(P_{x_r(t)} = \theta_t (x_r(t) - x_e) \cdot RE_{x_r(t)} \cdot SF_{x_r(t)} \cdot b_{x_r(t)}\)
             </div>
             
             <h4 class="subsection-title">Modélisation détaillée de la population</h4>
             
             <p><strong>Projection démographique :</strong></p>
             <ul>
-                <li>Utilisation du modèle Log-Poisson pour les taux de mortalité <span class="math">q(x,t)</span></li>
-                <li>Population initiale <span class="math">L(x,2023)</span> issue des tables de mortalité périodiques unisexes</li>
-                <li>Pas de naissances : <span class="math">L(0,t) = 100 000</span> constant</li>
+                <li>Utilisation du modèle Log-Poisson pour les taux de mortalité \(q(x,t)\)</li>
+                <li>Population initiale \(L(x,2023)\) issue des tables de mortalité périodiques unisexes</li>
+                <li>Pas de naissances : \(L(0,t) = 100\ 000\) constant</li>
                 <li>Projection jusqu'en 2123 avec vieillissement de la cohorte initiale</li>
             </ul>
             
             <p><strong>Structure populationnelle :</strong></p>
             <ul>
-                <li>Actifs : <span class="math">A<span class="math-sub">t</span> = ∑<span class="math-sub">x=25</span><span class="math-sup">64</span> L(x,t)</span></li>
-                <li>Retraités : <span class="math">R<span class="math-sub">t</span> = ∑<span class="math-sub">x=65</span><span class="math-sup">105</span> L(x,t)</span></li>
-                <li>Quotient de vieillesse : <span class="math">QV<span class="math-sub">t</span> = R<span class="math-sub">t</span> / A<span class="math-sub">t</span></span></li>
+                <li>Actifs : \(A_t = \sum_{x=25}^{64} L(x,t)\)</li>
+                <li>Retraités : \(R_t = \sum_{x=65}^{105} L(x,t)\)</li>
+                <li>Quotient de vieillesse : \(QV_t = \frac{R_t}{A_t}\)</li>
             </ul>
             
             <div class="table-container">
@@ -549,13 +551,13 @@
             
             <p><strong>Fondement théorique :</strong></p>
             <div class="formula">
-                <span class="math">c<span class="math-sub">t</span> = c<span class="math-sub">0</span> · (D<span class="math-sub">t</span>/D<span class="math-sub">0</span>) · (a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>)</span>
+                \(c_t = c_0 \cdot \frac{D_t}{D_0} \cdot \frac{a_{x_r(t)}^{\pi,y}}{a_{x_r(0)}^{\pi,y}}\)
             </div>
             
             <p><strong>Application pratique :</strong></p>
             <ul>
-                <li>Taux initial <span class="math">c<span class="math-sub">0</span> = 24,47%</span></li>
-                <li>Ajustement annuel basé sur l'évolution de <span class="math">D<span class="math-sub">t</span></span> et <span class="math">a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span></span></li>
+                <li>Taux initial \(c_0 = 24,47\%\)</li>
+                <li>Ajustement annuel basé sur l'évolution de \(D_t\) et \(a_{x_r(t)}^{\pi,y}\)</li>
             </ul>
             
             <p><strong>Résultats :</strong></p>
@@ -576,13 +578,13 @@
             
             <p><strong>Équation fondamentale :</strong></p>
             <div class="formula">
-                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) = e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+                \(e_{x_r}^c(t) = e_{x_r}^c(0) \cdot \frac{D_0}{D_t}\)
             </div>
             
             <p><strong>Méthode de résolution :</strong></p>
             <ul>
                 <li>Interpolation linéaire sur les tables de mortalité prospectives</li>
-                <li>Résolution de : <span class="math">∑<span class="math-sub">x=x<span class="math-sub">r</span></span><span class="math-sup">ω</span> p<span class="math-sub">x</span> = e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span></li>
+                <li>Résolution de : \(\sum_{x=x_r}^{\omega} p_x = e_{x_r}^c(0) \cdot \frac{D_0}{D_t}\)</li>
             </ul>
             
             <div class="table-container">
@@ -628,7 +630,7 @@
             
             <p><strong>Calcul des nouvelles pensions :</strong></p>
             <div class="formula">
-                <span class="math">P<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">ajusté</span> = (c<span class="math-sub">0</span> · V<span class="math-sub">t</span>) / QV<span class="math-sub">t</span></span>
+                \(P_{x_r(t)}^{\text{ajusté}} = \frac{c_0 \cdot V_t}{QV_t}\)
             </div>
             
             <p><strong>Performance financière :</strong></p>
@@ -641,7 +643,7 @@
             
             <p><strong>Équation d'équilibre :</strong></p>
             <div class="formula">
-                <span class="math">e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(t) / (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) = (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>) · e<span class="math-sub">x<span class="math-sub">r</span></span><span class="math-sup">c</span>(0) / (x<span class="math-sub">r</span>(0) - x<span class="math-sub">e</span>)</span>
+                \(\frac{e_{x_r}^c(t)}{x_r(t) - x_e} = \frac{D_0}{D_t} \cdot \frac{e_{x_r}^c(0)}{x_r(0) - x_e}\)
             </div>
             
             <div class="table-container">
@@ -680,7 +682,7 @@
             
             <p><strong>Ajustement du taux d'accumulation :</strong></p>
             <div class="formula">
-                <span class="math">θ<span class="math-sub">t</span> = θ<span class="math-sub">0</span> · (x<span class="math-sub">r</span>(0) - x<span class="math-sub">e</span>) / (x<span class="math-sub">r</span>(t) - x<span class="math-sub">e</span>) = 1,3% · 40 / (x<span class="math-sub">r</span>(t) - 25)</span>
+                \(\theta_t = \theta_0 \cdot \frac{x_r(0) - x_e}{x_r(t) - x_e} = 1,3\% \cdot \frac{40}{x_r(t) - 25}\)
             </div>
             
             <p><strong>Impact :</strong></p>
@@ -693,7 +695,7 @@
             
             <p><strong>Formule générale :</strong></p>
             <div class="formula">
-                <span class="math">SF<span class="math-sub">x<span class="math-sub">r</span>(t)</span> = SF<span class="math-sub">x<span class="math-sub">r</span>(0)</span> · (a<span class="math-sub">x<span class="math-sub">r</span>(0)</span><span class="math-sup">π,y</span>/a<span class="math-sub">x<span class="math-sub">r</span>(t)</span><span class="math-sup">π,y</span>) · (D<span class="math-sub">0</span>/D<span class="math-sub">t</span>)</span>
+                \(SF_{x_r(t)} = SF_{x_r(0)} \cdot \frac{a_{x_r(0)}^{\pi,y}}{a_{x_r(t)}^{\pi,y}} \cdot \frac{D_0}{D_t}\)
             </div>
             
             <p><strong>Application :</strong></p>
