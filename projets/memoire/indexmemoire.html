@@ -230,6 +230,8 @@
     </style>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Chart.js pour les graphiques interactifs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -544,6 +546,94 @@
                     </tbody>
                 </table>
             </div>
+
+            <h3 class="section-title">Visualisations Interactives</h3>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                <h4 class="subsection-title" style="text-align: center;">Évolution du Quotient de Vieillesse (2023 - 2123)</h4>
+                <div style="position: relative; height:350px; width:100%">
+                    <canvas id="chartQV"></canvas>
+                </div>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                <h4 class="subsection-title" style="text-align: center;">Évolution de l'Âge de Retraite avec MAA (2023 - 2100)</h4>
+                <div style="position: relative; height:350px; width:100%">
+                    <canvas id="chartRetraite"></canvas>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Graphique Quotient de Vieillesse
+                    const ctxQV = document.getElementById('chartQV').getContext('2d');
+                    new Chart(ctxQV, {
+                        type: 'line',
+                        data: {
+                            labels: ['2023', '2033', '2043', '2053', '2063', '2073', '2083', '2093', '2103', '2113', '2123'],
+                            datasets: [{
+                                label: 'Quotient de Vieillesse (QV %)',
+                                data: [49.39, 50.55, 52.84, 55.45, 57.59, 60.72, 62.73, 65.36, 67.99, 70.62, 71.74],
+                                borderColor: '#3498db',
+                                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.3
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'top' }
+                            },
+                            scales: {
+                                y: {
+                                    title: { display: true, text: 'Pourcentage (%)' },
+                                    min: 45,
+                                    max: 80
+                                },
+                                x: {
+                                    title: { display: true, text: 'Année' }
+                                }
+                            }
+                        }
+                    });
+
+                    // Graphique Âge de Retraite
+                    const ctxRetraite = document.getElementById('chartRetraite').getContext('2d');
+                    new Chart(ctxRetraite, {
+                        type: 'bar',
+                        data: {
+                            labels: ['2023', '2030', '2040', '2050', '2060', '2070', '2080', '2090', '2100'],
+                            datasets: [{
+                                label: "Âge de départ à la retraite (ans)",
+                                data: [65.0, 66.3, 68.6, 70.8, 72.8, 74.6, 76.1, 77.5, 78.7],
+                                backgroundColor: '#2c3e50',
+                                borderColor: '#34495e',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'top' }
+                            },
+                            scales: {
+                                y: {
+                                    title: { display: true, text: 'Âge (ans)' },
+                                    min: 60,
+                                    max: 85
+                                },
+                                x: {
+                                    title: { display: true, text: 'Année' }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
             
             <h3 class="section-title">4.2 Application des mécanismes d'ajustements automatiques</h3>
             
