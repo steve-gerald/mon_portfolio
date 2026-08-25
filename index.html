@@ -1,1026 +1,1182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- --------- UNICONS ---------- -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-
-    <!-- --------- TYPING JS ---------- -->
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-
-    <!-- --------- SCROLL REVEAL ---------- -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-
-    <!-- --------- CSS ---------- -->
-    <style>
-        /* GOOGLE FONTS */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-        /* VARIABLES */
-        :root {
-            --primary-color: #4a90e2;
-            --primary-color-dark: #3a7bc8;
-            --secondary-color: #042f62;
-            --text-dark: #0f172a;
-            --text-light: #64748b;
-            --white: #ffffff;
-            --max-width: 1200px;
-        }
-
-        /* BASE */
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--white);
-        }
-
-        .container {
-            max-width: var(--max-width);
-            margin: auto;
-            width: 100%;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 30px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: var(--white);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            font-size: 1rem;
-            font-weight: 500;
-            margin-right: 1rem;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .blue-btn {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .blue-btn:hover {
-            background-color: var(--primary-color-dark);
-        }
-
-        .section {
-            padding: 5rem 1rem;
-        }
-
-        /* HEADER */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 99;
-            background-color: var(--white);
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-logo span {
-            color: var(--primary-color);
-            font-size: 2rem;
-        }
-
-        .nav_menu_list {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav_list {
-            position: relative;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover, .active-link {
-            color: var(--primary-color);
-        }
-
-        .circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            z-index: -1;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav_list:hover .circle {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.1;
-        }
-
-        .nav-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* FEATURED BOX */
-        .featured-box {
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            align-items: center;
-            gap: 2rem;
-            padding: 10rem 1rem 5rem;
-        }
-
-        .featured-text-card {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .featured-name {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .featured-name span {
-            color: var(--primary-color);
-        }
-
-        .featured-text-info {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.5;
-        }
-
-        .featured-text-btn {
-            display: flex;
-            margin-bottom: 2rem;
-        }
-
-        .social_icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background-color: var(--white);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .icon:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .icon a {
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        .icon:hover a {
-            color: var(--white);
-        }
-
-        .featured-image {
-            display: flex;
-            justify-content: center;
-        }
-
-        .image {
-            width: 25rem;
-            height: 25rem;
-            border-radius: 50%;
-            overflow: hidden;
-            background-color: var(--primary-color);
-            border: 10px solid var(--primary-color);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .scroll-icon-box {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .scroll-btn {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-size: 1.5rem;
-            animation: upDown 1s infinite alternate;
-        }
-
-        @keyframes upDown {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* ABOUT */
-        .top-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .top-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .top-header span {
-            color: var(--text-light);
-        }
-
-        .row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .about-info {
-            padding: 1rem;
-        }
-
-        .about-info h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .about-info p {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.5;
-        }
-
-        .about-btn {
-            display: flex;
-        }
-
-        .skills-box {
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .skills-header {
-            margin-bottom: 1rem;
-        }
-
-        .skills-header h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .skills-list span {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: inline-block;
-            font-size: 0.9rem;
-        }
-
-        /* PROJECTS */
-        .project-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .project-box {
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-box:hover {
-            transform: translateY(-10px);
-        }
-
-        .project-box i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .project-box h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .project-box label {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        /* CONTACT */
-        .contact-info {
-            padding: 1rem;
-        }
-
-        .contact-info h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .contact-info p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .form-control {
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-inputs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px solid var(--text-light);
-            outline: none;
-        }
-
-        .text-area {
-            margin-bottom: 1rem;
-        }
-
-        .text-area textarea {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px solid var(--text-light);
-            outline: none;
-            height: 10rem;
-            resize: none;
-        }
-
-        .form-button {
-            text-align: right;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--secondary-color);
-            color: var(--white);
-        }
-
-        .top-footer {
-            margin-bottom: 2rem;
-        }
-
-        .top-footer p {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .middle-footer {
-            margin-bottom: 2rem;
-        }
-
-        .footer-menu {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .footer_menu_list a {
-            text-decoration: none;
-            color: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        .footer_menu_list a:hover {
-            color: var(--primary-color);
-        }
-
-        .footer-social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-social-icons .icon {
-            background-color: var(--white);
-            color: var(--secondary-color);
-        }
-
-        .footer-social-icons .icon:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .bottom-footer p {
-            font-size: 0.9rem;
-        }
-
-        .bottom-footer a {
-            color: var(--primary-color);
-        }
-
-        /* MEDIA QUERIES */
-        @media screen and (max-width: 992px) {
-            .featured-box {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .featured-text-btn {
-                justify-content: center;
-            }
-
-            .social_icons {
-                justify-content: center;
-            }
-
-            .row {
-                grid-template-columns: 1fr;
-            }
-
-            .project-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .nav_menu_list {
-                position: fixed;
-                top: 4rem;
-                right: 0;
-                width: 100%;
-                height: 100vh;
-                background-color: var(--white);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transform: translateX(100%);
-                transition: all 0.3s ease;
-            }
-
-            .nav_menu_list.open {
-                transform: translateX(0);
-            }
-
-            .nav-menu-btn {
-                display: block;
-            }
-
-            .project-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media screen and (max-width: 576px) {
-            .nav-button {
-                display: none;
-            }
-
-            .form-inputs {
-                flex-direction: column;
-            }
-        }
-    </style>
-
-    <!-- --------- FAVICON ---------- -->
-    <link rel="shortcut icon" href="/api/placeholder/32/32" type="image/x-icon">
-
-    <title>Portfolio | Steve Geraldin SIMO TCHEMO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steve Geraldin SIMO TCHEMO — Actuaire IABE | Tarification, Provisionnement, Solvabilité II</title>
+<meta name="description" content="Actuaire IABE (Master UCLouvain) spécialisé en tarification non-vie, provisionnement, IFRS 17 et Solvabilité II. Python, R, SAS. Portfolio de projets actuariels avec résultats chiffrés. Disponible en Belgique et au Luxembourg.">
+<meta name="author" content="Steve Geraldin SIMO TCHEMO">
+<meta name="keywords" content="actuaire, IABE, tarification, provisionnement, Solvabilité II, IFRS 17, GLM, Python, R, Belgique, Luxembourg">
+
+<!-- Aperçu sur LinkedIn / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Steve Geraldin SIMO TCHEMO — Actuaire IABE">
+<meta property="og:description" content="Tarification, provisionnement, Solvabilité II et IFRS 17. Portfolio de projets actuariels avec résultats chiffrés.">
+<meta property="og:image" content="https://steve-gerald.github.io/mon_portfolio/steve-photo.jpg">
+<meta property="og:url" content="https://steve-gerald.github.io/mon_portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b1120'/%3E%3Ctext x='50' y='70' font-size='58' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='%23f0b429'%3ES%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+<style>
+/* ============================================================
+   VARIABLES — thème "dark premium" navy + ambre
+   ============================================================ */
+:root{
+  --bg:#080D18;
+  --bg-2:#0D1526;
+  --surface:#111C31;
+  --surface-2:#16233C;
+  --line:rgba(148,163,184,.16);
+  --line-strong:rgba(240,180,41,.35);
+  --gold:#F0B429;
+  --gold-soft:rgba(240,180,41,.12);
+  --cyan:#5EE7D0;
+  --txt:#E9EEF8;
+  --txt-2:#9FB0C9;
+  --txt-3:#6B7C96;
+  --radius:16px;
+  --max:1180px;
+  --font-title:'Sora',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--txt);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* halos lumineux d'arrière-plan */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(60rem 40rem at 78% -8%, rgba(240,180,41,.10), transparent 60%),
+    radial-gradient(50rem 36rem at 0% 30%, rgba(94,231,208,.07), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 110%, rgba(240,180,41,.06), transparent 60%);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+
+/* ============================================================
+   TYPOGRAPHIE COMMUNE
+   ============================================================ */
+h1,h2,h3{font-family:var(--font-title);line-height:1.2;font-weight:700}
+.section{padding:5.5rem 0;scroll-margin-top:80px}
+.section-head{margin-bottom:3rem;max-width:720px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:.9rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:.8rem}
+.section-head p{color:var(--txt-2);font-size:1.02rem}
+
+/* ============================================================
+   BOUTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.85rem 1.6rem;border-radius:999px;font-weight:600;font-size:.95rem;
+  border:1px solid var(--line);background:transparent;color:var(--txt);
+  cursor:pointer;transition:.25s ease;font-family:var(--font-body);
+}
+.btn:hover{border-color:var(--line-strong);background:var(--gold-soft);transform:translateY(-2px)}
+.btn-gold{
+  background:linear-gradient(135deg,#F5C33F,#E09B10);
+  color:#101623;border:none;box-shadow:0 10px 30px -12px rgba(240,180,41,.7);
+}
+.btn-gold:hover{filter:brightness(1.07);transform:translateY(-2px)}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  transition:.3s ease;border-bottom:1px solid transparent;
+}
+header.scrolled{
+  background:rgba(8,13,24,.82);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{display:flex;align-items:center;gap:.7rem;font-family:var(--font-title);font-weight:700;min-width:0;overflow:hidden}
+.brand-mark{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#F5C33F,#E09B10);color:#101623;font-size:1.05rem;
+}
+.brand-txt{font-size:.98rem;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brand-txt small{display:block;font-family:var(--font-body);font-weight:500;font-size:.72rem;color:var(--gold);letter-spacing:.08em}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:.92rem;color:var(--txt-2);font-weight:500;position:relative;padding:.3rem 0}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);transition:.25s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--txt)}
+.nav-links a.active::after,.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:.9rem;flex-shrink:0}
+.lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang-switch button{
+  background:transparent;border:none;color:var(--txt-3);font-size:.78rem;font-weight:600;
+  padding:.38rem .72rem;cursor:pointer;font-family:var(--font-body);transition:.2s;
+}
+.lang-switch button.active{background:var(--gold);color:#101623}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:.35rem;width:34px}
+.burger span{display:block;height:2px;background:var(--txt);border-radius:2px;margin:5px 0;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.li-cv{display:none}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 0 3rem}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:center}
+.status{
+  display:inline-flex;align-items:center;gap:.6rem;padding:.42rem .95rem;
+  border:1px solid var(--line-strong);border-radius:999px;background:var(--gold-soft);
+  font-size:.8rem;color:var(--gold);font-weight:600;margin-bottom:1.5rem;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 0 rgba(74,222,128,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.hero h1{font-size:clamp(2.1rem,5vw,3.5rem);letter-spacing:-.02em;margin-bottom:.6rem}
+.hero h1 span{background:linear-gradient(120deg,#F5C33F,#5EE7D0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-role{font-family:var(--font-title);font-size:clamp(1.05rem,2.3vw,1.45rem);color:var(--txt-2);min-height:2.2rem;margin-bottom:1.2rem}
+.hero-role .typed{color:var(--gold)}
+.hero-lead{color:var(--txt-2);font-size:1.05rem;max-width:44rem;margin-bottom:1.6rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.78rem;padding:.34rem .8rem;border-radius:999px;
+  border:1px solid var(--line);color:var(--txt-2);background:rgba(255,255,255,.02);
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:1.8rem}
+.socials{display:flex;gap:.7rem}
+.socials a{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  border:1px solid var(--line);color:var(--txt-2);font-size:1.15rem;transition:.25s;
+}
+.socials a:hover{color:var(--gold);border-color:var(--line-strong);transform:translateY(-3px)}
+
+.hero-photo{position:relative;justify-self:center}
+.hero-photo .frame{
+  width:clamp(240px,30vw,330px);aspect-ratio:1/1;border-radius:28px;overflow:hidden;
+  border:1px solid var(--line);background:var(--surface);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.9);
+}
+.hero-photo .frame img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-photo .frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 55%,rgba(8,13,24,.55) 100%);
+}
+.hero-photo .frame{position:relative}
+.hero-photo::after{
+  content:"";position:absolute;inset:-14%;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(240,180,41,.20),transparent 62%);
+}
+.badge-float{
+  position:absolute;right:-14px;bottom:22px;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:14px;padding:.7rem .95rem;
+  display:flex;align-items:center;gap:.6rem;box-shadow:0 16px 36px -18px #000;
+}
+.badge-float i{color:var(--gold);font-size:1.3rem}
+.badge-float strong{display:block;font-size:.85rem;font-family:var(--font-title)}
+.badge-float span{font-size:.72rem;color:var(--txt-3)}
+
+/* ============================================================
+   BANDEAU DE CHIFFRES CLÉS
+   ============================================================ */
+.kpi-band{border-block:1px solid var(--line);background:rgba(255,255,255,.015)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:2.2rem 0}
+.kpi{text-align:center;padding:.4rem 1rem;border-right:1px solid var(--line)}
+.kpi:last-child{border-right:none}
+.kpi b{display:block;font-family:var(--font-title);font-size:clamp(1.5rem,3vw,2.1rem);color:var(--gold)}
+.kpi span{font-size:.82rem;color:var(--txt-2)}
+
+/* ============================================================
+   À PROPOS + COMPÉTENCES
+   ============================================================ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about-text p{color:var(--txt-2);margin-bottom:1.1rem}
+.about-text strong{color:var(--txt)}
+.skill-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.4rem 1.5rem;margin-bottom:1rem;transition:.25s;
+}
+.skill-card:hover{border-color:var(--line-strong);transform:translateY(-3px)}
+.skill-card h3{font-size:.95rem;display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
+.skill-card h3 i{color:var(--gold);font-size:1.15rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.skill-tags span{
+  font-size:.79rem;padding:.32rem .72rem;border-radius:8px;
+  background:var(--surface-2);color:var(--txt-2);border:1px solid var(--line);
+}
+.lang-list{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:.4rem}
+.lang-list div{font-size:.85rem;color:var(--txt-2)}
+.lang-list b{display:block;color:var(--txt);font-family:var(--font-title);font-size:.9rem}
+
+/* ============================================================
+   TIMELINE — PARCOURS
+   ============================================================ */
+.tl-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.tl-col h3{font-size:1.05rem;margin-bottom:1.6rem;display:flex;align-items:center;gap:.6rem}
+.tl-col h3 i{color:var(--gold)}
+.tl{position:relative;padding-left:1.9rem;border-left:1px solid var(--line)}
+.tl-item{position:relative;padding-bottom:1.9rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:calc(-1.9rem - 5px);top:.42rem;
+  width:9px;height:9px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 4px rgba(240,180,41,.15);
+}
+.tl-date{font-size:.75rem;color:var(--gold);font-weight:600;letter-spacing:.05em}
+.tl-item h4{font-family:var(--font-title);font-size:.98rem;margin:.2rem 0 .18rem}
+.tl-org{font-size:.85rem;color:var(--txt-3);margin-bottom:.4rem}
+.tl-item p{font-size:.87rem;color:var(--txt-2)}
+
+/* ============================================================
+   PROJETS
+   ============================================================ */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.4rem}
+.proj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.6rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:.28s;
+}
+.proj::before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--cyan));transform:scaleX(0);transform-origin:left;transition:.35s;
+}
+.proj:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 24px 50px -30px #000}
+.proj:hover::before{transform:scaleX(1)}
+.proj-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.proj-icon{
+  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:var(--gold-soft);color:var(--gold);font-size:1.4rem;
+}
+.proj-year{font-size:.74rem;color:var(--txt-3);letter-spacing:.08em}
+.proj h3{font-size:1.02rem;margin-bottom:.6rem}
+.proj > p{font-size:.88rem;color:var(--txt-2);margin-bottom:1.1rem}
+.proj-metrics{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+.metric{display:flex;align-items:flex-start;gap:.55rem;font-size:.83rem;color:var(--txt-2)}
+.metric i{color:var(--cyan);font-size:.95rem;margin-top:.15rem;flex-shrink:0}
+.metric b{color:var(--txt);font-weight:600}
+.proj-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.proj-stack{font-size:.74rem;color:var(--txt-3)}
+.proj-link{
+  font-size:.85rem;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:.35rem;transition:.2s;
+}
+.proj-link:hover{gap:.6rem}
+.more-work{
+  margin-top:2rem;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:1.6rem;
+}
+.more-work h3{font-size:.98rem;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
+.more-work h3 i{color:var(--gold)}
+.more-list{display:flex;flex-wrap:wrap;gap:.5rem}
+.more-list span{
+  font-size:.8rem;padding:.4rem .85rem;border-radius:999px;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--txt-2);
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:start}
+.contact-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem;
+}
+.contact-line{display:flex;align-items:center;gap:.9rem;padding:.75rem 0;border-bottom:1px solid var(--line)}
+.contact-line:last-child{border-bottom:none}
+.contact-line i{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+  background:var(--gold-soft);color:var(--gold);font-size:1.1rem;flex-shrink:0;
+}
+.contact-line small{display:block;font-size:.73rem;color:var(--txt-3);letter-spacing:.06em;text-transform:uppercase}
+.contact-line a,.contact-line p{font-size:.9rem;color:var(--txt);word-break:break-word}
+.contact-line a:hover{color:var(--gold)}
+form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.8rem;color:var(--txt-2);margin-bottom:.4rem;font-weight:500}
+.field input,.field textarea{
+  width:100%;padding:.8rem 1rem;border-radius:11px;background:var(--bg-2);
+  border:1px solid var(--line);color:var(--txt);font-family:var(--font-body);font-size:.92rem;transition:.2s;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);background:#0A121F}
+.field textarea{resize:vertical;min-height:130px}
+.form-msg{margin-top:.9rem;font-size:.88rem;display:none}
+.form-msg.ok{display:block;color:#4ADE80}
+.form-msg.ko{display:block;color:#F87171}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.foot p{font-size:.83rem;color:var(--txt-3)}
+.foot-nav{display:flex;gap:1.4rem;list-style:none}
+.foot-nav a{font-size:.85rem;color:var(--txt-2)}
+.foot-nav a:hover{color:var(--gold)}
+
+/* ============================================================
+   ANIMATIONS D'APPARITION
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:960px){
+  .hero-grid,.about-grid,.tl-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-photo{order:-1}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .kpi:nth-child(2){border-right:none}
+  .kpi:nth-child(1),.kpi:nth-child(2){border-bottom:1px solid var(--line);padding-bottom:1.2rem}
+  .kpi:nth-child(3),.kpi:nth-child(4){padding-top:1.2rem}
+  .nav-links{
+    position:fixed;top:74px;left:0;width:100%;flex-direction:column;gap:0;
+    background:rgba(8,13,24,.97);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:.35s;
+  }
+  .nav-links.open{max-height:320px}
+  .nav-links li{width:100%;text-align:center;border-bottom:1px solid var(--line)}
+  .nav-links a{display:block;padding:1rem}
+  .burger{display:block}
+  .brand-txt{font-size:.82rem;white-space:nowrap}
+  .brand-txt small{font-size:.65rem}
+  .nav-right{gap:.55rem}
+  .nav-cv{padding:.55rem .75rem!important}
+  .nav-cv span{display:none}
+}
+@media(max-width:620px){
+  .nav-cv{display:none}
+  .brand-txt small{display:none}
+  .brand-txt{font-size:.8rem}
+  .li-cv{display:block}
+  .nav-links.open{max-height:400px}
+}
+@media(max-width:640px){
+  .hero{min-height:auto;padding:5.5rem 0 3rem}
+  .hero-grid{gap:2rem}
+  .hero-photo .frame{width:clamp(160px,44vw,200px);border-radius:22px}
+  .badge-float{display:none}
+  .brand-txt{font-size:.74rem}
+}
+@media(max-width:520px){
+  .section{padding:4rem 0}
+  .kpi-grid{grid-template-columns:1fr}
+  .kpi{border-right:none;border-bottom:1px solid var(--line);padding:1rem 0}
+  .kpi:last-child{border-bottom:none}
+  .badge-float{right:-6px;bottom:10px;padding:.55rem .7rem}
+}
+</style>
 </head>
 <body>
-   <div class="container">
-    <!-- --------------- HEADER --------------- -->
-      <nav id="header">
-        <div class="nav-logo">
-            <p class="nav-name">Steve Geraldin SIMO TCHEMO</p>
-            <span>.</span>
-        </div>
-        <div class="nav-menu" id="myNavMenu">
-            <ul class="nav_menu_list">
-                <li class="nav_list">
-                    <a href="#home" class="nav-link active-link">Home</a>
-                    <div class="circle"></div>
-                </li>
-                <li class="nav_list">
-                    <a href="#about" class="nav-link">About</a>
-                    <div class="circle"></div>
-                </li>
-                <li class="nav_list">
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <div class="circle"></div>
-                </li>
-                <li class="nav_list">
-                    <a href="#contact" class="nav-link">Contact</a>
-                    <div class="circle"></div>
-                </li>
-            </ul>
-        </div>
-        <div class="nav-button">
-            <button class="btn">Download CV <i class="uil uil-file-alt"></i></button>
-        </div>
-        <div class="nav-menu-btn">
-            <i class="uil uil-bars" onclick="myMenuFunction()"></i>
-        </div>
-      </nav>
 
-    <!-- -------------- MAIN ---------------- -->
-    <main class="wrapper">
-       <!-- -------------- FEATURED BOX ---------------- -->
-        <section class="featured-box" id="home">
-          <div class="featured-text">
-            <div class="featured-text-card">
-                <span>Steve Geraldin SIMO TCHEMO</span>
-            </div>
-            <div class="featured-name">
-                <p> Je suis <span class="typedText"></span></p>
-            </div>
-            <div class="featured-text-info">
-                <p>Actuaire IABE spécialisé en Gestion des risques, passionné par l'analyse de données et les modèles prédictifs pour assurer la stabilité financière des entreprises.</p>
-            </div>
-            <div class="featured-text-btn">
-                <button class="btn blue-btn" onclick="scrollToContact()">Hire Me</button>
-                <button class="btn"> Download CV <i class="uil uil-file-alt"></i></button>
-            </div>
-            <div class="social_icons">
-                <div class="icon"><a href="#"><i class="uil uil-instagram"></i></a></div>
-                <div class="icon"><a href="https://www.linkedin.com/in/steve-geraldin-simo-tchemo-3409101b7/" target="_blank"><i class="uil uil-linkedin-alt"></i></a></div>
-                <div class="icon"><a href="#"><i class="uil uil-github-alt"></i></a></div>
-            </div>
-          </div>
-          <div class="featured-image">
-            <div class="image">
-                <img src="steve-photo.jpg" alt="Steve Geraldin SIMO TCHEMO">
-            </div>
-          </div>
-          <div class="scroll-icon-box">
-            <a href="#about" class="scroll-btn">
-                <i class="uil uil-mouse-alt"></i>
-                <p>Scroll Down</p>
-            </a>
-          </div>
-       </section>
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<header id="header">
+  <div class="container nav">
+    <a href="#home" class="brand">
+      <span class="brand-mark">S</span>
+      <span class="brand-txt">Steve G. SIMO TCHEMO
+        <small data-fr="Actuaire IABE" data-en="IABE Actuary">Actuaire IABE</small>
+      </span>
+    </a>
 
-       <!-- -------------- ABOUT BOX ---------------- -->
-       <section class="section" id="about">
-          <div class="top-header">
-            <h1>About Me</h1>
-          </div>
-          <div class="row">
-            <div class="col">
-                <div class="about-info">
-                    <h3>My introduction</h3>
-                    <p>Je suis un Actuaire IABE avec une expertise en gestion des risques financiers et opérationnels. J'ai une solide expérience dans l'analyse de données complexes, la modélisation actuarielle et la mise en œuvre de stratégies de gestion des risques pour le secteur financier et de l'assurance.</p>
-                   
-                    <div class="about-btn">
-                     <a href="cv/indexCV" target="_blank" class="btn">
-        Voir mon CV <i class="uil uil-import"></i> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="skills-box">
-                    <div class="skills-header">
-                        <h3>Actuariat & Finance</h3>
-                    </div>
-                    <div class="skills-list">
-                        <span>Modélisation actuarielle</span>
-                        <span>Solvabilité II</span>
-                        <span>Tarification</span>
-                        <span>Provisions techniques</span>
-                        <span>IFRS 17</span>
-                    </div>
-                </div>
-                <div class="skills-box">
-                    <div class="skills-header">
-                        <h3>Outils d'analyse</h3>
-                    </div>
-                    <div class="skills-list">
-                        <span>R</span>
-                        <span>Python</span>
-                        <span>SAS</span>
-                        <span>Excel</span>
-                        <span>PowerBI</span>
-                    </div>
-                </div>
-                <div class="skills-box">
-                    <div class="skills-header">
-                        <h3>Gestion & Leadership</h3>
-                    </div>
-                    <div class="skills-list">
-                        <span>Gestion de projets</span>
-                        <span>Analyse stratégique</span>
-                        <span>Communication</span>
-                        <span>Résolution de problèmes</span>
-                    </div>
-                </div>
-            </div>
-          </div>
-       </section>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active" data-fr="Accueil" data-en="Home">Accueil</a></li>
+      <li><a href="#about" data-fr="Profil" data-en="Profile">Profil</a></li>
+      <li><a href="#parcours" data-fr="Parcours" data-en="Background">Parcours</a></li>
+      <li><a href="#projects" data-fr="Projets" data-en="Projects">Projets</a></li>
+      <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+      <li class="li-cv"><a href="cv/index.html" target="_blank" rel="noopener" data-fr="Mon CV" data-en="My CV">Mon CV</a></li>
+    </ul>
 
-       <!-- -------------- PROJECTS BOX ---------------- -->
-       <section class="section" id="projects">
-          <div class="top-header">
-            <h1>Projects</h1>
-          </div>
-          <div class="project-container">
-                 
-          <!-- Project DLA -->
-        <div class="project-box">
-          <i class="uil uil-chart-line"></i>
-          <h3 class="project-title">Tarification stochastique de rentes viageres differees (DLA)</h3>
-          <p>Modelisation conjointe du risque de taux et de mortalite (correlation negative) via Monte Carlo, avec recommandations operationnelles pour assureurs sous Solvabilite II. Python, UCLouvain 2024.</p>
-          <!-- Lien vers le projet -->
-          <a href="https://github.com/steve-gerald/dla-longevity-pricing" class="btn" target="_blank">View Project</a>
-        </div>
-
-        <!-- Project 1 -->
-<div class="project-box">
-    <i class="uil uil-chart-line"></i>
-    <h3 v>Réassurance — Tarification d'un traité XL MTPL</h3>
-    <p>
-        Tarification d'un traité en excédent de sinistre (XL) sur une branche Motor Third Party Liability : estimation du Burning Cost avec clause de stabilité, validation des charges ultimes par Chain-Ladder, modélisation de la sévérité via Pareto/GPD, et construction de la prime commerciale (chargement de sécurité, coût du capital et frais).
-    </p>
-    <!-- Lien vers le projet -->
-    <a href="https://github.com/steve-gerald/reassurance-xl-mtpl-pricing" class="btn" target="_blank">View Project</a>
-</div>
-          
-          <!-- Project 2 -->
-<div class="project-box">
-    <i class="fas fas-home-shield"></i>
-    <h3 class="project-title">Closing actuariel & suivi des risques techniques</h3>
-    <p>
-        Pipeline complet de clôture actuarielle non-vie sur un portefeuille MTPL simulé : provisionnement stochastique, calcul des charges ultimes, reporting et suivi des risques techniques. Livrables : scripts Python (pipeline, reserving, tests), classeur Excel de pilotage et présentation de synthèse.
-
-    </p>
-    <!-- Lien vers le projet -->
-    <a href="https://github.com/steve-gerald/closing-actuariel" class="btn" target="_blank">View Project</a>
-</div>
-
-            <!-- Project 3 -->
-            <div class="project-box">
-                <i class="uil uil-analytics"></i>
-                <h3 class="project-title">Analyse ORSA</h3>
-                <label>consiste à analyser, sous IFRS 17 et l’approche BBA, la valorisation initiale et l’évolution d’un groupe de contrats d’assurance dans différents scénarios touchant la prime, les sinistres, le risk adjustment et la CSM.</label>
-                <a href="projets/ifrs/synthese_exercices_ifrs17.html" class="btn" target="_blank">View Project</a>
-            </div>
-            
-             <!-- Project 5 -->      
-            <div class="project-box">
-    <i class="uil uil-shield-check"></i>
-    <h3>Mon Mémoire</h3>
-    <p>
-        Ce mémoire analyse l’effet du vieillissement sur la viabilité des pensions et évalue, à l’aide de modèles de mortalité stochastiques, les mécanismes d’ajustement automatique pour garantir la solvabilité et l’équité intergénérationnelle.
-    </p>
-    <!-- Lien vers le projet -->
-    <a href="projets/memoire/indexmemoire.html" class="btn" target="_blank">View Projet</a>
-</div>
-
-            <!-- Project Scoring Confiance -->
-            <div class="project-box">
-    <i class="uil uil-chart-line"></i>
-    <h3 class="project-title">Scoring de Confiance</h3>
-    <p>Systeme complet de scoring de confiance : generation de donnees synthetiques, modelisation ML (Random Forest, XGBoost), benchmark multi-modeles, calibration des seuils et tarification commerciale. Livrables : scripts Python modulaires, noyau de scoring et rapport. Python, 2026.</p>
-    <!-- Lien vers le projet -->
-    <a href="https://github.com/steve-gerald/scoring-confiance" class="btn" target="_blank">View Project</a>
-</div>
-           
-              
-          </div> 
-          
-       </section>
-
-       <!-- -------------- CONTACT BOX ---------------- -->
-       <section class="section" id="contact">, 
-  <div class="top-header">
-    <h1>Get in Touch</h1>
-    <span>Do you have a project in mind? Contact me here.</span>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <button type="button" id="btnFR" class="active" onclick="setLang('fr')">FR</button>
+        <button type="button" id="btnEN" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="cv/index.html" target="_blank" rel="noopener" class="btn btn-gold nav-cv" style="padding:.6rem 1.15rem;font-size:.85rem">
+        <i class="uil uil-file-alt"></i><span data-fr="Mon CV" data-en="My CV">Mon CV</span>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
+</header>
 
-  <div class="row">
-    <!-- Contact Information -->
-    <div class="col">
-      <div class="contact-info">
-        <h2>Find Me <i class="uil uil-corner-right-down"></i></h2>
-        <p>
-          <i class="uil uil-envelope"></i>
-          Email:
-          <a href="mailto:ssimotchemo@gmail.com" style="color: var(--primary-color);">
-            ssimotchemo@gmail.com
-          </a>
-        </p>
-        <p>
-          <i class="uil uil-phone"></i>
-          Tel: +32 465 420 652
-        </p>
-        <p>
-          <i class="uil uil-linkedin"></i>
-          LinkedIn:
-          <a href="https://www.linkedin.com/in/steve-geraldin-simo-tchemo-3409101b7/"
-             target="_blank"
-             style="color: var(--primary-color);">
-            steve-geraldin-simo-tchemo-3409101b7
-          </a>
-        </p>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-text">
+
+      <div class="status reveal">
+        <span class="dot"></span>
+        <span data-fr="Disponible immédiatement — Belgique, Luxembourg &amp; remote"
+              data-en="Available immediately — Belgium, Luxembourg &amp; remote">Disponible immédiatement — Belgique, Luxembourg &amp; remote</span>
+      </div>
+
+      <h1 class="reveal">Steve Geraldin<br><span>SIMO TCHEMO</span></h1>
+
+      <p class="hero-role reveal">
+        <span data-fr="Je suis" data-en="I am">Je suis</span>
+        <span class="typed" id="typedText"></span>
+      </p>
+
+      <p class="hero-lead reveal"
+         data-fr="Actuaire IABE, Master en Sciences Actuarielles (UCLouvain). Je transforme des portefeuilles d'assurance en décisions chiffrées : tarification, provisionnement, capital réglementaire. Python et R au quotidien, du modèle jusqu'au livrable exploitable par le métier."
+         data-en="IABE actuary, MSc in Actuarial Science (UCLouvain). I turn insurance portfolios into quantified decisions: pricing, reserving, regulatory capital. Python and R daily, from the model through to a deliverable the business can actually use.">
+        Actuaire IABE, Master en Sciences Actuarielles (UCLouvain). Je transforme des portefeuilles d'assurance en décisions chiffrées : tarification, provisionnement, capital réglementaire. Python et R au quotidien, du modèle jusqu'au livrable exploitable par le métier.
+      </p>
+
+      <div class="hero-tags reveal">
+        <span class="chip" data-fr="Tarification non-vie" data-en="Non-life pricing">Tarification non-vie</span>
+        <span class="chip">Solvabilité II</span>
+        <span class="chip">IFRS 17</span>
+        <span class="chip" data-fr="Provisionnement" data-en="Reserving">Provisionnement</span>
+        <span class="chip">GLM &amp; Machine Learning</span>
+        <span class="chip">Python · R · SAS</span>
+      </div>
+
+      <div class="hero-cta reveal">
+        <a href="#contact" class="btn btn-gold">
+          <i class="uil uil-envelope-check"></i><span data-fr="Me contacter" data-en="Get in touch">Me contacter</span>
+        </a>
+        <a href="cv/index.html" target="_blank" rel="noopener" class="btn">
+          <i class="uil uil-file-download-alt"></i><span data-fr="Consulter le CV" data-en="View my CV">Consulter le CV</span>
+        </a>
+      </div>
+
+      <div class="socials reveal">
+        <a href="https://www.linkedin.com/in/steve-geraldin-simo-tchemo-3409101b7/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="uil uil-linkedin-alt"></i></a>
+        <a href="https://github.com/steve-gerald" target="_blank" rel="noopener" aria-label="GitHub"><i class="uil uil-github-alt"></i></a>
+        <a href="mailto:ssimotchemo@gmail.com" aria-label="Email"><i class="uil uil-envelope"></i></a>
       </div>
     </div>
 
-    <!-- Contact Form -->
-    <div class="col">
-      <form id="contactForm"
-            class="form-control"
-            action="https://formspree.io/f/xrbrzrra"
-            method="POST">
+    <div class="hero-photo reveal">
+      <div class="frame">
+        <img src="steve-photo.jpg" alt="Steve Geraldin SIMO TCHEMO" width="330" height="330">
+      </div>
+      <div class="badge-float">
+        <i class="uil uil-award"></i>
+        <div>
+          <strong>UCLouvain</strong>
+          <span data-fr="Master actuariat · 2024" data-en="MSc Actuarial Science · 2024">Master actuariat · 2024</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="form-inputs">
-          <label for="name">Your Name:</label>
-          <input type="text" id="name" name="name" class="input-field" placeholder="Enter your name" required>
+<!-- ============================================================
+     BANDEAU CHIFFRES CLÉS
+     ============================================================ -->
+<div class="kpi-band">
+  <div class="container">
+    <div class="kpi-grid">
+      <div class="kpi reveal">
+        <b>4 <span style="font-size:1rem">ans</span></b>
+        <span data-fr="en compagnie d'assurance (tarification, provisionnement)"
+              data-en="in insurance companies (pricing, reserving)">en compagnie d'assurance (tarification, provisionnement)</span>
+      </div>
+      <div class="kpi reveal">
+        <b>15+</b>
+        <span data-fr="projets actuariels et data menés de bout en bout"
+              data-en="actuarial and data projects delivered end to end">projets actuariels et data menés de bout en bout</span>
+      </div>
+      <div class="kpi reveal">
+        <b>13 <span style="font-size:1rem">ans</span></b>
+        <span data-fr="d'enseignement des mathématiques (Cameroun, Belgique)"
+              data-en="teaching mathematics (Cameroon, Belgium)">d'enseignement des mathématiques (Cameroun, Belgique)</span>
+      </div>
+      <div class="kpi reveal">
+        <b>IABE</b>
+        <span data-fr="Membre de l'Institut des Actuaires en Belgique"
+              data-en="Member of the Institute of Actuaries in Belgium">Membre de l'Institut des Actuaires en Belgique</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <label for="email">Your Email:</label>
-          <input type="email" id="email" name="email" class="input-field" placeholder="Enter your email" required>
+<!-- ============================================================
+     PROFIL
+     ============================================================ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-fr="Profil" data-en="Profile">Profil</div>
+      <h2 data-fr="Un actuaire qui va du modèle à la décision"
+          data-en="An actuary who takes the model all the way to the decision">Un actuaire qui va du modèle à la décision</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p data-fr="Je suis actuaire IABE, titulaire d'un Master en Sciences Actuarielles de l'UCLouvain et d'un Master en Sciences Économiques option Actuariat. Mon terrain de prédilection : la tarification et le provisionnement non-vie, la modélisation vie et longévité, et le capital réglementaire sous Solvabilité II et IFRS 17."
+           data-en="I am an IABE actuary holding an MSc in Actuarial Science from UCLouvain and an MSc in Economics (actuarial track). My home ground: non-life pricing and reserving, life and longevity modelling, and regulatory capital under Solvency II and IFRS 17.">
+          Je suis actuaire IABE, titulaire d'un Master en Sciences Actuarielles de l'UCLouvain et d'un Master en Sciences Économiques option Actuariat. Mon terrain de prédilection : la tarification et le provisionnement non-vie, la modélisation vie et longévité, et le capital réglementaire sous Solvabilité II et IFRS 17.
+        </p>
+        <p data-fr="En compagnie, j'ai construit des outils de tarification non-vie et santé, estimé la rentabilité de nouveaux contrats et calculé des provisions pour sinistres. En parallèle, je développe des pipelines Python complets — données, modèle, validation, tests, reporting — parce qu'un modèle qui ne se relit pas et ne se rejoue pas ne sert à personne."
+           data-en="In-house, I built non-life and health pricing tools, assessed the profitability of new products and computed claims reserves. Alongside this, I build complete Python pipelines — data, model, validation, tests, reporting — because a model nobody can re-read or re-run is of no use to anyone.">
+          En compagnie, j'ai construit des outils de tarification non-vie et santé, estimé la rentabilité de nouveaux contrats et calculé des provisions pour sinistres. En parallèle, je développe des pipelines Python complets — données, modèle, validation, tests, reporting — parce qu'un modèle qui ne se relit pas et ne se rejoue pas ne sert à personne.
+        </p>
+        <p data-fr="Treize années d'enseignement des mathématiques m'ont donné une compétence que les recruteurs sous-estiment souvent : expliquer un modèle stochastique à un comité de direction aussi clairement qu'à une classe de terminale."
+           data-en="Thirteen years of teaching mathematics gave me a skill recruiters often underrate: explaining a stochastic model to a management committee as clearly as to a final-year class.">
+          Treize années d'enseignement des mathématiques m'ont donné une compétence que les recruteurs sous-estiment souvent : expliquer un modèle stochastique à un comité de direction aussi clairement qu'à une classe de terminale.
+        </p>
+
+        <div class="lang-list">
+          <div><b>Français</b><span data-fr="Langue maternelle" data-en="Native">Langue maternelle</span></div>
+          <div><b>English</b><span data-fr="Niveau B1 — en progression" data-en="B1 — improving">Niveau B1 — en progression</span></div>
         </div>
 
-        <div class="text-area">
-          <label for="message">Your Message:</label>
-          <textarea id="message" name="message" class="input-field" placeholder="Write your message here..." required></textarea>
+        <div style="margin-top:1.6rem">
+          <a href="cv/index.html" target="_blank" rel="noopener" class="btn">
+            <i class="uil uil-import"></i><span data-fr="Voir le CV détaillé" data-en="See the full CV">Voir le CV détaillé</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="skills reveal">
+        <div class="skill-card">
+          <h3><i class="uil uil-calculator-alt"></i><span data-fr="Actuariat &amp; assurance" data-en="Actuarial &amp; insurance">Actuariat &amp; assurance</span></h3>
+          <div class="skill-tags">
+            <span data-fr="Tarification non-vie" data-en="Non-life pricing">Tarification non-vie</span>
+            <span data-fr="Provisionnement (Chain-Ladder, stochastique)" data-en="Reserving (Chain-Ladder, stochastic)">Provisionnement (Chain-Ladder, stochastique)</span>
+            <span>Solvabilité II · SCR</span>
+            <span>IFRS 17 (BBA, PAA, VFA)</span>
+            <span data-fr="Réassurance XL" data-en="XL reinsurance">Réassurance XL</span>
+            <span data-fr="Modélisation vie &amp; longévité" data-en="Life &amp; longevity modelling">Modélisation vie &amp; longévité</span>
+            <span data-fr="Fonds de pension (DB/DC)" data-en="Pension funds (DB/DC)">Fonds de pension (DB/DC)</span>
+          </div>
         </div>
 
-        <div class="form-button">
-          <button type="submit" class="btn">
-            Send <i class="uil uil-message"></i>
-          </button>
-        </div>
-        <div id="successMessage"
-             style="display: none; color: green; margin-top: 10px; text-align: center;">
-          Message sent successfully! ✅
+        <div class="skill-card">
+          <h3><i class="uil uil-brackets-curly"></i><span data-fr="Modélisation &amp; outils" data-en="Modelling &amp; tools">Modélisation &amp; outils</span></h3>
+          <div class="skill-tags">
+            <span>Python (pandas, statsmodels, scikit-learn)</span>
+            <span>GLM Poisson / Gamma</span>
+            <span>XGBoost · LightGBM · SHAP</span>
+            <span>Monte Carlo</span>
+            <span>R</span><span>SAS</span><span>Excel / VBA</span>
+            <span>Power BI</span><span>SQL</span><span>Git · pytest</span><span>LaTeX</span>
+          </div>
         </div>
 
+        <div class="skill-card">
+          <h3><i class="uil uil-users-alt"></i><span data-fr="Transverse" data-en="Cross-functional">Transverse</span></h3>
+          <div class="skill-tags">
+            <span data-fr="Vulgarisation technique" data-en="Explaining technical work">Vulgarisation technique</span>
+            <span data-fr="Rédaction de rapports actuariels" data-en="Actuarial report writing">Rédaction de rapports actuariels</span>
+            <span data-fr="Gestion de projet" data-en="Project management">Gestion de projet</span>
+            <span data-fr="Rigueur et reproductibilité" data-en="Rigour and reproducibility">Rigueur et reproductibilité</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARCOURS
+     ============================================================ -->
+<section class="section" id="parcours" style="background:rgba(255,255,255,.015);border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-fr="Parcours" data-en="Background">Parcours</div>
+      <h2 data-fr="Formation actuarielle, expérience terrain"
+          data-en="Actuarial training, hands-on experience">Formation actuarielle, expérience terrain</h2>
+      <p data-fr="Quatre années en compagnie d'assurance, deux masters en actuariat, et treize ans à expliquer les mathématiques."
+         data-en="Four years inside insurance companies, two actuarial master's degrees, and thirteen years explaining mathematics.">
+        Quatre années en compagnie d'assurance, deux masters en actuariat, et treize ans à expliquer les mathématiques.</p>
+    </div>
+
+    <div class="tl-grid">
+      <div class="tl-col reveal">
+        <h3><i class="uil uil-briefcase-alt"></i><span data-fr="Expérience professionnelle" data-en="Professional experience">Expérience professionnelle</span></h3>
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-date" data-fr="Aujourd'hui" data-en="Present">Aujourd'hui</div>
+            <h4 data-fr="Enseignant en mathématiques" data-en="Mathematics teacher">Enseignant en mathématiques</h4>
+            <div class="tl-org" data-fr="Enseignement secondaire supérieur — Belgique" data-en="Upper secondary education — Belgium">Enseignement secondaire supérieur — Belgique</div>
+            <p data-fr="Enseignement des mathématiques et de la géométrie dans l'espace, en parallèle de l'agrégation (AESS) à l'UNamur."
+               data-en="Teaching mathematics and solid geometry, alongside the AESS teaching qualification at UNamur.">Enseignement des mathématiques et de la géométrie dans l'espace, en parallèle de l'agrégation (AESS) à l'UNamur.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date" data-fr="Avril 2018 — Septembre 2020" data-en="April 2018 — September 2020">Avril 2018 — Septembre 2020</div>
+            <h4 data-fr="Actuaire junior" data-en="Junior actuary">Actuaire junior</h4>
+            <div class="tl-org">Zenith Assurance — Cameroun</div>
+            <p data-fr="Outils de tarification non-vie et santé, estimation de la rentabilité des nouveaux contrats, profilage des assurés, calcul des provisions pour sinistres et analyse des réserves. R, Excel, VBA, Power BI."
+               data-en="Non-life and health pricing tools, profitability assessment of new products, policyholder profiling, claims reserve calculation and reserve analysis. R, Excel, VBA, Power BI.">Outils de tarification non-vie et santé, estimation de la rentabilité des nouveaux contrats, profilage des assurés, calcul des provisions pour sinistres et analyse des réserves. R, Excel, VBA, Power BI.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date" data-fr="Septembre 2016 — Février 2018" data-en="September 2016 — February 2018">Septembre 2016 — Février 2018</div>
+            <h4 data-fr="Stagiaire en actuariat" data-en="Actuarial intern">Stagiaire en actuariat</h4>
+            <div class="tl-org">Kom Assur — <span data-fr="agent général SAAR Assurance" data-en="general agent, SAAR Assurance">agent général SAAR Assurance</span></div>
+            <p data-fr="Production et suivi des contrats, analyse de la rentabilité des portefeuilles, estimation des performances des nouveaux produits."
+               data-en="Policy production and monitoring, portfolio profitability analysis, performance estimation for new products.">Production et suivi des contrats, analyse de la rentabilité des portefeuilles, estimation des performances des nouveaux produits.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2007 — 2016</div>
+            <h4 data-fr="Enseignant en mathématiques" data-en="Mathematics teacher">Enseignant en mathématiques</h4>
+            <div class="tl-org" data-fr="Lycées — Cameroun" data-en="Secondary schools — Cameroon">Lycées — Cameroun</div>
+            <p data-fr="Mathématiques appliquées et géométrie, formation à la résolution de problèmes complexes."
+               data-en="Applied mathematics and geometry, training students in complex problem solving.">Mathématiques appliquées et géométrie, formation à la résolution de problèmes complexes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-col reveal">
+        <h3><i class="uil uil-graduation-cap"></i><span data-fr="Formation" data-en="Education">Formation</span></h3>
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-date" data-fr="2024 — en cours" data-en="2024 — ongoing">2024 — en cours</div>
+            <h4 data-fr="Agrégation en mathématiques (AESS)" data-en="Teaching qualification in mathematics (AESS)">Agrégation en mathématiques (AESS)</h4>
+            <div class="tl-org">Université de Namur</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2020 — 2024</div>
+            <h4 data-fr="Master 120 en Sciences Actuarielles" data-en="MSc (120 ECTS) in Actuarial Science">Master 120 en Sciences Actuarielles</h4>
+            <div class="tl-org">Université catholique de Louvain (UCLouvain)</div>
+            <p data-fr="Mémoire : viabilité des pensions face au vieillissement et mécanismes d'ajustement automatique, modèles de mortalité stochastiques."
+               data-en="Thesis: pension sustainability under ageing and automatic adjustment mechanisms, using stochastic mortality models.">Mémoire : viabilité des pensions face au vieillissement et mécanismes d'ajustement automatique, modèles de mortalité stochastiques.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2015 — 2017</div>
+            <h4 data-fr="Master en Sciences Économiques — option Actuariat" data-en="MSc in Economics — actuarial track">Master en Sciences Économiques — option Actuariat</h4>
+            <div class="tl-org">Université de Douala</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2012 — 2015</div>
+            <h4 data-fr="Licence en Mathématiques Appliquées" data-en="BSc in Applied Mathematics">Licence en Mathématiques Appliquées</h4>
+            <div class="tl-org">Université de Douala</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date" data-fr="Affiliation" data-en="Membership">Affiliation</div>
+            <h4>IABE</h4>
+            <div class="tl-org" data-fr="Institut des Actuaires en Belgique" data-en="Institute of Actuaries in Belgium">Institut des Actuaires en Belgique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJETS
+     ============================================================ -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-fr="Projets" data-en="Projects">Projets</div>
+      <h2 data-fr="Des modèles complets, pas des exercices"
+          data-en="Complete models, not textbook exercises">Des modèles complets, pas des exercices</h2>
+      <p data-fr="Chaque projet va de la donnée au livrable : code Python ou R reproductible, validation, et une recommandation exploitable par une compagnie."
+         data-en="Every project runs from data to deliverable: reproducible Python or R code, validation, and a recommendation an insurer could act on.">
+        Chaque projet va de la donnée au livrable : code Python ou R reproductible, validation, et une recommandation exploitable par une compagnie.</p>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- DLA -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-chart-line"></i></div>
+          <span class="proj-year">UCLouvain · 2024</span>
+        </div>
+        <h3 data-fr="Tarification stochastique de rentes viagères différées"
+            data-en="Stochastic pricing of deferred life annuities">Tarification stochastique de rentes viagères différées</h3>
+        <p data-fr="Modélisation conjointe du risque de taux et du risque de mortalité, avec corrélation négative, pour tarifer des rentes différées sous Solvabilité II."
+           data-en="Joint modelling of interest-rate and mortality risk, with negative correlation, to price deferred annuities under Solvency II.">Modélisation conjointe du risque de taux et du risque de mortalité, avec corrélation négative, pour tarifer des rentes différées sous Solvabilité II.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-arrow-growth"></i><span data-fr="Surcharge stochastique quantifiée : <b>+3,6 % à +9,2 %</b> selon l'âge et le différé"
+              data-en="Quantified stochastic loading: <b>+3.6% to +9.2%</b> depending on age and deferral">Surcharge stochastique quantifiée : <b>+3,6 % à +9,2 %</b> selon l'âge et le différé</span></div>
+          <div class="metric"><i class="uil uil-layer-group"></i><span data-fr="<b>5 modèles</b> comparés : Lee-Carter, CBD, Vasicek, CIR, Hull-White"
+              data-en="<b>5 models</b> compared: Lee-Carter, CBD, Vasicek, CIR, Hull-White">
+            <b>5 modèles</b> comparés : Lee-Carter, CBD, Vasicek, CIR, Hull-White</span></div>
+          <div class="metric"><i class="uil uil-dice-five"></i><span data-fr="Simulation Monte Carlo conjointe par décomposition de Cholesky"
+              data-en="Joint Monte Carlo simulation via Cholesky decomposition">Simulation Monte Carlo conjointe par décomposition de Cholesky</span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack">Python · LaTeX</span>
+          <a class="proj-link" href="https://github.com/steve-gerald/dla-longevity-pricing" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- XL MTPL -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-shield-check"></i></div>
+          <span class="proj-year" data-fr="Réassurance" data-en="Reinsurance">Réassurance</span>
+        </div>
+        <h3 data-fr="Tarification d'un traité XL en RC Auto"
+            data-en="Pricing an XL treaty on Motor Third Party Liability">Tarification d'un traité XL en RC Auto</h3>
+        <p data-fr="Tarification d'un traité en excédent de sinistre sur une branche Responsabilité Civile Moteur, du Burning Cost à la prime commerciale."
+           data-en="Pricing an excess-of-loss treaty on a Motor TPL portfolio, from burning cost through to the commercial premium.">Tarification d'un traité en excédent de sinistre sur une branche Responsabilité Civile Moteur, du Burning Cost à la prime commerciale.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-calculator"></i><span data-fr="<b>Burning Cost</b> avec clause de stabilité et indexation"
+              data-en="<b>Burning cost</b> with stability clause and indexation">Burning Cost avec clause de stabilité et indexation</span></div>
+          <div class="metric"><i class="uil uil-chart"></i><span data-fr="Charges ultimes validées par <b>Chain-Ladder</b>"
+              data-en="Ultimate losses validated by <b>Chain-Ladder</b>">Charges ultimes validées par <b>Chain-Ladder</b></span></div>
+          <div class="metric"><i class="uil uil-graph-bar"></i><span data-fr="Sévérité des grands sinistres modélisée par <b>Pareto / GPD</b>"
+              data-en="Large-loss severity modelled with <b>Pareto / GPD</b>">Sévérité des grands sinistres modélisée par <b>Pareto / GPD</b></span></div>
+          <div class="metric"><i class="uil uil-euro"></i><span data-fr="Prime commerciale : chargement de sécurité, coût du capital et frais"
+              data-en="Commercial premium: safety loading, cost of capital and expenses">Prime commerciale : chargement de sécurité, coût du capital et frais</span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack">Python</span>
+          <a class="proj-link" href="https://github.com/steve-gerald/reassurance-xl-mtpl-pricing" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- CLOSING -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-clipboard-notes"></i></div>
+          <span class="proj-year" data-fr="Non-vie" data-en="Non-life">Non-vie</span>
+        </div>
+        <h3 data-fr="Clôture actuarielle et suivi des risques techniques"
+            data-en="Actuarial closing and technical risk monitoring">Clôture actuarielle et suivi des risques techniques</h3>
+        <p data-fr="Pipeline complet de clôture non-vie sur un portefeuille RC Auto simulé, reproductible d'un trimestre à l'autre."
+           data-en="A complete non-life closing pipeline on a simulated Motor TPL portfolio, reproducible quarter after quarter.">Pipeline complet de clôture non-vie sur un portefeuille RC Auto simulé, reproductible d'un trimestre à l'autre.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-process"></i><span data-fr="Provisionnement <b>stochastique</b> et calcul des charges ultimes"
+              data-en="<b>Stochastic</b> reserving and ultimate loss calculation">Provisionnement <b>stochastique</b> et calcul des charges ultimes</span></div>
+          <div class="metric"><i class="uil uil-check-circle"></i><span data-fr="Scripts Python modulaires <b>couverts par des tests</b>"
+              data-en="Modular Python scripts <b>covered by tests</b>">Scripts Python modulaires <b>couverts par des tests</b></span></div>
+          <div class="metric"><i class="uil uil-presentation-check"></i><span data-fr="Livrables métier : classeur Excel de pilotage et présentation de synthèse"
+              data-en="Business deliverables: Excel steering workbook and summary deck">Livrables métier : classeur Excel de pilotage et présentation de synthèse</span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack">Python · Excel</span>
+          <a class="proj-link" href="https://github.com/steve-gerald/closing-actuariel" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- IFRS 17 -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-balance-scale"></i></div>
+          <span class="proj-year">IFRS 17</span>
+        </div>
+        <h3 data-fr="Valorisation BBA et évolution de la CSM"
+            data-en="BBA measurement and CSM roll-forward">Valorisation BBA et évolution de la CSM</h3>
+        <p data-fr="Analyse, sous IFRS 17 et l'approche BBA, de la valorisation initiale puis de l'évolution d'un groupe de contrats dans plusieurs scénarios."
+           data-en="Analysis, under IFRS 17 and the BBA approach, of initial measurement and subsequent movement of a group of contracts across several scenarios.">Analyse, sous IFRS 17 et l'approche BBA, de la valorisation initiale puis de l'évolution d'un groupe de contrats dans plusieurs scénarios.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-list-ol"></i><span data-fr="<b>5 cas chiffrés</b> détaillés pas à pas"
+              data-en="<b>5 worked cases</b> laid out step by step"><b>5 cas chiffrés</b> détaillés pas à pas</span></div>
+          <div class="metric"><i class="uil uil-exchange"></i><span data-fr="Sensibilités : prime, sinistres, <b>risk adjustment</b> et <b>CSM</b>"
+              data-en="Sensitivities: premium, claims, <b>risk adjustment</b> and <b>CSM</b>">Sensibilités : prime, sinistres, <b>risk adjustment</b> et <b>CSM</b></span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack" data-fr="Étude chiffrée" data-en="Worked study">Étude chiffrée</span>
+          <a class="proj-link" href="projets/ifrs/synthese_exercices_ifrs17.html" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- MEMOIRE -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-book-open"></i></div>
+          <span class="proj-year" data-fr="Mémoire · UCLouvain" data-en="Thesis · UCLouvain">Mémoire · UCLouvain</span>
+        </div>
+        <h3 data-fr="Vieillissement et viabilité des systèmes de pension"
+            data-en="Ageing and the sustainability of pension systems">Vieillissement et viabilité des systèmes de pension</h3>
+        <p data-fr="Effet du vieillissement démographique sur la viabilité des pensions, et évaluation des mécanismes d'ajustement automatique."
+           data-en="The effect of demographic ageing on pension sustainability, and an assessment of automatic adjustment mechanisms.">Effet du vieillissement démographique sur la viabilité des pensions, et évaluation des mécanismes d'ajustement automatique.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-chart-growth"></i><span data-fr="Projections par <b>modèles de mortalité stochastiques</b>"
+              data-en="Projections using <b>stochastic mortality models</b>">Projections par <b>modèles de mortalité stochastiques</b></span></div>
+          <div class="metric"><i class="uil uil-balance-scale"></i><span data-fr="Arbitrage entre <b>solvabilité</b> du système et <b>équité intergénérationnelle</b>"
+              data-en="Trade-off between system <b>solvency</b> and <b>intergenerational fairness</b>">Arbitrage entre <b>solvabilité</b> du système et <b>équité intergénérationnelle</b></span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack" data-fr="Master 120" data-en="MSc thesis">Master 120</span>
+          <a class="proj-link" href="projets/memoire/indexmemoire.html" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- SCORING -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-robot"></i></div>
+          <span class="proj-year">2026</span>
+        </div>
+        <h3 data-fr="Score de confiance — du modèle ML au tarif"
+            data-en="Trust scoring — from ML model to price">Score de confiance — du modèle ML au tarif</h3>
+        <p data-fr="Système complet de scoring : génération de données synthétiques, modélisation, calibrage des seuils et traduction en tarification commerciale."
+           data-en="A complete scoring system: synthetic data generation, modelling, threshold calibration and translation into commercial pricing.">Système complet de scoring : génération de données synthétiques, modélisation, calibrage des seuils et traduction en tarification commerciale.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-sitemap"></i><span data-fr="Benchmark multi-modèles : <b>Random Forest, XGBoost</b> et modèles de référence"
+              data-en="Multi-model benchmark: <b>Random Forest, XGBoost</b> and baselines">Benchmark multi-modèles : <b>Random Forest, XGBoost</b> et modèles de référence</span></div>
+          <div class="metric"><i class="uil uil-sliders-v-alt"></i><span data-fr="<b>Calibrage des seuils</b> de décision et impact tarifaire chiffré"
+              data-en="<b>Decision threshold calibration</b> with quantified pricing impact"><b>Calibrage des seuils</b> de décision et impact tarifaire chiffré</span></div>
+          <div class="metric"><i class="uil uil-file-check-alt"></i><span data-fr="Noyau de scoring réutilisable + rapport de synthèse"
+              data-en="Reusable scoring core plus a summary report">Noyau de scoring réutilisable + rapport de synthèse</span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack">Python · scikit-learn</span>
+          <a class="proj-link" href="https://github.com/steve-gerald/scoring-confiance" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- ALM -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-scales"></i></div>
+          <span class="proj-year">ACTU2200 · UCLouvain</span>
+        </div>
+        <h3 data-fr="Gestion actif-passif (ALM)" data-en="Asset & Liability Management (ALM)">Gestion actif-passif (ALM)</h3>
+        <p data-fr="Projet de gestion des risques actifs-passifs : adossement des flux, sensibilité aux taux et stratégies d'immunisation d'un portefeuille."
+           data-en="An asset-liability risk management project: cash-flow matching, interest-rate sensitivity and portfolio immunisation strategies.">Projet de gestion des risques actifs-passifs : adossement des flux, sensibilité aux taux et stratégies d'immunisation d'un portefeuille.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-arrows-h"></i><span data-fr="Duration, convexité et <b>immunisation</b> du bilan"
+              data-en="Duration, convexity and balance-sheet <b>immunisation</b>">Duration, convexité et <b>immunisation</b> du bilan</span></div>
+          <div class="metric"><i class="uil uil-database"></i><span data-fr="Données de marché réelles, résultats reproductibles"
+              data-en="Real market data, reproducible results">Données de marché réelles, résultats reproductibles</span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack">Excel · R</span>
+          <a class="proj-link" href="projets/rapport-alm/index.html" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- MARCHES -->
+      <article class="proj reveal">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="uil uil-money-insert"></i></div>
+          <span class="proj-year" data-fr="Finance quantitative" data-en="Quantitative finance">Finance quantitative</span>
+        </div>
+        <h3 data-fr="Analyses de marché et de risque financier"
+            data-en="Market and financial risk analyses">Analyses de marché et de risque financier</h3>
+        <p data-fr="Études quantitatives sur actions et immobilier : impact des publications de résultats, mesures de risque, stratégie de trading backtestée."
+           data-en="Quantitative studies on equities and real estate: earnings-announcement impact, risk measures, and a backtested trading strategy.">Études quantitatives sur actions et immobilier : impact des publications de résultats, mesures de risque, stratégie de trading backtestée.</p>
+        <div class="proj-metrics">
+          <div class="metric"><i class="uil uil-chart-pie"></i><span data-fr="NVIDIA : effet des résultats trimestriels sur le cours et le <b>P/E</b>"
+              data-en="NVIDIA: effect of quarterly earnings on price and <b>P/E</b>">NVIDIA : effet des résultats trimestriels sur le cours et le <b>P/E</b></span></div>
+          <div class="metric"><i class="uil uil-percentage"></i><span data-fr="AAPL : volatilité, autocorrélation et <b>mesures de risque</b>"
+              data-en="AAPL: volatility, autocorrelation and <b>risk measures</b>">AAPL : volatilité, autocorrélation et <b>mesures de risque</b></span></div>
+          <div class="metric"><i class="uil uil-home"></i><span data-fr="Immobilier US : accessibilité et croissance des prix par ville"
+              data-en="US housing: affordability and price growth by city">Immobilier US : accessibilité et croissance des prix par ville</span></div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-stack">Python · pandas</span>
+          <a class="proj-link" href="projets/analyseNVIDIA/index_fr.html" target="_blank" rel="noopener">
+            <span data-fr="Voir le projet" data-en="View project">Voir le projet</span> <i class="uil uil-arrow-right"></i></a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="more-work reveal">
+      <h3><i class="uil uil-layers-alt"></i><span data-fr="Autres travaux" data-en="Other work">Autres travaux</span></h3>
+      <div class="more-list">
+        <span data-fr="Pipeline de tarification freMTPL2 (GLM fréquence/coût, ML, SHAP, SCR)" data-en="freMTPL2 pricing pipeline (frequency/severity GLM, ML, SHAP, SCR)">Pipeline de tarification freMTPL2 (GLM fréquence/coût, ML, SHAP, SCR)</span>
+        <span data-fr="bmspy — package bonus-malus belge (échelle −1/+5, Gini 0,281)" data-en="bmspy — Belgian bonus-malus package (−1/+5 scale, Gini 0.281)">bmspy — package bonus-malus belge (échelle −1/+5, Gini 0,281)</span>
+        <span data-fr="Détection de fraude (LightGBM, AUC 0,84)" data-en="Fraud detection (LightGBM, AUC 0.84)">Détection de fraude (LightGBM, AUC 0,84)</span>
+        <span data-fr="Risque de crédit — PD / LGD / EAD, IFRS 9, Bâle IRB" data-en="Credit risk — PD / LGD / EAD, IFRS 9, Basel IRB">Risque de crédit — PD / LGD / EAD, IFRS 9, Bâle IRB</span>
+        <span data-fr="Crédibilité Bühlmann-Straub sur portefeuille santé" data-en="Bühlmann-Straub credibility on a health portfolio">Crédibilité Bühlmann-Straub sur portefeuille santé</span>
+        <span data-fr="QuantLab — plateforme de pricing de dérivés (10 modèles)" data-en="QuantLab — derivatives pricing platform (10 models)">QuantLab — plateforme de pricing de dérivés (10 modèles)</span>
+        <span data-fr="Modèle collectif de risque avec réassurance XL (Python, VBA)" data-en="Collective risk model with XL reinsurance (Python, VBA)">Modèle collectif de risque avec réassurance XL (Python, VBA)</span>
+        <span data-fr="Température et mortalité en Belgique (application Streamlit)" data-en="Temperature and mortality in Belgium (Streamlit app)">Température et mortalité en Belgique (application Streamlit)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section class="section" id="contact" style="background:rgba(255,255,255,.015);border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-fr="Contact" data-en="Contact">Contact</div>
+      <h2 data-fr="Un poste, une mission, une question technique ?"
+          data-en="A role, an assignment, a technical question?">Un poste, une mission, une question technique ?</h2>
+      <p data-fr="Je suis ouvert aux postes d'actuaire junior en tarification, provisionnement ou risk management, en Belgique, au Luxembourg et à distance. Réponse sous 24 h."
+         data-en="I am open to junior actuary roles in pricing, reserving or risk management, in Belgium, Luxembourg and remotely. I reply within 24 hours.">
+        Je suis ouvert aux postes d'actuaire junior en tarification, provisionnement ou risk management, en Belgique, au Luxembourg et à distance. Réponse sous 24 h.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-line">
+          <i class="uil uil-envelope"></i>
+          <div><small>Email</small><a href="mailto:ssimotchemo@gmail.com">ssimotchemo@gmail.com</a></div>
+        </div>
+        <div class="contact-line">
+          <i class="uil uil-phone"></i>
+          <div><small data-fr="Téléphone" data-en="Phone">Téléphone</small><a href="tel:+32465420652">+32 465 42 06 52</a></div>
+        </div>
+        <div class="contact-line">
+          <i class="uil uil-linkedin"></i>
+          <div><small>LinkedIn</small><a href="https://www.linkedin.com/in/steve-geraldin-simo-tchemo-3409101b7/" target="_blank" rel="noopener">Steve Geraldin SIMO TCHEMO</a></div>
+        </div>
+        <div class="contact-line">
+          <i class="uil uil-github-alt"></i>
+          <div><small>GitHub</small><a href="https://github.com/steve-gerald" target="_blank" rel="noopener">github.com/steve-gerald</a></div>
+        </div>
+        <div class="contact-line">
+          <i class="uil uil-map-marker"></i>
+          <div><small data-fr="Localisation" data-en="Location">Localisation</small>
+            <p>Louvain-la-Neuve, <span data-fr="Belgique" data-en="Belgium">Belgique</span></p></div>
+        </div>
+      </div>
+
+      <form id="contactForm" class="reveal" action="https://formspree.io/f/xrbrzrra" method="POST">
+        <div class="field">
+          <label for="name" data-fr="Votre nom" data-en="Your name">Votre nom</label>
+          <input type="text" id="name" name="name" required
+                 data-ph-fr="Prénom et nom" data-ph-en="First and last name" placeholder="Prénom et nom">
+        </div>
+        <div class="field">
+          <label for="email" data-fr="Votre email" data-en="Your email">Votre email</label>
+          <input type="email" id="email" name="email" required
+                 data-ph-fr="nom@entreprise.com" data-ph-en="name@company.com" placeholder="nom@entreprise.com">
+        </div>
+        <div class="field">
+          <label for="message" data-fr="Votre message" data-en="Your message">Votre message</label>
+          <textarea id="message" name="message" required
+                    data-ph-fr="Décrivez le poste ou la mission en quelques lignes..."
+                    data-ph-en="Describe the role or assignment in a few lines..."
+                    placeholder="Décrivez le poste ou la mission en quelques lignes..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%">
+          <i class="uil uil-message"></i><span data-fr="Envoyer le message" data-en="Send message">Envoyer le message</span>
+        </button>
+        <p class="form-msg" id="formMsg"></p>
       </form>
     </div>
   </div>
 </section>
 
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container foot">
+    <p>© <span id="year"></span> Steve Geraldin SIMO TCHEMO — <span data-fr="Actuaire IABE" data-en="IABE Actuary">Actuaire IABE</span></p>
+    <ul class="foot-nav">
+      <li><a href="#home" data-fr="Accueil" data-en="Home">Accueil</a></li>
+      <li><a href="#parcours" data-fr="Parcours" data-en="Background">Parcours</a></li>
+      <li><a href="#projects" data-fr="Projets" data-en="Projects">Projets</a></li>
+      <li><a href="cv/index.html" target="_blank" rel="noopener">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
 <script>
-document.getElementById("contactForm").addEventListener("submit", async function(event) {
-  event.preventDefault(); // Empêche le rechargement de la page
+/* ============================================================
+   1. TRADUCTION FR / EN
+   Chaque element traduisible porte data-fr et data-en.
+   On remplace simplement le contenu HTML de l'element.
+   ============================================================ */
+var langueCourante = "fr";
 
-  const form = event.target;
-  const formData = new FormData(form);
+var metiersFR = ["Actuaire IABE", "Specialiste tarification non-vie", "Analyste risques & Solvabilite II", "Data scientist en assurance"];
+var metiersEN = ["IABE Actuary", "Non-life pricing specialist", "Risk & Solvency II analyst", "Insurance data scientist"];
 
-  try {
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    });
+function setLang(langue) {
+  langueCourante = langue;
 
-    if (response.ok) {
-      // Affiche le message de succès
-      const successMsg = document.getElementById("successMessage");
-      successMsg.style.display = "block";
-
-      // Vide les champs du formulaire
-      form.reset();
-
-      // Cache le message après 5 secondes
-      setTimeout(() => {
-        successMsg.style.display = "none";
-      }, 5000);
-    } else {
-      alert("Oops! Something went wrong. Please try again.");
-    }
-  } catch (error) {
-    alert("There was an error sending your message.");
+  // On met a jour tous les textes traduisibles
+  var elements = document.querySelectorAll("[data-fr]");
+  for (var i = 0; i < elements.length; i++) {
+    var texte = elements[i].getAttribute("data-" + langue);
+    if (texte !== null) { elements[i].innerHTML = texte; }
   }
+
+  // On met a jour les placeholders des champs du formulaire
+  var champs = document.querySelectorAll("[data-ph-fr]");
+  for (var j = 0; j < champs.length; j++) {
+    var ph = champs[j].getAttribute("data-ph-" + langue);
+    if (ph !== null) { champs[j].setAttribute("placeholder", ph); }
+  }
+
+  // Attribut lang du document : evite la traduction automatique du navigateur
+  document.documentElement.lang = langue;
+
+  // Etat visuel des boutons FR / EN
+  document.getElementById("btnFR").classList.toggle("active", langue === "fr");
+  document.getElementById("btnEN").classList.toggle("active", langue === "en");
+
+  // On redemarre l'animation de frappe dans la bonne langue
+  demarrerFrappe(langue === "fr" ? metiersFR : metiersEN);
+
+  // On memorise le choix (sans bloquer si le navigateur refuse)
+  try { localStorage.setItem("langue", langue); } catch (e) {}
+}
+
+/* ============================================================
+   2. ANIMATION DE FRAPPE (sans librairie externe)
+   ============================================================ */
+var frappeTimer = null;
+
+function demarrerFrappe(listeMots) {
+  var cible = document.getElementById("typedText");
+  if (!cible) { return; }
+  if (frappeTimer) { clearTimeout(frappeTimer); }
+
+  var indexMot = 0;
+  var indexLettre = 0;
+  var effacement = false;
+
+  function boucle() {
+    var mot = listeMots[indexMot];
+
+    if (!effacement) {
+      indexLettre = indexLettre + 1;
+      cible.textContent = mot.substring(0, indexLettre);
+      if (indexLettre === mot.length) {
+        effacement = true;
+        frappeTimer = setTimeout(boucle, 1600);   // pause en fin de mot
+        return;
+      }
+      frappeTimer = setTimeout(boucle, 75);
+    } else {
+      indexLettre = indexLettre - 1;
+      cible.textContent = mot.substring(0, indexLettre);
+      if (indexLettre === 0) {
+        effacement = false;
+        indexMot = (indexMot + 1) % listeMots.length;
+      }
+      frappeTimer = setTimeout(boucle, 35);
+    }
+  }
+  boucle();
+}
+
+/* ============================================================
+   3. APPARITION PROGRESSIVE DES SECTIONS
+   ============================================================ */
+var observateur = new IntersectionObserver(function (entrees) {
+  entrees.forEach(function (entree) {
+    if (entree.isIntersecting) {
+      entree.target.classList.add("visible");
+      observateur.unobserve(entree.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(function (el, index) {
+  el.style.transitionDelay = (index % 4) * 60 + "ms";
+  observateur.observe(el);
 });
+
+/* ============================================================
+   4. NAVIGATION : fond au scroll, lien actif, menu mobile
+   ============================================================ */
+var entete = document.getElementById("header");
+var sections = document.querySelectorAll("section[id]");
+var liensNav = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", function () {
+  entete.classList.toggle("scrolled", window.scrollY > 30);
+
+  var position = window.scrollY + 120;
+  sections.forEach(function (section) {
+    var haut = section.offsetTop;
+    var hauteur = section.offsetHeight;
+    var id = section.getAttribute("id");
+    var lien = document.querySelector('.nav-links a[href="#' + id + '"]');
+    if (lien) {
+      if (position >= haut && position < haut + hauteur) {
+        liensNav.forEach(function (l) { l.classList.remove("active"); });
+        lien.classList.add("active");
+      }
+    }
+  });
+});
+
+var burger = document.getElementById("burger");
+var menu = document.getElementById("navLinks");
+burger.addEventListener("click", function () {
+  var ouvert = menu.classList.toggle("open");
+  burger.classList.toggle("open", ouvert);
+  burger.setAttribute("aria-expanded", ouvert ? "true" : "false");
+});
+liensNav.forEach(function (lien) {
+  lien.addEventListener("click", function () {
+    menu.classList.remove("open");
+    burger.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+  });
+});
+
+/* ============================================================
+   5. FORMULAIRE DE CONTACT (Formspree)
+   ============================================================ */
+document.getElementById("contactForm").addEventListener("submit", function (evenement) {
+  evenement.preventDefault();
+
+  var formulaire = evenement.target;
+  var zoneMessage = document.getElementById("formMsg");
+  var donnees = new FormData(formulaire);
+
+  fetch(formulaire.action, {
+    method: "POST",
+    body: donnees,
+    headers: { "Accept": "application/json" }
+  })
+  .then(function (reponse) {
+    if (reponse.ok) {
+      zoneMessage.className = "form-msg ok";
+      zoneMessage.textContent = (langueCourante === "fr")
+        ? "Message envoye. Je vous reponds sous 24 heures."
+        : "Message sent. I will reply within 24 hours.";
+      formulaire.reset();
+      setTimeout(function () { zoneMessage.className = "form-msg"; }, 6000);
+    } else {
+      throw new Error("erreur serveur");
+    }
+  })
+  .catch(function () {
+    zoneMessage.className = "form-msg ko";
+    zoneMessage.textContent = (langueCourante === "fr")
+      ? "L'envoi a echoue. Ecrivez-moi directement a ssimotchemo@gmail.com."
+      : "Sending failed. Please email me directly at ssimotchemo@gmail.com.";
+  });
+});
+
+/* ============================================================
+   6. INITIALISATION
+   ============================================================ */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+var langueSauvegardee = "fr";
+try {
+  var enregistree = localStorage.getItem("langue");
+  if (enregistree === "fr" || enregistree === "en") { langueSauvegardee = enregistree; }
+} catch (e) {}
+setLang(langueSauvegardee);
 </script>
- 
-
-
-       
-       
-       
-
-  </main>
-
-    <!-- --------------- FOOTER --------------- -->
-    <footer>
-        <div class="top-footer">
-            <p>Steve Geraldin SIMO TCHEMO .</p>
-        </div>
-        <div class="middle-footer">
-            <ul class="footer-menu">
-                <li class="footer_menu_list">
-                    <a href="#home">Home</a>
-                </li>
-                <li class="footer_menu_list">
-                    <a href="#about">About</a>
-                </li>
-                <li class="footer_menu_list">
-                    <a href="#projects">Projects</a>
-                </li>
-                <li class="footer_menu_list">
-                    <a href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-social-icons">
-            <div class="icon"><a href="#"><i class="uil uil-instagram"></i></a></div>
-            <div class="icon"><a href="https://www.linkedin.com/in/steve-geraldin-simo-tchemo-3409101b7/" target="_blank"><i class="uil uil-linkedin-alt"></i></a></div>
-            <div class="icon"><a href="#"><i class="uil uil-github-alt"></i></a></div>
-        </div>
-        <div class="bottom-footer">
-            <p>Copyright &copy; <a href="#home" style="text-decoration: none;">Steve Geraldin SIMO TCHEMO</a> -portfolio</p>
-        </div>
-    </footer>
-   </div>
-
-    <!-- ----- MAIN JS ----- -->
-    <script>
-        // MENU SHOW AND HIDDEN
-        function myMenuFunction() {
-            var menuList = document.getElementById("myNavMenu");
-            menuList.classList.toggle("open");
-        }
-
-        // SCROLL TO SECTIONS
-        function scrollToContact() {
-            document.getElementById("contact").scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // TYPING ANIMATION - Correction ici
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                var typed = new Typed(".typedText", {
-                    strings: ["Actuaire IABE", "Gestionnaire de risques", "Analyste financier"],
-                    typeSpeed: 100,
-                    backSpeed: 50,
-                    backDelay: 1000,
-                    loop: true
-                });
-            } catch (error) {
-                console.error("Erreur d'initialisation de Typed.js:", error);
-            }
-        });
-
-        // SCROLL REVEAL ANIMATION
-        document.addEventListener('DOMContentLoaded', function() {
-            try {
-                const sr = ScrollReveal({
-                    origin: 'top',
-                    distance: '60px',
-                    duration: 2000,
-                    delay: 200
-                });
-
-                sr.reveal('.featured-text-card');
-                sr.reveal('.featured-name', { delay: 300 });
-                sr.reveal('.featured-text-info', { delay: 400 });
-                sr.reveal('.featured-text-btn', { delay: 500 });
-                sr.reveal('.social_icons', { delay: 600 });
-                sr.reveal('.featured-image', { delay: 700 });
-                sr.reveal('.project-box', { interval: 200 });
-                sr.reveal('.top-header', {});
-            } catch (error) {
-                console.error("Erreur d'initialisation de ScrollReveal:", error);
-            }
-        });
-
-        // CHANGE ACTIVE LINK
-        const sections = document.querySelectorAll('section[id]');
-        function scrollActive() {
-            const scrollY = window.scrollY;
-
-            sections.forEach(current => {
-                const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 50;
-                const sectionId = current.getAttribute('id');
-                
-                const menuItem = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
-                if (menuItem) {
-                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                        menuItem.classList.add('active-link');
-                    } else {
-                        menuItem.classList.remove('active-link');
-                    }
-                }
-            });
-        }
-        window.addEventListener('scroll', scrollActive);
-
-        // Form handling
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            // Here you would normally send the form data to a server
-            // This is just a placeholder to show success message
-            document.getElementById("successMessage").style.display = "block";
-            document.getElementById("name").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("message").value = "";
-            
-            // Hide success message after 3 seconds
-            setTimeout(function() {
-                document.getElementById("successMessage").style.display = "none";
-            }, 3000);
-        });
-    </script>
 </body>
 </html>
